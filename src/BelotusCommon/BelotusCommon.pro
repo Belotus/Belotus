@@ -1,4 +1,6 @@
 HEADERS += Class.h \
-    Base.h
+    Base.h \
+    IPlayer.h
 SOURCES += Class.cpp \
-    Base.cpp
+    Base.cpp \
+    IPlayer.cpp
