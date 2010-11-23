@@ -21,6 +21,8 @@
 #ifndef REMOTEPLAYER_H
 #define REMOTEPLAYER_H
 
+#include "../BelotusCommon/IPlayer.h"
+
 class RemotePlayer : public IPlayer
 {
 public:

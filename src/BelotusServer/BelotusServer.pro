@@ -11,22 +11,23 @@ SOURCES += main.cpp \
     ../BelotusCommon/IPlayer.cpp \
     ../BelotusCommon/Class.cpp \
     ../BelotusCommon/Base.cpp \
+    ../BelotusCommon/Protocol.cpp \
+    ../BelotusCommon/CardHolder.cpp \
+    ../BelotusCommon/Card.cpp \
     Scheduler.cpp \
     RemotePlayer.cpp \
     Dealer.cpp \
     Deck.cpp \
-    ../BelotusCommon/Protocol.cpp \
-    ../BelotusCommon/CardHolder.cpp \
-    CheckRules.cpp \
-    ../BelotusCommon/Card.cpp
+    CheckRules.cpp
+
 HEADERS += ../BelotusCommon/IPlayer.h \
     ../BelotusCommon/Class.h \
     ../BelotusCommon/Base.h \
+    ../BelotusCommon/Protocol.h \
+    ../BelotusCommon/CardHolder.h \
+    ../BelotusCommon/Card.h \
     Scheduler.h \
     RemotePlayer.h \
     Dealer.h \
     Deck.h \
-    ../BelotusCommon/Protocol.h \
-    ../BelotusCommon/CardHolder.h \
-    CheckRules.h \
-    ../BelotusCommon/Card.h
+    CheckRules.h

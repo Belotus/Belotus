@@ -27,11 +27,6 @@ Class::Class()
 	ref++;
 }
 
-Class::Class(const Class& c)
-{
-	ref++;
-}
-
 Class::~Class()
 {
 	ref--;

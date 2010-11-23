@@ -19,6 +19,7 @@
  */
 
 #include <QtCore/QCoreApplication>
+#include "../BelotusCommon/Card.h"
 
 int main(int argc, char *argv[])
 {

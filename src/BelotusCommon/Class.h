@@ -24,7 +24,6 @@ class Class
 {
 public:
 	Class();
-	Class(const Class&);
 	virtual ~Class();
 
 	static unsigned int GetRef();
