@@ -32,10 +32,14 @@ class Suit : public Base
 {
 public:
     Suit(CardSuit type);
+    Suit(CardSuit type, bool isTrump);
     CardSuit getType() const;
+    void setTrump(bool isTrump);
+    bool isTrump() const;
 private:
     std::ostream& PrintOn(std::ostream&) const;
     CardSuit suit;
+    bool trump;
 };
 
 #endif // SUIT_H

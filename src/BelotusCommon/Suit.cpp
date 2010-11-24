@@ -27,8 +27,21 @@ Suit::Suit(CardSuit suit) :
 {
 }
 
+Suit::Suit(CardSuit suit, bool isTrump) :
+        suit(suit), trump(isTrump)
+{
+}
+
 CardSuit Suit::getType() const {
     return this->suit;
+}
+
+void Suit::setTrump(bool isTrump) {
+    this->trump = isTrump;
+}
+
+bool Suit::isTrump() const {
+    return this->trump;
 }
 
 std::ostream& Suit::PrintOn(std::ostream& os) const {
