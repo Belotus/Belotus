@@ -21,12 +21,20 @@
 #ifndef REMOTEPLAYER_H
 #define REMOTEPLAYER_H
 
-#include "../BelotusCommon/IPlayer.h"
+#include <QTcpSocket>
 
-class RemotePlayer : public IPlayer
+#include "../BelotusCommon/IPlayer.h"
+#include "../BelotusCommon/Base.h"
+
+
+class RemotePlayer : public IPlayer, public Base
 {
 public:
     RemotePlayer();
+    RemotePlayer(QTcpSocket socket);
+private:
+    QTcpSocket socket;
+
 };
 
 #endif // REMOTEPLAYER_H

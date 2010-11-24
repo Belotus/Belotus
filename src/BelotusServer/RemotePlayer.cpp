@@ -18,8 +18,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QTcpSocket>
+
 #include "RemotePlayer.h"
 
 RemotePlayer::RemotePlayer()
+{
+}
+
+RemotePlayer::RemotePlayer(QTcpSocket socket) : socket(socket)
 {
 }

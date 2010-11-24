@@ -21,10 +21,28 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
-class Scheduler
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QMap>
+#include <QSet>
+
+#include "../BelotusCommon/IPlayer.h"
+
+class Scheduler : public QTcpServer
 {
+    Q_OBJECT
+
 public:
-    Scheduler();
+    Scheduler(QObject *parent=0);
+
+protected:
+    void incomingConnection(int socketfd);
+    int run();
+
+private:
+    QSet<QTcpSocket*> tcpClients;
+    QMap<QTcpSocket*,IPlayer> players;
+
 };
 
 #endif // SCHEDULER_H
