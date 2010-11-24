@@ -22,34 +22,31 @@
 #include <string>
 #include <iostream>
 
-Suit::Suit(SuitType type) :
-        type(type)
+Suit::Suit(CardSuit suit) :
+        suit(suit)
 {
 }
 
-SuitType Suit::getType() const {
-    return this->type;
+CardSuit Suit::getType() const {
+    return this->suit;
 }
 
 std::ostream& Suit::PrintOn(std::ostream& os) const {
-    std::string typeString;
-    switch(this->type) {
-    case Heart:
-        typeString = "Heart";
+    switch(this->suit) {
+    case HEART:
+        return os << "Suit: Heart";
         break;
-    case Diamond:
-        typeString = "Diamond";
+    case DIAMOND:
+        return os << "Suit: Diamond";
         break;
-    case Club:
-        typeString = "Club";
+    case CLUB:
+        return os << "Suit: Club";
         break;
-    case Spade:
-        typeString = "Spade";
+    case SPADE:
+        return os << "Suit: Spade";
         break;
     default:
-        typeString = "Error: This Suit doens't exist.";
+        return os << "Error: This Suit doens't exist.";
         break;
     }
-
-    return os << "Suit: " << typeString;
 }

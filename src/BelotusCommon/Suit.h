@@ -23,19 +23,19 @@
 #include "../BelotusCommon/Base.h"
 
 typedef enum {
-    Heart = 0,
-    Diamond,
-    Club,
-    Spade} SuitType;
+    HEART = 0,
+    DIAMOND,
+    CLUB,
+    SPADE} CardSuit;
 
 class Suit : public Base
 {
 public:
-    Suit(SuitType type);
-    SuitType getType() const;
+    Suit(CardSuit type);
+    CardSuit getType() const;
 private:
     std::ostream& PrintOn(std::ostream&) const;
-    SuitType type;
+    CardSuit suit;
 };
 
 #endif // SUIT_H
