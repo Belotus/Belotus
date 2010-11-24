@@ -21,11 +21,19 @@
 #define CARD_H
 
 #include "../BelotusCommon/Base.h"
+#include "../BelotusCommon/Suit.h"
+#include "../BelotusCommon/Value.h"
 
 class Card : public Base
 {
 public:
-    Card();
+    Card(Suit &suit, Value &value);
+    Suit& getSuit() const;
+    Value& getValue() const;
+private:
+    std::ostream& PrintOn(std::ostream&) const;
+    Suit &suit;
+    Value &value;
 };
 
 #endif // CARD_H

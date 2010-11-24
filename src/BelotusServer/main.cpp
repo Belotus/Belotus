@@ -19,11 +19,21 @@
  */
 
 #include <QtCore/QCoreApplication>
+#include "../BelotusCommon/Suit.h"
+#include "../BelotusCommon/Value.h"
 #include "../BelotusCommon/Card.h"
+#include <iostream>
+
+using namespace std;
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    return a.exec();
+    Suit *suit = new Suit(HEART);
+    Value *value = new Value(SEVEN);
+    Card *card = new Card(*suit, *value);
+
+    cout << *card;
+    //return a.exec();
 }

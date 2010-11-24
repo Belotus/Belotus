@@ -14,6 +14,8 @@ SOURCES += main.cpp \
     ../BelotusCommon/Protocol.cpp \
     ../BelotusCommon/CardHolder.cpp \
     ../BelotusCommon/Card.cpp \
+    ../BelotusCommon/Suit.cpp \
+    ../BelotusCommon/Value.cpp \
     Scheduler.cpp \
     RemotePlayer.cpp \
     Dealer.cpp \
@@ -26,6 +28,8 @@ HEADERS += ../BelotusCommon/IPlayer.h \
     ../BelotusCommon/Protocol.h \
     ../BelotusCommon/CardHolder.h \
     ../BelotusCommon/Card.h \
+    ../BelotusCommon/Suit.h \
+    ../BelotusCommon/Value.h \
     Scheduler.h \
     RemotePlayer.h \
     Dealer.h \
