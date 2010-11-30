@@ -32,19 +32,23 @@ Suit::Suit(CardSuit suit, bool isTrump) :
 {
 }
 
-CardSuit Suit::getType() const {
+CardSuit Suit::getType() const
+{
     return this->suit;
 }
 
-void Suit::setTrump(bool isTrump) {
+void Suit::setTrump(bool isTrump)
+{
     this->trump = isTrump;
 }
 
-bool Suit::isTrump() const {
+bool Suit::isTrump() const
+{
     return this->trump;
 }
 
-std::ostream& Suit::PrintOn(std::ostream& os) const {
+std::ostream& Suit::PrintOn(std::ostream& os) const
+{
     switch(this->suit) {
     case HEART:
         return os << "Suit: Heart";

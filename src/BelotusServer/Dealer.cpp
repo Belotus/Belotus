@@ -25,9 +25,11 @@ Dealer::Dealer()
     this->GenerateCard();
 }
 
-void Dealer::GenerateCard() {
+void Dealer::GenerateCard()
+{
 }
 
-std::ostream& Dealer::PrintOn(std::ostream& os) const {
+std::ostream& Dealer::PrintOn(std::ostream& os) const
+{
     return os << "Dealer: " << this->cards.count() << "cards";
 }

@@ -38,6 +38,7 @@ public:
     bool isTrump() const;
 private:
     std::ostream& PrintOn(std::ostream&) const;
+
     CardSuit suit;
     bool trump;
 };

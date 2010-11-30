@@ -24,6 +24,7 @@ CardHolder::CardHolder()
 {
 }
 
-std::ostream& CardHolder::PrintOn(std::ostream& os) const {
+std::ostream& CardHolder::PrintOn(std::ostream& os) const
+{
     return os << "CardHolder(" << this->cards.count() << " elements)";
 }

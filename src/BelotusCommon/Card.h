@@ -34,6 +34,7 @@ public:
     bool operator>(Card& card);
 private:
     std::ostream& PrintOn(std::ostream&) const;
+
     Suit &suit;
     Value &value;
 };

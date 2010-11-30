@@ -41,6 +41,7 @@ public:
     bool operator>(Value& value);
 private:
     std::ostream& PrintOn(std::ostream&) const;
+
     CardValue value;
 };
 
