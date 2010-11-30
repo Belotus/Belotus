@@ -27,11 +27,13 @@ Value::Value(CardValue value) :
 {
 }
 
-CardValue Value::getType() const {
+CardValue Value::getType() const
+{
     return this->value;
 }
 
-std::ostream& Value::PrintOn(std::ostream& os) const {
+std::ostream& Value::PrintOn(std::ostream& os) const
+{
     switch(this->value) {
     case SEVEN:
     case EIGHT:
@@ -55,4 +57,14 @@ std::ostream& Value::PrintOn(std::ostream& os) const {
         return os << "Error: This Value doens't exist.";
         break;
     }
+}
+
+bool Value::operator<(Value& value)
+{
+    return (this->value < value.value);
+}
+
+bool Value::operator>(Value& value)
+{
+    return (this->value > value.value);
 }

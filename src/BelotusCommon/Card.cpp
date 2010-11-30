@@ -27,14 +27,64 @@ Card::Card(Suit &suit, Value &value) :
 {
 }
 
-Suit& Card::getSuit() const {
+Suit& Card::getSuit() const
+{
     return this->suit;
 }
 
-Value& Card::getValue() const {
+Value& Card::getValue() const
+{
     return this->value;
 }
 
-std::ostream& Card::PrintOn(std::ostream& os) const {
+std::ostream& Card::PrintOn(std::ostream& os) const
+{
     return os << "Card(" << this->suit << " , " << this->value << ")";
+}
+
+/**
+ * operator<:
+ * This function compare the power of two Card.
+ * Beware, this function doesnt check if the Card is valid in the game
+ * Also, this assume that all card are different
+ */
+bool Card::operator<(Card& card)
+{
+    if(this->suit.isTrump())
+    {
+        if(card.suit.isTrump())
+        {
+            if(this->value.getType() == JACKS) return false;
+            if(card.value.getType() == JACKS) return true;
+            if(this->value.getType() == NINE) return false;
+            if(card.value.getType() == NINE) return true;
+            return (this->value < card.value);
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else
+    {
+        if(card.suit.isTrump())
+        {
+            return false;
+        }
+        else
+        {
+            return (this->value < card.value);
+        }
+    }
+}
+
+/**
+ * operator>:
+ * This function compare the power of two Card.
+ * Beware, this function doesnt check if the Card is valid in the game
+ * Also, this assume that all card are different
+ */
+bool Card::operator>(Card& card)
+{
+    return !(this->operator <(card));
 }

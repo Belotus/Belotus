@@ -26,10 +26,10 @@ typedef enum {
     SEVEN = 7,
     EIGHT,
     NINE,
-    TEN,
     JACKS,
     QUEEN,
     KING,
+    TEN,
     ACE} CardValue;
 
 class Value : public Base
@@ -37,6 +37,8 @@ class Value : public Base
 public:
     Value(CardValue value);
     CardValue getType() const;
+    bool operator<(Value& value);
+    bool operator>(Value& value);
 private:
     std::ostream& PrintOn(std::ostream&) const;
     CardValue value;

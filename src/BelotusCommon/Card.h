@@ -30,6 +30,8 @@ public:
     Card(Suit &suit, Value &value);
     Suit& getSuit() const;
     Value& getValue() const;
+    bool operator<(Card& card);
+    bool operator>(Card& card);
 private:
     std::ostream& PrintOn(std::ostream&) const;
     Suit &suit;
