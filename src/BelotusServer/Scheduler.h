@@ -29,7 +29,7 @@
 #include "../BelotusCommon/IPlayer.h"
 
 class Scheduler : public QTcpServer
-{
+{/*
     Q_OBJECT
 
 public:
@@ -41,7 +41,7 @@ protected:
 
 private:
     QSet<QTcpSocket*> tcpClients;
-    QMap<QTcpSocket*,IPlayer> players;
+    QMap<QTcpSocket*,IPlayer> players;*/
 
 };
 

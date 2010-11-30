@@ -31,9 +31,9 @@ class RemotePlayer : public IPlayer, public Base
 {
 public:
     RemotePlayer();
-    RemotePlayer(QTcpSocket socket);
+    RemotePlayer(QTcpSocket *socket);
 private:
-    QTcpSocket socket;
+    QTcpSocket *socket;
 
 };
 

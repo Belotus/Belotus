@@ -20,12 +20,12 @@
 
 #include "Scheduler.h"
 
-Scheduler::Scheduler()
-{
-}
+//Scheduler::Scheduler(QObject *parent)
+//{
+//}
 
-int Scheduler::run()
-{
+//int Scheduler::run()
+//{
 
-    return 0;
-}
+//    return 0;
+//}

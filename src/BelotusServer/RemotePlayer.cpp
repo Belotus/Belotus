@@ -26,6 +26,6 @@ RemotePlayer::RemotePlayer()
 {
 }
 
-RemotePlayer::RemotePlayer(QTcpSocket socket) : socket(socket)
+RemotePlayer::RemotePlayer(QTcpSocket *socket) : socket(socket)
 {
 }
