@@ -20,10 +20,16 @@
 #ifndef DEALER_H
 #define DEALER_H
 
-class Dealer
+#include "../BelotusCommon/CardHolder.h"
+
+class Dealer : public CardHolder
 {
 public:
     Dealer();
+
+private:
+    void GenerateCard();
+    virtual std::ostream& PrintOn(std::ostream&) const;
 };
 
 #endif // DEALER_H

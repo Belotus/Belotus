@@ -20,10 +20,20 @@
 #ifndef CARDHOLDER_H
 #define CARDHOLDER_H
 
-class CardHolder
+#include "../BelotusCommon/Base.h"
+#include "../BelotusCommon/Card.h"
+#include <QList>
+
+class CardHolder : public Base
 {
 public:
     CardHolder();
+
+protected:
+    QList<Card> cards;
+
+private:
+    virtual std::ostream& PrintOn(std::ostream&) const;
 };
 
 #endif // CARDHOLDER_H
