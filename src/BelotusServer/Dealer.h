@@ -28,8 +28,13 @@ public:
     Dealer();
 
 private:
+    void GenerateSuits();
+    void GenerateValues();
     void GenerateCard();
     virtual std::ostream& PrintOn(std::ostream&) const;
+
+    QList<Value*> values;
+    QList<Suit*> suits;
 };
 
 #endif // DEALER_H

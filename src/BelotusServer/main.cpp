@@ -22,6 +22,7 @@
 #include "../BelotusCommon/Suit.h"
 #include "../BelotusCommon/Value.h"
 #include "../BelotusCommon/Card.h"
+#include "Dealer.h"
 #include <iostream>
 
 using namespace std;
@@ -34,6 +35,9 @@ int main(int argc, char *argv[])
     Value *value = new Value(SEVEN);
     Card *card = new Card(*suit, *value);
 
-    cout << *card;
+    cout << *card << endl;
+
+    Dealer *dealer = new Dealer();
+    cout << *dealer;
     //return a.exec();
 }

@@ -30,7 +30,7 @@ public:
     CardHolder();
 
 protected:
-    QList<Card> cards;
+    QList<Card*> cards;
 
 private:
     virtual std::ostream& PrintOn(std::ostream&) const;
