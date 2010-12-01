@@ -67,7 +67,7 @@ std::ostream& Dealer::PrintOn(std::ostream& os) const
 
     for(cardIndex = this->cards.constBegin(); cardIndex != this->cards.constEnd(); cardIndex++)
     {
-        os << "\t" << **cardIndex << endl;
+        os << "\t" << **cardIndex << std::endl;
     }
 
     return os;
