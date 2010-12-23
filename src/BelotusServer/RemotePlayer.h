@@ -27,7 +27,7 @@
 #include "../BelotusCommon/Base.h"
 
 
-class RemotePlayer : public Player, public Base
+class RemotePlayer : public Player
 {
 public:
     RemotePlayer();

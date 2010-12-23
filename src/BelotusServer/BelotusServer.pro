@@ -20,9 +20,9 @@ SOURCES += main.cpp \
     RemotePlayer.cpp \
     Dealer.cpp \
     Deck.cpp \
-    CheckRules.cpp
-HEADERS += \
-    ../BelotusCommon/Class.h \
+    CheckRules.cpp \
+    LocalPlayer.cpp
+HEADERS += ../BelotusCommon/Class.h \
     ../BelotusCommon/Base.h \
     ../BelotusCommon/Protocol.h \
     ../BelotusCommon/CardHolder.h \
@@ -34,4 +34,5 @@ HEADERS += \
     RemotePlayer.h \
     Dealer.h \
     Deck.h \
-    CheckRules.h
+    CheckRules.h \
+    LocalPlayer.h

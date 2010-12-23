@@ -6,7 +6,6 @@ TARGET = BelotusClient
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
-    LocalPlayer.cpp \
     ../BelotusCommon/Player.cpp \
     ../BelotusCommon/Class.cpp \
     ../BelotusCommon/Base.cpp \
@@ -14,7 +13,6 @@ SOURCES += main.cpp \
     ../BelotusCommon/CardHolder.cpp \
     RemotePlayerAdapter.cpp
 HEADERS += mainwindow.h \
-    LocalPlayer.h \
     ../BelotusCommon/Player.h \
     ../BelotusCommon/Class.h \
     ../BelotusCommon/Base.h \
