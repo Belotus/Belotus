@@ -28,8 +28,9 @@ class Card : public Base
 {
 public:
     Card(Suit &suit, Value &value);
-    Suit& getSuit() const;
-    Value& getValue() const;
+    Suit& GetSuit() const;
+    Value& GetValue() const;
+    int GetPoints() const;
     bool operator<(Card& card);
     bool operator>(Card& card);
 private:

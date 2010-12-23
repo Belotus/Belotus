@@ -32,17 +32,17 @@ Suit::Suit(CardSuit suit, bool isTrump) :
 {
 }
 
-CardSuit Suit::getType() const
+CardSuit Suit::GetType() const
 {
     return this->suit;
 }
 
-void Suit::setTrump(bool isTrump)
+void Suit::SetTrump(bool isTrump)
 {
     this->trump = isTrump;
 }
 
-bool Suit::isTrump() const
+bool Suit::IsTrump() const
 {
     return this->trump;
 }

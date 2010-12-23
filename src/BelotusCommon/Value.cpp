@@ -27,7 +27,7 @@ Value::Value(CardValue value) :
 {
 }
 
-CardValue Value::getType() const
+CardValue Value::GetValue() const
 {
     return this->value;
 }
@@ -41,7 +41,7 @@ std::ostream& Value::PrintOn(std::ostream& os) const
     case TEN:
         return os << "Value: " << this->value;
         break;
-    case JACKS:
+    case JACK:
         return os << "Value: Jacks";
         break;
     case QUEEN:

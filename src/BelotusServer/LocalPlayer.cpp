@@ -23,3 +23,23 @@
 LocalPlayer::LocalPlayer()
 {
 }
+
+void LocalPlayer::AddCard(Card* card)
+{
+    cards.push_front(card);
+}
+
+void LocalPlayer::Insult(string insult)
+{
+    // TODO
+}
+
+Card* LocalPlayer::Play()
+{
+    return cards.takeFirst();
+}
+
+std::ostream& LocalPlayer::PrintOn(std::ostream& os) const
+{
+    return os << "LocalPlayer";
+}

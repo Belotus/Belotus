@@ -24,12 +24,14 @@
 #include "../BelotusCommon/Base.h"
 #include "../BelotusCommon/CardHolder.h"
 
-class Player : public Base, public CardHolder
+using namespace std;
+
+class Player : public CardHolder
 {
 public:
     Player();
-    virtual Card Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
-    virtual void AddCard(Card card)=0;
+    virtual Card* Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
+    virtual void AddCard(Card* card)=0;
     virtual void Insult(string insult)=0;
     //virtual méthode_du_player(truc)=0;
 };

@@ -27,19 +27,60 @@ Card::Card(Suit &suit, Value &value) :
 {
 }
 
-Suit& Card::getSuit() const
+Suit& Card::GetSuit() const
 {
     return this->suit;
 }
 
-Value& Card::getValue() const
+Value& Card::GetValue() const
 {
     return this->value;
 }
 
+int Card::GetPoints() const
+{
+    switch(this->value.GetValue())
+    {
+    case SEVEN :
+    case EIGHT :
+        return 0;
+    case NINE :
+        if(this->GetSuit().IsTrump())
+        {
+            return 14;
+        }
+        else
+        {
+            return 0;
+        }
+    case TEN :
+        return 10;
+    case JACK :
+        if(this->GetSuit().IsTrump())
+        {
+            return 20;
+        }
+        else
+        {
+            return 2;
+        }
+     case QUEEN :
+        return 3;
+     case KING :
+        return 4;
+     case ACE :
+        return 11;
+     default :
+        return 0;
+    }
+}
+
+
+
+
 std::ostream& Card::PrintOn(std::ostream& os) const
 {
-    return os << "Card(" << this->suit << " , " << this->value << ")";
+    return os << "Card(" << this->suit << " , " << this->value << ", " << this->GetPoints() << " points)";
 }
 
 /**
@@ -50,14 +91,14 @@ std::ostream& Card::PrintOn(std::ostream& os) const
  */
 bool Card::operator<(Card& card)
 {
-    if(this->suit.isTrump())
+    if(this->suit.IsTrump())
     {
-        if(card.suit.isTrump())
+        if(card.suit.IsTrump())
         {
-            if(this->value.getType() == JACKS) return false;
-            if(card.value.getType() == JACKS) return true;
-            if(this->value.getType() == NINE) return false;
-            if(card.value.getType() == NINE) return true;
+            if(this->value.GetValue() == JACK) return false;
+            if(card.value.GetValue() == JACK) return true;
+            if(this->value.GetValue() == NINE) return false;
+            if(card.value.GetValue() == NINE) return true;
             return (this->value < card.value);
         }
         else
@@ -67,7 +108,7 @@ bool Card::operator<(Card& card)
     }
     else
     {
-        if(card.suit.isTrump())
+        if(card.suit.IsTrump())
         {
             return false;
         }

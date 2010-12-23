@@ -21,10 +21,19 @@
 #ifndef DECK_H
 #define DECK_H
 
-class Deck
+#include "../BelotusCommon/CardHolder.h"
+
+class Deck : public CardHolder
 {
 public:
     Deck();
+    void AddCard(Card* card);
+    Card* GetFrontCard();
+    Card* GetBackCard();
+    int GetScore() const;
+
+private:
+    std::ostream& PrintOn(std::ostream&) const;
 };
 
 #endif // DECK_H

@@ -33,9 +33,9 @@ class Suit : public Base
 public:
     Suit(CardSuit type);
     Suit(CardSuit type, bool isTrump);
-    CardSuit getType() const;
-    void setTrump(bool isTrump);
-    bool isTrump() const;
+    CardSuit GetType() const;
+    void SetTrump(bool isTrump);
+    bool IsTrump() const;
 private:
     std::ostream& PrintOn(std::ostream&) const;
 

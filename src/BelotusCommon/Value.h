@@ -26,7 +26,7 @@ typedef enum {
     SEVEN = 7,
     EIGHT,
     NINE,
-    JACKS,
+    JACK,
     QUEEN,
     KING,
     TEN,
@@ -36,7 +36,7 @@ class Value : public Base
 {
 public:
     Value(CardValue value);
-    CardValue getType() const;
+    CardValue GetValue() const;
     bool operator<(Value& value);
     bool operator>(Value& value);
 private:

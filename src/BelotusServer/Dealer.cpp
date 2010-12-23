@@ -40,7 +40,7 @@ void Dealer::GenerateValues() {
     this->values.append(new Value(EIGHT));
     this->values.append(new Value(NINE));
     this->values.append(new Value(TEN));
-    this->values.append(new Value(JACKS));
+    this->values.append(new Value(JACK));
     this->values.append(new Value(QUEEN));
     this->values.append(new Value(KING));
     this->values.append(new Value(ACE));

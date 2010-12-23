@@ -26,6 +26,12 @@ class LocalPlayer : public Player
 {
 public:
     LocalPlayer();
+    Card* Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
+    void AddCard(Card* card);
+    void Insult(string insult);
+
+private:
+    std::ostream& PrintOn(std::ostream&) const;
 };
 
 #endif // LOCALPLAYER_H

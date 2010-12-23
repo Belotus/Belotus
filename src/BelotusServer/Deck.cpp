@@ -23,3 +23,40 @@
 Deck::Deck()
 {
 }
+
+void Deck::AddCard(Card* card)
+{
+    cards.push_front(card);
+}
+
+
+Card* Deck::GetFrontCard()
+{
+    return cards.takeFirst();
+}
+
+Card* Deck::GetBackCard()
+{
+    return cards.takeLast();
+}
+
+int Deck::GetScore() const
+{
+    int score = 0;
+
+    QList<Card *>::const_iterator iCard;
+
+    iCard = this->cards.constBegin();
+    while(iCard != this->cards.constEnd())
+    {
+        score += (*iCard)->GetPoints();
+        iCard++;
+    }
+
+    return score;
+}
+
+std::ostream& Deck::PrintOn(std::ostream& os) const
+{
+    return os << "Deck (" << this->cards.count() << " cards , " << this->GetScore() << " points)";
+}
