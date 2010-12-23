@@ -23,11 +23,11 @@
 
 #include <QTcpSocket>
 
-#include "../BelotusCommon/IPlayer.h"
+#include "../BelotusCommon/Player.h"
 #include "../BelotusCommon/Base.h"
 
 
-class RemotePlayer : public IPlayer, public Base
+class RemotePlayer : public Player, public Base
 {
 public:
     RemotePlayer();

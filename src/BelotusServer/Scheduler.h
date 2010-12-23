@@ -26,7 +26,7 @@
 #include <QMap>
 #include <QSet>
 
-#include "../BelotusCommon/IPlayer.h"
+#include "../BelotusCommon/Player.h"
 
 class Scheduler : public QTcpServer
 {/*

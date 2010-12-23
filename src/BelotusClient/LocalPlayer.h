@@ -20,9 +20,9 @@
 #ifndef LOCALPLAYER_H
 #define LOCALPLAYER_H
 
-#include "../BelotusCommon/IPlayer.h"
+#include "../BelotusCommon/Player.h"
 
-class LocalPlayer : public IPlayer
+class LocalPlayer : public Player
 {
 public:
     LocalPlayer();
