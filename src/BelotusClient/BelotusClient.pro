@@ -12,7 +12,7 @@ SOURCES += main.cpp \
     ../BelotusCommon/Base.cpp \
     ../BelotusCommon/Protocol.cpp \
     ../BelotusCommon/CardHolder.cpp \
-    RemotePlayerAdapter.cpp \
+    RemotePlayerAdapter.cpp
 HEADERS += mainwindow.h \
     LocalPlayer.h \
     ../BelotusCommon/Player.h \
@@ -20,5 +20,5 @@ HEADERS += mainwindow.h \
     ../BelotusCommon/Base.h \
     ../BelotusCommon/Protocol.h \
     ../BelotusCommon/CardHolder.h \
-    RemotePlayerAdapter.h \
+    RemotePlayerAdapter.h
 FORMS += mainwindow.ui
