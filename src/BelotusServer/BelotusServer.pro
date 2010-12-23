@@ -8,7 +8,7 @@ CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
 SOURCES += main.cpp \
-    ../BelotusCommon/IPlayer.cpp \
+    ../BelotusCommon/Player.cpp \
     ../BelotusCommon/Class.cpp \
     ../BelotusCommon/Base.cpp \
     ../BelotusCommon/Protocol.cpp \
@@ -20,9 +20,9 @@ SOURCES += main.cpp \
     RemotePlayer.cpp \
     Dealer.cpp \
     Deck.cpp \
-    CheckRules.cpp
+    CheckRules.cpp \
 
-HEADERS += ../BelotusCommon/IPlayer.h \
+HEADERS += \
     ../BelotusCommon/Class.h \
     ../BelotusCommon/Base.h \
     ../BelotusCommon/Protocol.h \
@@ -30,8 +30,10 @@ HEADERS += ../BelotusCommon/IPlayer.h \
     ../BelotusCommon/Card.h \
     ../BelotusCommon/Suit.h \
     ../BelotusCommon/Value.h \
+    ../BelotusCommon/Player.h
     Scheduler.h \
     RemotePlayer.h \
     Dealer.h \
     Deck.h \
-    CheckRules.h
+    CheckRules.h \
+
