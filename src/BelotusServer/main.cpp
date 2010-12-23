@@ -31,13 +31,13 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    Suit *suit = new Suit(HEART);
-    Value *value = new Value(SEVEN);
-    Card *card = new Card(*suit, *value);
+    Suit suit = Suit(HEART);
+    Value value = Value(SEVEN);
+    Card card = Card(suit, value);
 
-    cout << *card << endl;
+    cout << card << endl;
 
-    Dealer *dealer = new Dealer();
-    cout << *dealer;
+    Dealer dealer = Dealer();
+    cout << dealer;
     //return a.exec();
 }

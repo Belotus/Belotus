@@ -1,6 +1,6 @@
 /* Belotus
  *
- * IPlayer.cpp
+ * Player.cpp
  * Copyright (C) 2010 Schneider Julien
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
@@ -18,8 +18,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "IPlayer.h"
+#include "Player.h"
 
-IPlayer::IPlayer()
+Player::Player()
 {
 }

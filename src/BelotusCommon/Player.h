@@ -1,6 +1,6 @@
 /* Belotus
  *
- * IPlayer.h
+ * Player.h
  * Copyright (C) 2010 Schneider Julien
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
@@ -17,13 +17,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef IPLAYER_H
-#define IPLAYER_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
-class IPlayer
+class Player
 {
 public:
-    IPlayer();
+    Player();
 };
 
-#endif // IPLAYER_H
+#endif // PLAYER_H
