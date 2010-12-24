@@ -1,0 +1,28 @@
+@startuml
+
+abstract class Class
+abstract class Base
+abstract class CardHolder
+abstract class Player
+
+
+Class <|-- Base
+Base <|-- CardHolder
+CardHolder <|-- Dealer
+CardHolder <|-- Player
+CardHolder <|-- Deck
+CardHolder <|-- Table
+CardHolder *--  "N" Card
+
+Base <|-- Card
+Base <|-- Value
+Base <|-- Suit
+Card *-- Suit
+Card *-- Value
+
+Base <|-- Scheduler
+Scheduler *-- "4" Player
+Scheduler *-- "2" Deck
+Scheduler *-- "1" Table
+Scheduler *-- "1" Dealer
+@enduml
