@@ -26,10 +26,10 @@ typedef enum {
     SEVEN = 7,
     EIGHT,
     NINE,
+    TEN,
     JACK,
     QUEEN,
     KING,
-    TEN,
     ACE} CardValue;
 
 class Value : public Base

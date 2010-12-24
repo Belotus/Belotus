@@ -19,12 +19,70 @@
  */
 
 #include "Dealer.h"
+#include <algorithm>
+#include <QTime>
+#include <QtGlobal>
 
 Dealer::Dealer()
+    : indexDeal(0)
 {
+    QTime time = QTime::currentTime ();
+    qsrand(time.hour() + time.minute() + time.msec());
+
     this->GenerateSuits();
     this->GenerateValues();
     this->GenerateCard();
+    //this->Shuffle();
+    //this->Cut();
+}
+
+Dealer::~Dealer()
+{
+    while(!this->cards.empty())
+    {
+        delete this->cards.first();
+        this->cards.pop_front();
+    }
+}
+
+void Dealer::Reset(Deck* deck1, Deck* deck2)
+{
+    this->cards.clear();
+
+    while(!deck1->IsEmpty())
+    {
+        this->cards.push_back(deck1->GetBackCard());
+    }
+
+    while(!deck2->IsEmpty())
+    {
+        this->cards.push_back(deck2->GetBackCard());
+    }
+
+    this->Cut();
+    indexDeal = 0;
+}
+
+bool Dealer::DealEnded() const
+{
+    return (this->indexDeal >= this->cards.count());
+}
+
+Card* Dealer::GetCard()
+{
+    Card* card = this->cards.at(this->indexDeal);
+    indexDeal++;
+    return card;
+}
+
+void Dealer::SetTrump(const CardSuit suit)
+{
+    QList<Suit*>::iterator SuitIndex;
+
+    for(SuitIndex = this->suits.begin(); SuitIndex != this->suits.end(); SuitIndex++)
+    {
+        (*SuitIndex)->SetTrump((*SuitIndex)->GetType() == suit);
+    }
 }
 
 void Dealer::GenerateSuits()
@@ -55,15 +113,32 @@ void Dealer::GenerateCard()
     {
         for(valueIndex = this->values.begin(); valueIndex != this->values.end(); valueIndex++)
         {
-            this->cards.append(new Card(**suitIndex, **valueIndex));
+            this->cards.append(new Card(*suitIndex, *valueIndex));
         }
     }
+}
+
+void Dealer::Cut()
+{
+    unsigned int count = this->cards.count();
+    int iteration = (qrand() % (count - 1)) + 1;
+    while(iteration > 0)
+    {
+        Card* tmp = this->cards.takeLast();
+        this->cards.push_front(tmp);
+        iteration--;
+    }
+}
+
+void Dealer::Shuffle()
+{
+    std::random_shuffle( this->cards.begin(), this->cards.end() );
 }
 
 std::ostream& Dealer::PrintOn(std::ostream& os) const
 {
     QList<Card*>::const_iterator cardIndex;
-    os << "Dealer: " << this->cards.count() << "cards";
+    os << "Dealer: " << this->cards.count() << "cards" << std::endl;
 
     for(cardIndex = this->cards.constBegin(); cardIndex != this->cards.constEnd(); cardIndex++)
     {

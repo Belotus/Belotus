@@ -22,30 +22,30 @@
 
 using namespace std;
 
-Card::Card(Suit &suit, Value &value) :
+Card::Card(Suit *suit, Value *value) :
     suit(suit), value(value)
 {
 }
 
-Suit& Card::GetSuit() const
+Suit* Card::GetSuit() const
 {
     return this->suit;
 }
 
-Value& Card::GetValue() const
+Value* Card::GetValue() const
 {
     return this->value;
 }
 
 int Card::GetPoints() const
 {
-    switch(this->value.GetValue())
+    switch(this->value->GetValue())
     {
     case SEVEN :
     case EIGHT :
         return 0;
     case NINE :
-        if(this->GetSuit().IsTrump())
+        if(this->suit->IsTrump())
         {
             return 14;
         }
@@ -56,7 +56,7 @@ int Card::GetPoints() const
     case TEN :
         return 10;
     case JACK :
-        if(this->GetSuit().IsTrump())
+        if(this->suit->IsTrump())
         {
             return 20;
         }
@@ -80,7 +80,7 @@ int Card::GetPoints() const
 
 std::ostream& Card::PrintOn(std::ostream& os) const
 {
-    return os << "Card(" << this->suit << " , " << this->value << ", " << this->GetPoints() << " points)";
+    return os << "Card(" << *(this->suit) << " , " << *(this->value) << ", " << this->GetPoints() << " points)";
 }
 
 /**
@@ -91,14 +91,14 @@ std::ostream& Card::PrintOn(std::ostream& os) const
  */
 bool Card::operator<(Card& card)
 {
-    if(this->suit.IsTrump())
+    if(this->suit->IsTrump())
     {
-        if(card.suit.IsTrump())
+        if(card.suit->IsTrump())
         {
-            if(this->value.GetValue() == JACK) return false;
-            if(card.value.GetValue() == JACK) return true;
-            if(this->value.GetValue() == NINE) return false;
-            if(card.value.GetValue() == NINE) return true;
+            if(this->value->GetValue() == JACK) return false;
+            if(card.value->GetValue() == JACK) return true;
+            if(this->value->GetValue() == NINE) return false;
+            if(card.value->GetValue() == NINE) return true;
             return (this->value < card.value);
         }
         else
@@ -108,7 +108,7 @@ bool Card::operator<(Card& card)
     }
     else
     {
-        if(card.suit.IsTrump())
+        if(card.suit->IsTrump())
         {
             return false;
         }

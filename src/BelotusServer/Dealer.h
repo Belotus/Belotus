@@ -21,20 +21,29 @@
 #define DEALER_H
 
 #include "../BelotusCommon/CardHolder.h"
+#include "Deck.h"
 
 class Dealer : public CardHolder
 {
 public:
     Dealer();
+    ~Dealer();
+    void Reset(Deck* deck1, Deck* deck2);
+    bool DealEnded() const;
+    Card* GetCard();
+    void SetTrump(const CardSuit suit);
 
 private:
     void GenerateSuits();
     void GenerateValues();
     void GenerateCard();
+    void Cut();
+    void Shuffle();
     virtual std::ostream& PrintOn(std::ostream&) const;
 
     QList<Value*> values;
     QList<Suit*> suits;
+    int indexDeal;
 };
 
 #endif // DEALER_H

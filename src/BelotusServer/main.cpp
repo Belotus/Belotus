@@ -31,13 +31,30 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    Suit suit = Suit(HEART);
-    Value value = Value(SEVEN);
+    /* Test Card, Suit, Value */
+    Suit *suit = new Suit(HEART);
+    Value *value = new Value(SEVEN);
     Card card = Card(suit, value);
 
     cout << card << endl;
 
+    delete suit;
+    delete value;
+
+    /* Test Dealer, Deck */
     Dealer dealer = Dealer();
+    Deck deck1 = Deck();
+    Deck deck2 = Deck();
+
+    cout << dealer;
+
+    while(!dealer.DealEnded())
+    {
+        deck1.AddCard(dealer.GetCard());
+        deck2.AddCard(dealer.GetCard());
+    }
+
+    dealer.Reset(&deck1, &deck2);
     cout << dealer;
     //return a.exec();
 }

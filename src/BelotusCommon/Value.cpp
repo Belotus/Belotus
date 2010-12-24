@@ -42,7 +42,7 @@ std::ostream& Value::PrintOn(std::ostream& os) const
         return os << "Value: " << this->value;
         break;
     case JACK:
-        return os << "Value: Jacks";
+        return os << "Value: Jack";
         break;
     case QUEEN:
         return os << "Value: Queen";

@@ -51,19 +51,24 @@ std::ostream& Suit::PrintOn(std::ostream& os) const
 {
     switch(this->suit) {
     case HEART:
-        return os << "Suit: Heart";
+        os << "Suit: Heart";
         break;
     case DIAMOND:
-        return os << "Suit: Diamond";
+        os << "Suit: Diamond";
         break;
     case CLUB:
-        return os << "Suit: Club";
+        os << "Suit: Club";
         break;
     case SPADE:
-        return os << "Suit: Spade";
+        os << "Suit: Spade";
         break;
     default:
         return os << "Error: This Suit doens't exist.";
         break;
     }
+    if(this->IsTrump())
+    {
+        os << " (trump)";
+    }
+    return os;
 }

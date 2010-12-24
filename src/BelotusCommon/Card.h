@@ -27,17 +27,17 @@
 class Card : public Base
 {
 public:
-    Card(Suit &suit, Value &value);
-    Suit& GetSuit() const;
-    Value& GetValue() const;
+    Card(Suit *suit, Value *value);
+    Suit* GetSuit() const;
+    Value* GetValue() const;
     int GetPoints() const;
     bool operator<(Card& card);
     bool operator>(Card& card);
 private:
     std::ostream& PrintOn(std::ostream&) const;
 
-    Suit &suit;
-    Value &value;
+    Suit *suit;
+    Value *value;
 };
 
 #endif // CARD_H
