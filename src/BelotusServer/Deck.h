@@ -31,7 +31,6 @@ public:
     Card* GetFrontCard();
     Card* GetBackCard();
     int GetScore() const;
-    bool IsEmpty() const;
 
 private:
     std::ostream& PrintOn(std::ostream&) const;

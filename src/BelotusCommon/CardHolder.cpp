@@ -24,6 +24,11 @@ CardHolder::CardHolder()
 {
 }
 
+bool CardHolder::IsEmpty() const
+{
+    return this->cards.isEmpty();
+}
+
 std::ostream& CardHolder::PrintOn(std::ostream& os) const
 {
     return os << "CardHolder(" << this->cards.count() << " elements)";

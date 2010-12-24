@@ -56,11 +56,6 @@ int Deck::GetScore() const
     return score;
 }
 
-bool Deck::IsEmpty() const
-{
-    return this->cards.isEmpty();
-}
-
 std::ostream& Deck::PrintOn(std::ostream& os) const
 {
     return os << "Deck (" << this->cards.count() << " cards , " << this->GetScore() << " points)";
