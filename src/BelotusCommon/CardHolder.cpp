@@ -29,6 +29,21 @@ bool CardHolder::IsEmpty() const
     return this->cards.isEmpty();
 }
 
+bool CardHolder::HasSuit(CardSuit suit) const
+{
+    QList<Card *>::const_iterator iCard;
+
+    for(iCard = this->cards.constBegin(); iCard != this->cards.constEnd(); iCard++)
+    {
+        if((*iCard)->GetSuit()->GetType() == suit)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 std::ostream& CardHolder::PrintOn(std::ostream& os) const
 {
     return os << "CardHolder(" << this->cards.count() << " elements)";

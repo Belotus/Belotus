@@ -29,6 +29,7 @@ class CardHolder : public Base
 public:
     CardHolder();
     bool IsEmpty() const;
+    bool HasSuit(CardSuit suit) const;
 
 protected:
     QList<Card*> cards;
