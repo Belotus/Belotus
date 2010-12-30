@@ -20,12 +20,31 @@
 
 #include "Scheduler.h"
 
-//Scheduler::Scheduler(QObject *parent)
-//{
-//}
+Scheduler::Scheduler()
+{
+}
 
-//int Scheduler::run()
-//{
+int Scheduler::run()
+{
+    // Initialisation
 
-//    return 0;
-//}
+
+    // Wait for the players
+
+
+    // Game loop
+
+
+        // Round loop
+            // Cards distribution
+
+
+            // Choice of the trunk color
+
+
+            // Fold loop
+
+
+
+    return 0;
+}
