@@ -20,31 +20,71 @@
 
 #include "Scheduler.h"
 
-Scheduler::Scheduler()
+Scheduler::Scheduler(QObject *parent=0)
 {
+    //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
+    connect(this, SIGNAL(s_Card()), this, SLOT(Card()));
+    connect(this, SIGNAL(s_GameBeginning()), this, SLOT(GameBeginning()));
+    connect(this, SIGNAL(s_NewGame()), this, SLOT(NewGame()));
+    connect(this, SIGNAL(s_Pass()), this, SLOT(Pass()));
+    connect(this, SIGNAL(s_PlayBeginning()), this, SLOT(PlayBeginning()));
+    connect(this, SIGNAL(s_PlayerConnection()), this, SLOT(PlayerConnection()));
+    connect(this, SIGNAL(s_PlayerDeconnection()), this, SLOT(PlayerDeconnection()));
+    connect(this, SIGNAL(s_QuitGame()), this, SLOT(PlayerDeconnection()));
+    connect(this, SIGNAL(s_Take()), this, SLOT(Take()));
+
+    // TODO : Replace the sender (this) by the appropriate sender
 }
 
-int Scheduler::run()
+/*
+void Scheduler::unSlot(int *unParametre)
 {
-    // Initialisation
-
-
-    // Wait for the players
-
-
-    // Game loop
-
-
-        // Round loop
-            // Cards distribution
-
-
-            // Choice of the trunk color
-
-
-            // Fold loop
-
-
-
-    return 0;
+    // Traitement unSignal
 }
+*/
+
+void Scheduler::PlayerConnection()
+{
+    // TODO
+}
+
+void Scheduler::GameBeginning()
+{
+    // TODO
+}
+
+void Scheduler::PlayBeginning()
+{
+    // TODO
+}
+
+void Scheduler::Pass()
+{
+    // TODO
+}
+
+void Scheduler::Take()
+{
+    // TODO
+}
+
+void Scheduler::Card()
+{
+    // TODO
+}
+
+void Scheduler::QuitGame()
+{
+    // TODO
+}
+
+void Scheduler::NewGame()
+{
+    // TODO
+}
+
+void Scheduler::PlayerDeconnection()
+{
+    // TODO
+}
+

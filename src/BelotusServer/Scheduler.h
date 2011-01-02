@@ -29,19 +29,55 @@
 #include "../BelotusCommon/Player.h"
 
 class Scheduler : public QTcpServer
-{/*
+{    
     Q_OBJECT
 
 public:
     Scheduler(QObject *parent=0);
 
+
+signals:
+    //void unSignal(int *unParametre);
+    void s_PlayerConnection();
+    void s_GameBeginning();
+    void s_PlayBeginning();
+    void s_Pass();
+    void s_Take();
+    void s_Card();
+    void s_QuitGame();
+    void s_NewGame();
+    void s_PlayerDeconnection();
+
+
+public slots:
+    //void unSlot(int *unParametre);
+    void PlayerConnection();
+    void GameBeginning();
+    void PlayBeginning();
+    void Pass();
+    void Take();
+    void Card();
+    void QuitGame();
+    void NewGame();
+    void PlayerDeconnection();
+
+
 protected:
     void incomingConnection(int socketfd);
-    int run();
+
 
 private:
     QSet<QTcpSocket*> tcpClients;
-    QMap<QTcpSocket*,IPlayer> players;*/
+    QMap<QTcpSocket*,Player> players;*/
+
+    enum State {WFPlayersConnection,
+                WFGameBeginning
+                WFPlayBeginning
+                WFTrumpChoice
+                WFCard
+                WFPlayer1Decision
+                End
+                }
 
 };
 
