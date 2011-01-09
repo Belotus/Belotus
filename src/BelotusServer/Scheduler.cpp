@@ -20,7 +20,7 @@
 
 #include "Scheduler.h"
 
-Scheduler::Scheduler(QObject *parent=0)
+Scheduler::Scheduler(QObject *parent)
 {
     //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
     connect(this, SIGNAL(s_Card()), this, SLOT(Card()));

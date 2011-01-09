@@ -68,16 +68,16 @@ protected:
 
 private:
     QSet<QTcpSocket*> tcpClients;
-    QMap<QTcpSocket*,Player> players;*/
+    QMap<QTcpSocket*,Player> players;
 
     enum State {WFPlayersConnection,
-                WFGameBeginning
-                WFPlayBeginning
-                WFTrumpChoice
-                WFCard
-                WFPlayer1Decision
+                WFGameBeginning,
+                WFPlayBeginning,
+                WFTrumpChoice,
+                WFCard,
+                WFPlayer1Decision,
                 End
-                }
+                };
 
 };
 
