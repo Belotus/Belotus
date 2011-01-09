@@ -88,3 +88,7 @@ void Scheduler::PlayerDeconnection()
     // TODO
 }
 
+void Scheduler::incomingConnection(int socketfd)
+{
+    // TODO
+}
