@@ -19,8 +19,9 @@
  */
 
 #include "Scheduler.h"
+#include "time.h"
 
-Scheduler::Scheduler(QObject *parent)
+Scheduler::Scheduler(QObject *parent) : QTcpServer(parent)
 {
     //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
     connect(this, SIGNAL(s_Card()), this, SLOT(Card()));
@@ -46,49 +47,59 @@ void Scheduler::unSlot(int *unParametre)
 void Scheduler::PlayerConnection()
 {
     // TODO
+    cout << "PlayerConnection ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::GameBeginning()
 {
     // TODO
+    cout << "GameBeginning ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::PlayBeginning()
 {
     // TODO
+    cout << "PlayBeginning ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Pass()
 {
     // TODO
+    cout << "Pass ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Take()
 {
     // TODO
+    cout << "Take ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Card()
 {
     // TODO
+    cout << "Card ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::QuitGame()
 {
     // TODO
+    cout << "QuitGame ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::NewGame()
 {
     // TODO
+    cout << "NewGame ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::PlayerDeconnection()
 {
     // TODO
+    cout << "PlayerDeconnection ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::incomingConnection(int socketfd)
 {
     // TODO
+    cout << "incomingConnection ( " << time(0) << " )" << endl ;
 }

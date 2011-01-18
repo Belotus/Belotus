@@ -23,6 +23,7 @@
 #include "../BelotusCommon/Value.h"
 #include "../BelotusCommon/Card.h"
 #include "Dealer.h"
+#include "Scheduler.h"
 #include <iostream>
 
 using namespace std;
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     /* Test Card, Suit, Value */
+    /*
     Suit *suit = new Suit(HEART);
     Value *value = new Value(SEVEN);
     Card card = Card(suit, value);
@@ -40,8 +42,10 @@ int main(int argc, char *argv[])
 
     delete suit;
     delete value;
+    */
 
     /* Test Dealer, Deck */
+    /*
     Dealer dealer = Dealer();
     Deck deck1 = Deck();
     Deck deck2 = Deck();
@@ -56,5 +60,8 @@ int main(int argc, char *argv[])
 
     dealer.Reset(&deck1, &deck2);
     cout << dealer;
+    */
+
+    Scheduler scheduler = Scheduler();
     //return a.exec();
 }
