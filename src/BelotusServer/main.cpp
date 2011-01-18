@@ -62,6 +62,6 @@ int main(int argc, char *argv[])
     cout << dealer;
     */
 
-    Scheduler scheduler = Scheduler();
+    Scheduler scheduler;
     //return a.exec();
 }

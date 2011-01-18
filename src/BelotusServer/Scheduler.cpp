@@ -21,7 +21,7 @@
 #include "Scheduler.h"
 #include "time.h"
 
-Scheduler::Scheduler(QObject *parent) : QTcpServer(parent)
+Scheduler::Scheduler(QObject *parent)
 {
     //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
     connect(this, SIGNAL(s_Card()), this, SLOT(Card()));
