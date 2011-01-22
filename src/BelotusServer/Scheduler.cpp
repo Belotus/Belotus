@@ -22,6 +22,7 @@
 #include "time.h"
 
 Scheduler::Scheduler(QObject *parent)
+    : QObject(parent)
 {
     //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
     connect(this, SIGNAL(s_Card()), this, SLOT(Card()));

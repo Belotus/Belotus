@@ -29,12 +29,11 @@
 #include "../BelotusCommon/Player.h"
 
 class Scheduler : public QObject
-{    
+{
     Q_OBJECT
 
 public:
     Scheduler(QObject *parent = 0);
-    Scheduler(const Scheduler&) {};
 
 signals:
     //void unSignal(int *unParametre);
