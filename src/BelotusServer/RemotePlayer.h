@@ -24,7 +24,6 @@
 #include <QTcpSocket>
 
 #include "../BelotusCommon/Player.h"
-#include "../BelotusCommon/Base.h"
 
 
 class RemotePlayer : public Player
@@ -35,7 +34,7 @@ public:
 
     Card* Play();
     void AddCard(Card* card);
-    void Insult(string insult);
+    void Insult(QString insult);
 
 private:
     QTcpSocket *socket;

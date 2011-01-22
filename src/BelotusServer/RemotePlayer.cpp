@@ -39,6 +39,6 @@ void RemotePlayer::AddCard(Card* card)
 {
 }
 
-void RemotePlayer::Insult(string insult)
+void RemotePlayer::Insult(QString insult)
 {
 }

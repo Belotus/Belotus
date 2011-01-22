@@ -20,6 +20,85 @@
 
 #include "Protocol.h"
 
-Protocol::Protocol()
+quint32 Protocol::QUERY_PLAY = 0x00001;
+quint32 Protocol::QUERY_ADD_CARD = 0x00002;
+quint32 Protocol::QUERY_INSULT = 0x00003;
+
+quint32 Protocol::ANSWER_ACK = 0x10001;
+quint32 Protocol::ANSWER_FAIL = 0x10002;
+quint32 Protocol::ANSWER_PLAY = 0x10003;
+
+Protocol::Protocol(QObject *parent, QTcpSocket *socket)
+    : QObject(parent), socket(socket)
 {
+}
+
+void Protocol::MessageProcessed()
+{
+
+}
+
+void Protocol::send()
+{
+
+}
+
+void Protocol::write(quint32)
+{
+
+}
+
+void Protocol::write(QString*)
+{
+
+}
+
+Card* Protocol::getCard()
+{
+    return this->card;
+}
+
+QString* Protocol::getQString()
+{
+    return &(this->string);
+}
+
+void Protocol::sendQueryPlay()
+{
+
+}
+
+void Protocol::sendQueryAddCard(Card* card)
+{
+
+}
+
+void Protocol::sendQueryInsult(QString insult)
+{
+
+}
+
+void Protocol::sendAnswerACK()
+{
+
+}
+
+void Protocol::sendAnswerFAIL()
+{
+
+}
+
+void Protocol::sendAnswerPlay()
+{
+
+}
+
+void Protocol::receiveAddCard()
+{
+
+}
+
+void Protocol::receiveInsult()
+{
+
 }

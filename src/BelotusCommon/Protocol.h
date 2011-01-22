@@ -20,10 +20,60 @@
 #ifndef PROTOCOL_H
 #define PROTOCOL_H
 
-class Protocol
+#include <QObject>
+#include <QTcpSocket>
+
+#include "../BelotusCommon/Card.h"
+
+class Protocol : public QObject
 {
+    Q_OBJECT
+
 public:
-    Protocol();
+    Protocol(QObject *parent, QTcpSocket *socket);
+
+    void MessageProcessed();
+
+signals:
+    void s_MessageReady(quint32 *type);
+
+private:
+    void send();
+    void write(quint32);
+    void write(QString*);
+
+public:
+    Card* getCard();
+    QString* getQString();
+
+private:
+    quint32     type;
+    QTcpSocket *socket;
+    QByteArray  data;
+    Card* card;
+    QString string;
+
+private:
+    static quint32 QUERY_PLAY;
+    static quint32 QUERY_ADD_CARD;
+    static quint32 QUERY_INSULT;
+
+    static quint32 ANSWER_ACK;
+    static quint32 ANSWER_FAIL;
+    static quint32 ANSWER_PLAY;
+
+public:
+    void sendQueryPlay();
+    void sendQueryAddCard(Card* card);
+    void sendQueryInsult(QString insult);
+
+    void sendAnswerACK();
+    void sendAnswerFAIL();
+    void sendAnswerPlay();
+
+private:
+    void receiveAddCard();
+    void receiveInsult();
 };
 
 #endif // PROTOCOL_H
