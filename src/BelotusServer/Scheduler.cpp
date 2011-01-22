@@ -104,3 +104,16 @@ void Scheduler::incomingConnection(int socketfd)
     // TODO
     cout << "incomingConnection ( " << time(0) << " )" << endl ;
 }
+
+void Scheduler::Test()
+{
+    emit s_PlayerConnection();
+    emit s_GameBeginning();
+    emit s_PlayBeginning();
+    emit s_Pass();
+    emit s_Take();
+    emit s_Card();
+    emit s_QuitGame();
+    emit s_NewGame();
+    emit s_PlayerDeconnection();
+}

@@ -34,6 +34,7 @@ class Scheduler : public QObject
 
 public:
     Scheduler(QObject *parent = 0);
+    void Test();
 
 signals:
     //void unSignal(int *unParametre);

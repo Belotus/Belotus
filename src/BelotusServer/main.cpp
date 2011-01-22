@@ -63,5 +63,7 @@ int main(int argc, char *argv[])
     */
 
     Scheduler scheduler;
+
+    scheduler.Test();
     //return a.exec();
 }
