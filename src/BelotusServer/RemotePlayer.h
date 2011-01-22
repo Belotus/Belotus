@@ -32,6 +32,11 @@ class RemotePlayer : public Player
 public:
     RemotePlayer();
     RemotePlayer(QTcpSocket *socket);
+
+    Card* Play();
+    void AddCard(Card* card);
+    void Insult(string insult);
+
 private:
     QTcpSocket *socket;
 

@@ -22,7 +22,7 @@ SOURCES += main.cpp \
     Deck.cpp \
     CheckRules.cpp \
     LocalPlayer.cpp \
-    NetworkFE.cpp
+    NetworkFrontend.cpp
 HEADERS += ../BelotusCommon/Class.h \
     ../BelotusCommon/Base.h \
     ../BelotusCommon/Protocol.h \
@@ -37,4 +37,4 @@ HEADERS += ../BelotusCommon/Class.h \
     Deck.h \
     CheckRules.h \
     LocalPlayer.h \
-    NetworkFE.h
+    NetworkFrontend.h

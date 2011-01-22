@@ -1,6 +1,6 @@
 /* Belotus
  *
- * RemotePlayer.cpp
+ * NetworkFrontend.h
  * Copyright (C) 2010 Schneider Julien
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
@@ -17,28 +17,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef NetworkFrontend_H
+#define NetworkFrontend_H
 
-#include <QTcpSocket>
-
+#include <QTcpServer>
 #include "RemotePlayer.h"
 
-RemotePlayer::RemotePlayer()
+class NetworkFrontend : public QTcpServer
 {
-}
+    Q_OBJECT
 
-RemotePlayer::RemotePlayer(QTcpSocket *socket) : socket(socket)
-{
-}
+public:
+    NetworkFrontend(QObject *parent = 0);
 
-Card* RemotePlayer::Play()
-{
-    return 0;
-}
+signals:
+    //void unSignal(int *unParametre);
+    void s_PlayerConnection(RemotePlayer *remotePlayer);
 
-void RemotePlayer::AddCard(Card* card)
-{
-}
+protected:
+    void incomingConnection(int socketDescriptor);
 
-void RemotePlayer::Insult(string insult)
-{
-}
+
+};
+
+#endif // NetworkFrontend_H

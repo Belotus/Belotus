@@ -26,6 +26,8 @@
 #include <QMap>
 #include <QSet>
 
+#include "RemotePlayer.h"
+#include "NetworkFrontend.h"
 #include "../BelotusCommon/Player.h"
 
 class Scheduler : public QObject
@@ -38,7 +40,7 @@ public:
 
 signals:
     //void unSignal(int *unParametre);
-    void s_PlayerConnection();
+    //void s_PlayerConnection(); in NetworkFrontend.h
     void s_GameBeginning();
     void s_PlayBeginning();
     void s_Pass();
@@ -51,7 +53,7 @@ signals:
 
 public slots:
     //void unSlot(int *unParametre);
-    void PlayerConnection();
+    void PlayerConnection(RemotePlayer *remotePlayer);
     void GameBeginning();
     void PlayBeginning();
     void Pass();
@@ -67,8 +69,9 @@ protected:
 
 
 private:
-    QSet<QTcpSocket*> tcpClients;
-    QMap<QTcpSocket*,Player*> players;
+    //QSet<QTcpSocket*> tcpClients;
+    //QMap<QTcpSocket*,Player*> players;
+    NetworkFrontend *networkFrontend;
 
     enum State {WFPlayersConnection,
                 WFGameBeginning,

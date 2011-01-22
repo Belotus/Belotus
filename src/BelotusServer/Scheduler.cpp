@@ -24,13 +24,15 @@
 Scheduler::Scheduler(QObject *parent)
     : QObject(parent)
 {
+    this->networkFrontend = new NetworkFrontend();
+
     //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
     connect(this, SIGNAL(s_Card()), this, SLOT(Card()));
     connect(this, SIGNAL(s_GameBeginning()), this, SLOT(GameBeginning()));
     connect(this, SIGNAL(s_NewGame()), this, SLOT(NewGame()));
     connect(this, SIGNAL(s_Pass()), this, SLOT(Pass()));
     connect(this, SIGNAL(s_PlayBeginning()), this, SLOT(PlayBeginning()));
-    connect(this, SIGNAL(s_PlayerConnection()), this, SLOT(PlayerConnection()));
+    connect(this->networkFrontend, SIGNAL(s_PlayerConnection(RemotePlayer *)), this, SLOT(PlayerConnection(RemotePlayer *)));
     connect(this, SIGNAL(s_PlayerDeconnection()), this, SLOT(PlayerDeconnection()));
     connect(this, SIGNAL(s_QuitGame()), this, SLOT(PlayerDeconnection()));
     connect(this, SIGNAL(s_Take()), this, SLOT(Take()));
@@ -45,10 +47,11 @@ void Scheduler::unSlot(int *unParametre)
 }
 */
 
-void Scheduler::PlayerConnection()
+void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
 {
     // TODO
     cout << "PlayerConnection ( " << time(0) << " )" << endl ;
+    cout << *remotePlayer << endl;
 }
 
 void Scheduler::GameBeginning()
@@ -107,6 +110,7 @@ void Scheduler::incomingConnection(int socketfd)
 
 void Scheduler::Test()
 {
+    /*
     emit s_PlayerConnection();
     emit s_GameBeginning();
     emit s_PlayBeginning();
@@ -116,4 +120,5 @@ void Scheduler::Test()
     emit s_QuitGame();
     emit s_NewGame();
     emit s_PlayerDeconnection();
+    */
 }
