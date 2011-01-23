@@ -30,7 +30,7 @@
 #include "NetworkFrontend.h"
 #include "../BelotusCommon/Player.h"
 
-class Scheduler : public QObject
+class Scheduler : public Base
 {
     Q_OBJECT
 
@@ -67,6 +67,8 @@ public slots:
 protected:
     void incomingConnection(int socketfd);
 
+protected:
+    virtual QTextStream& PrintOn(QTextStream& stream) const;
 
 private:
     //QSet<QTcpSocket*> tcpClients;

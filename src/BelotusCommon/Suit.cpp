@@ -19,16 +19,14 @@
  */
 
 #include "Suit.h"
-#include <string>
-#include <iostream>
 
-Suit::Suit(CardSuit suit) :
-        suit(suit)
+Suit::Suit(QObject *parent, CardSuit suit)
+    : Base(parent), suit(suit)
 {
 }
 
-Suit::Suit(CardSuit suit, bool isTrump) :
-        suit(suit), trump(isTrump)
+Suit::Suit(QObject *parent, CardSuit suit, bool isTrump)
+    :Base(parent), suit(suit), trump(isTrump)
 {
 }
 
@@ -47,28 +45,28 @@ bool Suit::IsTrump() const
     return this->trump;
 }
 
-std::ostream& Suit::PrintOn(std::ostream& os) const
+QTextStream& Suit::PrintOn(QTextStream& stream) const
 {
     switch(this->suit) {
     case HEART:
-        os << "Suit: Heart";
+        stream << "Suit: Heart";
         break;
     case DIAMOND:
-        os << "Suit: Diamond";
+        stream << "Suit: Diamond";
         break;
     case CLUB:
-        os << "Suit: Club";
+        stream << "Suit: Club";
         break;
     case SPADE:
-        os << "Suit: Spade";
+        stream << "Suit: Spade";
         break;
     default:
-        return os << "Error: This Suit doens't exist.";
+        return stream << "Error: This Suit doens't exist.";
         break;
     }
     if(this->IsTrump())
     {
-        os << " (trump)";
+        stream << " (trump)";
     }
-    return os;
+    return stream;
 }

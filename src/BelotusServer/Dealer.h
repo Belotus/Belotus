@@ -25,13 +25,18 @@
 
 class Dealer : public CardHolder
 {
+    Q_OBJECT
+
 public:
-    Dealer();
+    Dealer(QObject *parent);
     ~Dealer();
     void Reset(Deck* deck1, Deck* deck2);
     bool DealEnded() const;
     Card* GetCard();
     void SetTrump(const CardSuit suit);
+
+protected:
+    virtual QTextStream& PrintOn(QTextStream& stream) const;
 
 private:
     void GenerateSuits();
@@ -39,7 +44,7 @@ private:
     void GenerateCard();
     void Cut();
     void Shuffle();
-    virtual std::ostream& PrintOn(std::ostream&) const;
+
 
     QList<Value*> values;
     QList<Suit*> suits;

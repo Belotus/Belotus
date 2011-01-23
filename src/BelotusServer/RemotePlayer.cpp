@@ -22,11 +22,13 @@
 
 #include "RemotePlayer.h"
 
-RemotePlayer::RemotePlayer()
+RemotePlayer::RemotePlayer(QObject *parent)
+    : Player(parent)
 {
 }
 
-RemotePlayer::RemotePlayer(QTcpSocket *socket) : socket(socket)
+RemotePlayer::RemotePlayer(QObject *parent, QTcpSocket *socket)
+    : Player(parent), socket(socket)
 {
 }
 
@@ -41,4 +43,9 @@ void RemotePlayer::AddCard(Card* card)
 
 void RemotePlayer::Insult(QString insult)
 {
+}
+
+QTextStream& RemotePlayer::PrintOn(QTextStream& stream) const
+{
+    return stream << "RemotePlayer";
 }

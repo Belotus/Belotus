@@ -35,11 +35,16 @@ void NetworkFrontend::incomingConnection(int socketDescriptor)
     if (!tcpSocket->setSocketDescriptor(socketDescriptor))
     {
         //emit error(tcpSocket.error());
-        cout << "Socket error" << endl;
+        qDebug() << "Socket error" << endl;
         return;
     }
 
     remotePlayer = new RemotePlayer(tcpSocket);
 
     emit s_PlayerConnection(remotePlayer);
+}
+
+QTextStream& NetworkFrontend::PrintOn(QTextStream& stream) const
+{
+    return stream << "NetworkFrontend";
 }

@@ -36,7 +36,7 @@ signals:
 
 protected:
     void incomingConnection(int socketDescriptor);
-
+    virtual QTextStream& PrintOn(QTextStream& stream) const;
 
 };
 

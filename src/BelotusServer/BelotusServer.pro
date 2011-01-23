@@ -9,7 +9,6 @@ CONFIG -= app_bundle
 TEMPLATE = app
 SOURCES += main.cpp \
     ../BelotusCommon/Player.cpp \
-    ../BelotusCommon/Class.cpp \
     ../BelotusCommon/Base.cpp \
     ../BelotusCommon/Protocol.cpp \
     ../BelotusCommon/CardHolder.cpp \
@@ -23,8 +22,7 @@ SOURCES += main.cpp \
     CheckRules.cpp \
     LocalPlayer.cpp \
     NetworkFrontend.cpp
-HEADERS += ../BelotusCommon/Class.h \
-    ../BelotusCommon/Base.h \
+HEADERS += ../BelotusCommon/Base.h \
     ../BelotusCommon/Protocol.h \
     ../BelotusCommon/CardHolder.h \
     ../BelotusCommon/Card.h \

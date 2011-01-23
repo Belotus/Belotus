@@ -25,15 +25,17 @@
 
 class Deck : public CardHolder
 {
+    Q_OBJECT
+
 public:
-    Deck();
+    Deck(QObject *parent);
     void AddCard(Card* card);
     Card* GetFrontCard();
     Card* GetBackCard();
     int GetScore() const;
 
-private:
-    std::ostream& PrintOn(std::ostream&) const;
+protected:
+    virtual QTextStream& PrintOn(QTextStream& stream) const;
 };
 
 #endif // DECK_H

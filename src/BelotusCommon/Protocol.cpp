@@ -29,7 +29,7 @@ quint32 Protocol::ANSWER_FAIL = 0x10002;
 quint32 Protocol::ANSWER_PLAY = 0x10003;
 
 Protocol::Protocol(QObject *parent, QTcpSocket *socket)
-    : QObject(parent), socket(socket)
+    : Base(parent), socket(socket)
 {
 }
 
@@ -101,4 +101,9 @@ void Protocol::receiveAddCard()
 void Protocol::receiveInsult()
 {
 
+}
+
+QTextStream& Protocol::PrintOn(QTextStream& stream) const
+{
+    return stream << "Protocol";
 }

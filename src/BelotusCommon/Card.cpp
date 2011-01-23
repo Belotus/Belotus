@@ -22,8 +22,8 @@
 
 using namespace std;
 
-Card::Card(Suit *suit, Value *value) :
-    suit(suit), value(value)
+Card::Card(QObject *parent, Suit *suit, Value *value)
+    :Base(parent), suit(suit), value(value)
 {
 }
 
@@ -77,10 +77,9 @@ int Card::GetPoints() const
 
 
 
-
-std::ostream& Card::PrintOn(std::ostream& os) const
+QTextStream& Card::PrintOn(QTextStream& stream) const
 {
-    return os << "Card(" << *(this->suit) << " , " << *(this->value) << ", " << this->GetPoints() << " points)";
+    return stream << "Card(" << this->suit << " , " << this->value << ", " << this->GetPoints() << " points)";
 }
 
 /**
@@ -89,17 +88,17 @@ std::ostream& Card::PrintOn(std::ostream& os) const
  * Beware, this function doesnt check if the Card is valid in the game
  * Also, this assume that all card are different
  */
-bool Card::operator<(Card& card)
+bool Card::operator<(Card* card)
 {
     if(this->suit->IsTrump())
     {
-        if(card.suit->IsTrump())
+        if(card->suit->IsTrump())
         {
             if(this->value->GetValue() == JACK) return false;
-            if(card.value->GetValue() == JACK) return true;
+            if(card->value->GetValue() == JACK) return true;
             if(this->value->GetValue() == NINE) return false;
-            if(card.value->GetValue() == NINE) return true;
-            return (this->value < card.value);
+            if(card->value->GetValue() == NINE) return true;
+            return (this->value < card->value);
         }
         else
         {
@@ -108,13 +107,13 @@ bool Card::operator<(Card& card)
     }
     else
     {
-        if(card.suit->IsTrump())
+        if(card->suit->IsTrump())
         {
             return false;
         }
         else
         {
-            return (this->value < card.value);
+            return (this->value < card->value);
         }
     }
 }
@@ -125,7 +124,7 @@ bool Card::operator<(Card& card)
  * Beware, this function doesnt check if the Card is valid in the game
  * Also, this assume that all card are different
  */
-bool Card::operator>(Card& card)
+bool Card::operator>(Card* card)
 {
     return !(this->operator <(card));
 }

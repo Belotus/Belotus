@@ -24,7 +24,6 @@
 #include "../BelotusCommon/Card.h"
 #include "Dealer.h"
 #include "Scheduler.h"
-#include <iostream>
 
 using namespace std;
 
@@ -33,34 +32,32 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     /* Test Card, Suit, Value */
-    /*
-    Suit *suit = new Suit(HEART);
-    Value *value = new Value(SEVEN);
-    Card card = Card(suit, value);
+    Suit *suit = new Suit(&a, HEART);
+    Value *value = new Value(&a, SEVEN);
+    Card *card = new Card(&a, suit, value);
 
-    cout << card << endl;
+    qDebug() << card << endl;
 
     delete suit;
     delete value;
-    */
+    delete card;
+
 
     /* Test Dealer, Deck */
-    /*
-    Dealer dealer = Dealer();
-    Deck deck1 = Deck();
-    Deck deck2 = Deck();
+    Dealer *dealer = new Dealer(&a);
+    Deck *deck1 = new Deck(&a);
+    Deck *deck2 = new Deck(&a);
 
-    cout << dealer;
+    qDebug() << dealer;
 
-    while(!dealer.DealEnded())
+    while(!dealer->DealEnded())
     {
-        deck1.AddCard(dealer.GetCard());
-        deck2.AddCard(dealer.GetCard());
+        deck1->AddCard(dealer->GetCard());
+        deck2->AddCard(dealer->GetCard());
     }
 
-    dealer.Reset(&deck1, &deck2);
-    cout << dealer;
-    */
+    dealer->Reset(deck1, deck2);
+    qDebug() << dealer;
 
     Scheduler scheduler;
 

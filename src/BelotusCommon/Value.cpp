@@ -19,11 +19,9 @@
  */
 
 #include "Value.h"
-#include <string>
-#include <iostream>
 
-Value::Value(CardValue value) :
-        value(value)
+Value::Value(QObject *parent, CardValue value)
+    :Base(parent), value(value)
 {
 }
 
@@ -32,29 +30,29 @@ CardValue Value::GetValue() const
     return this->value;
 }
 
-std::ostream& Value::PrintOn(std::ostream& os) const
+QTextStream& Value::PrintOn(QTextStream& stream) const
 {
     switch(this->value) {
     case SEVEN:
     case EIGHT:
     case NINE:
     case TEN:
-        return os << "Value: " << this->value;
+        return stream << "Value: " << this->value;
         break;
     case JACK:
-        return os << "Value: Jack";
+        return stream << "Value: Jack";
         break;
     case QUEEN:
-        return os << "Value: Queen";
+        return stream << "Value: Queen";
         break;
     case KING:
-        return os << "Value: King";
+        return stream << "Value: King";
         break;
     case ACE:
-        return os << "Value: Ace";
+        return stream << "Value: Ace";
         break;
     default:
-        return os << "Error: This Value doens't exist.";
+        return stream << "Error: This Value doens't exist.";
         break;
     }
 }

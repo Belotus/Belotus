@@ -20,7 +20,8 @@
 
 #include "CardHolder.h"
 
-CardHolder::CardHolder()
+CardHolder::CardHolder(QObject *parent)
+    :Base(parent)
 {
 }
 
@@ -43,8 +44,7 @@ bool CardHolder::HasSuit(CardSuit suit) const
     return false;
 }
 
-
-std::ostream& CardHolder::PrintOn(std::ostream& os) const
+QTextStream& CardHolder::PrintOn(QTextStream& stream) const
 {
-    return os << "CardHolder(" << this->cards.count() << " elements)";
+    return stream << "CardHolder(" << this->cards.count() << " elements)";
 }

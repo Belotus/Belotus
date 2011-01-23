@@ -20,6 +20,7 @@
 
 #include "Player.h"
 
-Player::Player()
+Player::Player(QObject *parent)
+    :CardHolder(parent)
 {
 }

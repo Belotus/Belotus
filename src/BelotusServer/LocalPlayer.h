@@ -24,14 +24,16 @@
 
 class LocalPlayer : public Player
 {
+    Q_OBJECT
+
 public:
-    LocalPlayer();
+    LocalPlayer(QObject *parent);
     Card* Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
     void AddCard(Card* card);
-    void Insult(string insult);
+    void Insult(QString insult);
 
-private:
-    std::ostream& PrintOn(std::ostream&) const;
+protected:
+    virtual QTextStream& PrintOn(QTextStream& stream) const;
 };
 
 #endif // LOCALPLAYER_H

@@ -19,16 +19,36 @@
  */
 
 #include "Base.h"
-#include <sstream>
 
-std::string Base::ToString() const
+quint32 Base::ref = 0;
+
+Base::Base(QObject *parent)
+    : QObject(parent)
 {
-	std::ostringstream os;
-	PrintOn(os);
-	return os.str();
+    ref++;
 }
 
-std::ostream& operator << (std::ostream& os, const Base& object)
+Base::~Base()
 {
-	return os << object.ToString();
+    ref--;
 }
+
+QString Base::ToString() const
+{
+    QString s;
+    QTextStream stream(&s);
+    PrintOn(stream);
+    return s;
+}
+
+QDebug operator<<(QDebug dbg, const Base *object)
+{
+    return dbg << object->ToString();
+}
+
+/*
+QDebug operator<<(QDebug dbg, const Base &object)
+{
+    return dbg << object.ToString();
+}
+*/

@@ -28,13 +28,18 @@
 
 class RemotePlayer : public Player
 {
+    Q_OBJECT
+
 public:
-    RemotePlayer();
-    RemotePlayer(QTcpSocket *socket);
+    RemotePlayer(QObject *parent);
+    RemotePlayer(QObject *parent, QTcpSocket *socket);
 
     Card* Play();
     void AddCard(Card* card);
     void Insult(QString insult);
+
+protected:
+    virtual QTextStream& PrintOn(QTextStream& stream) const;
 
 private:
     QTcpSocket *socket;

@@ -25,7 +25,7 @@
 
 #include "../BelotusCommon/Card.h"
 
-class Protocol : public QObject
+class Protocol : public Base
 {
     Q_OBJECT
 
@@ -33,6 +33,9 @@ public:
     Protocol(QObject *parent, QTcpSocket *socket);
 
     void MessageProcessed();
+
+protected:
+    virtual QTextStream& PrintOn(QTextStream& stream) const;
 
 signals:
     void s_MessageReady(quint32 *type);

@@ -34,14 +34,18 @@ typedef enum {
 
 class Value : public Base
 {
+    Q_OBJECT
+
 public:
-    Value(CardValue value);
+    Value(QObject *parent, CardValue value);
     CardValue GetValue() const;
     bool operator<(Value& value);
     bool operator>(Value& value);
-private:
-    std::ostream& PrintOn(std::ostream&) const;
 
+protected:
+    QTextStream& PrintOn(QTextStream& stream) const;
+
+private:
     CardValue value;
 };
 

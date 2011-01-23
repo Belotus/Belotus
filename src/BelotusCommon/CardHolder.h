@@ -26,16 +26,18 @@
 
 class CardHolder : public Base
 {
+    Q_OBJECT
+
 public:
-    CardHolder();
+    CardHolder(QObject *parent);
     bool IsEmpty() const;
     bool HasSuit(CardSuit suit) const;
 
 protected:
     QList<Card*> cards;
 
-private:
-    virtual std::ostream& PrintOn(std::ostream&) const;
+protected:
+    virtual QTextStream& PrintOn(QTextStream& stream) const;
 };
 
 #endif // CARDHOLDER_H

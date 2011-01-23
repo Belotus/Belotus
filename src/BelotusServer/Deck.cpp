@@ -20,7 +20,8 @@
 
 #include "Deck.h"
 
-Deck::Deck()
+Deck::Deck(QObject *parent)
+    : CardHolder(parent)
 {
 }
 
@@ -56,7 +57,7 @@ int Deck::GetScore() const
     return score;
 }
 
-std::ostream& Deck::PrintOn(std::ostream& os) const
+QTextStream& Deck::PrintOn(QTextStream& stream) const
 {
-    return os << "Deck (" << this->cards.count() << " cards , " << this->GetScore() << " points)";
+    return stream << "Deck (" << this->cards.count() << " cards , " << this->GetScore() << " points)";
 }

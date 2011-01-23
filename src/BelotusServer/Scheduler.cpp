@@ -22,7 +22,7 @@
 #include "time.h"
 
 Scheduler::Scheduler(QObject *parent)
-    : QObject(parent)
+    : Base(parent)
 {
     this->networkFrontend = new NetworkFrontend();
 
@@ -50,62 +50,62 @@ void Scheduler::unSlot(int *unParametre)
 void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
 {
     // TODO
-    cout << "PlayerConnection ( " << time(0) << " )" << endl ;
-    cout << *remotePlayer << endl;
+    qDebug() << "PlayerConnection ( " << time(0) << " )" << endl ;
+    qDebug() << remotePlayer << endl;
 }
 
 void Scheduler::GameBeginning()
 {
     // TODO
-    cout << "GameBeginning ( " << time(0) << " )" << endl ;
+    qDebug() << "GameBeginning ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::PlayBeginning()
 {
     // TODO
-    cout << "PlayBeginning ( " << time(0) << " )" << endl ;
+    qDebug() << "PlayBeginning ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Pass()
 {
     // TODO
-    cout << "Pass ( " << time(0) << " )" << endl ;
+    qDebug() << "Pass ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Take()
 {
     // TODO
-    cout << "Take ( " << time(0) << " )" << endl ;
+    qDebug() << "Take ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Card()
 {
     // TODO
-    cout << "Card ( " << time(0) << " )" << endl ;
+    qDebug() << "Card ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::QuitGame()
 {
     // TODO
-    cout << "QuitGame ( " << time(0) << " )" << endl ;
+    qDebug() << "QuitGame ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::NewGame()
 {
     // TODO
-    cout << "NewGame ( " << time(0) << " )" << endl ;
+    qDebug() << "NewGame ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::PlayerDeconnection()
 {
     // TODO
-    cout << "PlayerDeconnection ( " << time(0) << " )" << endl ;
+    qDebug() << "PlayerDeconnection ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::incomingConnection(int socketfd)
 {
     // TODO
-    cout << "incomingConnection ( " << time(0) << " )" << endl ;
+    qDebug() << "incomingConnection ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Test()
@@ -121,4 +121,9 @@ void Scheduler::Test()
     emit s_NewGame();
     emit s_PlayerDeconnection();
     */
+}
+
+QTextStream& Scheduler::PrintOn(QTextStream& stream) const
+{
+    return stream << "Scheduler";
 }

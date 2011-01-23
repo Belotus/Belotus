@@ -23,8 +23,8 @@
 #include <QTime>
 #include <QtGlobal>
 
-Dealer::Dealer()
-    : indexDeal(0)
+Dealer::Dealer(QObject *parent)
+    : CardHolder(parent), indexDeal(0)
 {
     QTime time = QTime::currentTime ();
     qsrand(time.hour() + time.minute() + time.msec());
@@ -87,21 +87,21 @@ void Dealer::SetTrump(const CardSuit suit)
 
 void Dealer::GenerateSuits()
 {
-    this->suits.append(new Suit(HEART));
-    this->suits.append(new Suit(DIAMOND));
-    this->suits.append(new Suit(CLUB));
-    this->suits.append(new Suit(SPADE));
+    this->suits.append(new Suit(this, HEART));
+    this->suits.append(new Suit(this, DIAMOND));
+    this->suits.append(new Suit(this, CLUB));
+    this->suits.append(new Suit(this, SPADE));
 }
 
 void Dealer::GenerateValues() {
-    this->values.append(new Value(SEVEN));
-    this->values.append(new Value(EIGHT));
-    this->values.append(new Value(NINE));
-    this->values.append(new Value(TEN));
-    this->values.append(new Value(JACK));
-    this->values.append(new Value(QUEEN));
-    this->values.append(new Value(KING));
-    this->values.append(new Value(ACE));
+    this->values.append(new Value(this, SEVEN));
+    this->values.append(new Value(this, EIGHT));
+    this->values.append(new Value(this, NINE));
+    this->values.append(new Value(this, TEN));
+    this->values.append(new Value(this, JACK));
+    this->values.append(new Value(this, QUEEN));
+    this->values.append(new Value(this, KING));
+    this->values.append(new Value(this, ACE));
 }
 
 void Dealer::GenerateCard()
@@ -113,7 +113,7 @@ void Dealer::GenerateCard()
     {
         for(valueIndex = this->values.begin(); valueIndex != this->values.end(); valueIndex++)
         {
-            this->cards.append(new Card(*suitIndex, *valueIndex));
+            this->cards.append(new Card(this, *suitIndex, *valueIndex));
         }
     }
 }
@@ -135,15 +135,16 @@ void Dealer::Shuffle()
     std::random_shuffle( this->cards.begin(), this->cards.end() );
 }
 
-std::ostream& Dealer::PrintOn(std::ostream& os) const
+QTextStream& Dealer::PrintOn(QTextStream& stream) const
 {
     QList<Card*>::const_iterator cardIndex;
-    os << "Dealer: " << this->cards.count() << "cards" << std::endl;
+
+    stream << "Dealer: " << this->cards.count() << "cards" << endl;
 
     for(cardIndex = this->cards.constBegin(); cardIndex != this->cards.constEnd(); cardIndex++)
     {
-        os << "\t" << **cardIndex << std::endl;
+        stream << "\t" << *cardIndex << endl;
     }
 
-    return os;
+    return stream;
 }
