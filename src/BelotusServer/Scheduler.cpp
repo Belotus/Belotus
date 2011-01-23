@@ -40,13 +40,6 @@ Scheduler::Scheduler(QObject *parent)
     // TODO : Replace the sender (this) by the appropriate sender
 }
 
-/*
-void Scheduler::unSlot(int *unParametre)
-{
-    // Traitement unSignal
-}
-*/
-
 void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
 {
     // TODO

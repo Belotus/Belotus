@@ -22,13 +22,9 @@
 
 #include "RemotePlayer.h"
 
-RemotePlayer::RemotePlayer(QObject *parent)
-    : Player(parent)
-{
-}
 
 RemotePlayer::RemotePlayer(QObject *parent, QTcpSocket *socket)
-    : Player(parent), socket(socket)
+    : Player(parent), protocol(new Protocol(this, socket))
 {
 }
 

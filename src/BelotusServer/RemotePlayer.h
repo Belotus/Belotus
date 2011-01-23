@@ -22,6 +22,7 @@
 #define REMOTEPLAYER_H
 
 #include <QTcpSocket>
+#include "../BelotusCommon/Protocol.h"
 
 #include "../BelotusCommon/Player.h"
 
@@ -31,7 +32,6 @@ class RemotePlayer : public Player
     Q_OBJECT
 
 public:
-    RemotePlayer(QObject *parent);
     RemotePlayer(QObject *parent, QTcpSocket *socket);
 
     Card* Play();
@@ -42,7 +42,7 @@ protected:
     virtual QTextStream& PrintOn(QTextStream& stream) const;
 
 private:
-    QTcpSocket *socket;
+    Protocol *protocol;
 
 };
 

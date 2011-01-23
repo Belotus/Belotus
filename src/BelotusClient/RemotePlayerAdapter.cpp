@@ -20,6 +20,26 @@
 
 #include "RemotePlayerAdapter.h"
 
-RemotePlayerAdapter::RemotePlayerAdapter()
+RemotePlayerAdapter::RemotePlayerAdapter(QObject *parent)
+    :Base(parent), socket(new QTcpSocket())
 {
+}
+
+void RemotePlayerAdapter::AskConnection(QString adress, quint16 port)
+{
+    this->socket->connectToHost(adress, port, QIODevice::ReadWrite);
+    connect(this->socket, SIGNAL(connected()), this, SLOT(SocketConnected()));
+}
+
+void RemotePlayerAdapter::SocketConnected()
+{
+    qDebug() << "Socket connecté !";
+    this->protocol = new Protocol(this, this->socket);
+    this->protocol->sendAnswerACK();
+    this->protocol->sendQueryInsult("INSULT !");
+}
+
+QTextStream& RemotePlayerAdapter::PrintOn(QTextStream& stream) const
+{
+    return stream << "RemotePlayerAdapter";
 }

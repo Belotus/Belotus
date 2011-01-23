@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     /* Test Card, Suit, Value */
-    Suit *suit = new Suit(&a, HEART);
+    /*Suit *suit = new Suit(&a, HEART);
     Value *value = new Value(&a, SEVEN);
     Card *card = new Card(&a, suit, value);
 
@@ -40,11 +40,11 @@ int main(int argc, char *argv[])
 
     delete suit;
     delete value;
-    delete card;
+    delete card;*/
 
 
     /* Test Dealer, Deck */
-    Dealer *dealer = new Dealer(&a);
+    /*Dealer *dealer = new Dealer(&a);
     Deck *deck1 = new Deck(&a);
     Deck *deck2 = new Deck(&a);
 
@@ -61,6 +61,9 @@ int main(int argc, char *argv[])
 
     Scheduler scheduler;
 
-    scheduler.Test();
+    scheduler.Test();*/
     //return a.exec();
+
+    Scheduler *scheduler = new Scheduler(&a);
+    return a.exec();
 }

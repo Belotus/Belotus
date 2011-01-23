@@ -21,10 +21,15 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
 
+#include "RemotePlayerAdapter.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    //MainWindow w;
+    //w.show();
+
+    RemotePlayerAdapter *remote = new RemotePlayerAdapter(NULL);
+    remote->AskConnection("127.0.0.1", 4242);
     return a.exec();
 }
