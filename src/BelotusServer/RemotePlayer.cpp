@@ -26,6 +26,11 @@
 RemotePlayer::RemotePlayer(QObject *parent, QTcpSocket *socket)
     : Player(parent), protocol(new Protocol(this, socket))
 {
+    /*
+    qDebug() << "Constructeur remote player" << endl;
+    qDebug() << "Sending ACK to remote player" << endl;
+    this->protocol->sendAnswerACK();
+    */
 }
 
 Card* RemotePlayer::Play()

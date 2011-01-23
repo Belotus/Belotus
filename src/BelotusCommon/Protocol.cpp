@@ -21,6 +21,10 @@
 #include "Protocol.h"
 #include <QtEndian>
 
+ /**********************************************************************
+ * Public methods                                                      *
+ **********************************************************************/
+
 Protocol::Protocol(QObject *parent, QTcpSocket *socket)
     : Base(parent), isReady(true), socket(socket)
 {
@@ -32,38 +36,6 @@ void Protocol::MessageProcessed()
     this->isReady = true;
     this->messageLength = 0;
     this->receive();
-}
-
-void Protocol::ReadyRead()
-{
-    this->receive();
-}
-
-void Protocol::send()
-{
-    //this->socket->writeData(this->data.data(), this->data.size());
-    this->data.clear();
-}
-
-void Protocol::writeQuint32(quint32 value)
-{
-    this->data.append(qToBigEndian(value));
-}
-
-void Protocol::writeQString(QString value)
-{
-    this->data.append(value.size());
-    this->data.append(value.toUtf8());
-}
-
-quint32 Protocol::readQuint32()
-{
-    //return qFromBigEndian((quint32) this->socket->read(sizeof(quint32)));
-}
-
-QString Protocol::readQString()
-{
-
 }
 
 Card* Protocol::getCard()
@@ -109,6 +81,28 @@ void Protocol::sendAnswerPlay()
     this->writeQuint32(this->ANSWER_PLAY);
 }
 
+/**********************************************************************
+* Protected methods                                                   *
+**********************************************************************/
+
+QTextStream& Protocol::PrintOn(QTextStream& stream) const
+{
+    return stream << "Protocol";
+}
+
+/**********************************************************************
+* Private slots                                                       *
+**********************************************************************/
+
+void Protocol::ReadyRead()
+{
+    this->receive();
+}
+
+/**********************************************************************
+* Private methods                                                     *
+**********************************************************************/
+
 void Protocol::receive()
 {
     if(this->isReady)
@@ -124,15 +118,22 @@ void Protocol::receive()
             switch(this->type)
             {
             case QUERY_ADD_CARD:
+                qDebug() << "MessageReady : QUERY_ADD_CARD" << endl;
                 receiveAddCard();
                 break;
 
             case QUERY_INSULT:
+                qDebug() << "MessageReady : QUERY_INSULT" << endl;
                 receiveInsult();
+                break;
+
+            default:
+                qDebug() << "MessageReady" << endl;
                 break;
             }
 
             this->isReady = false;
+
             emit this->s_MessageReady(&this->type);
         }
     }
@@ -140,7 +141,7 @@ void Protocol::receive()
 
 void Protocol::receiveAddCard()
 {
-
+    
 }
 
 void Protocol::receiveInsult()
@@ -148,7 +149,37 @@ void Protocol::receiveInsult()
     this->string = this->readQString();
 }
 
-QTextStream& Protocol::PrintOn(QTextStream& stream) const
+void Protocol::send()
 {
-    return stream << "Protocol";
+    //this->socket->writeData(this->data.data(), this->data.size());
+    this->socket->write(data);
+    this->data.clear();
+}
+
+void Protocol::writeQuint32(quint32 value)
+{
+    this->data.append(qToBigEndian(value));
+}
+
+void Protocol::writeQString(QString value)
+{
+    this->data.append(value.size());
+    this->data.append(value.toUtf8());
+}
+
+quint32 Protocol::readQuint32()
+{
+    //return qFromBigEndian((quint32) this->socket->read(sizeof(quint32)));
+}
+
+QString Protocol::readQString()
+{
+    QString *qs;
+    char *data = new char[this->messageLength];
+    int n = 0;
+
+    n = this->socket->read(data, (quint64) this->messageLength);
+    qs = new QString(data);
+
+    return *qs;
 }

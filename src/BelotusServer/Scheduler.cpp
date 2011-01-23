@@ -45,6 +45,10 @@ void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
     // TODO
     qDebug() << "PlayerConnection ( " << time(0) << " )" << endl ;
     qDebug() << remotePlayer << endl;
+
+    players.append(remotePlayer);
+
+
 }
 
 void Scheduler::GameBeginning()

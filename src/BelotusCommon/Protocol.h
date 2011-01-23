@@ -33,6 +33,16 @@ public:
     Protocol(QObject *parent, QTcpSocket *socket);
 
     void MessageProcessed();
+    Card* getCard();
+    QString* getQString();
+
+    void sendQueryPlay();
+    void sendQueryAddCard(Card* card);
+    void sendQueryInsult(QString insult);
+
+    void sendAnswerACK();
+    void sendAnswerFAIL();
+    void sendAnswerPlay();
 
 protected:
     virtual QTextStream& PrintOn(QTextStream& stream) const;
@@ -44,26 +54,14 @@ private slots:
     void ReadyRead();
 
 private:
-    void send();
-    void writeQuint32(quint32 value);
-    void writeQString(QString value);
-    quint32 readQuint32();
-    QString readQString();
-
-public:
-    Card* getCard();
-    QString* getQString();
-
-private:
     bool        isReady;
     quint32     messageLength;
     quint32     type;
     QTcpSocket *socket;
     QByteArray  data;
-    Card* card;
-    QString string;
+    Card       *card;
+    QString     string;
 
-private:
     static const quint32 QUERY_PLAY = 0x00001;
     static const quint32 QUERY_ADD_CARD = 0x00002;
     static const quint32 QUERY_INSULT = 0x00003;
@@ -72,19 +70,14 @@ private:
     static const quint32 ANSWER_FAIL = 0x10002;
     static const quint32 ANSWER_PLAY = 0x10003;
 
-public:
-    void sendQueryPlay();
-    void sendQueryAddCard(Card* card);
-    void sendQueryInsult(QString insult);
-
-    void sendAnswerACK();
-    void sendAnswerFAIL();
-    void sendAnswerPlay();
-
-private:
     void receive();
     void receiveAddCard();
     void receiveInsult();
+    void send();
+    void writeQuint32(quint32 value);
+    void writeQString(QString value);
+    quint32 readQuint32();
+    QString readQString();
 };
 
 #endif // PROTOCOL_H
