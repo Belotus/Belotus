@@ -23,23 +23,25 @@
 NetworkFrontend::NetworkFrontend(QObject *parent)
      : QTcpServer(parent)
 {
+    connect(this, SIGNAL(newConnection()), this, SLOT(NewConnection()));
+    this->listen(QHostAddress::Any, 4242);
 }
 
-void NetworkFrontend::incomingConnection(int socketDescriptor)
+void NetworkFrontend::NewConnection()
 {
+    qDebug() << "Connection arrivée !";
     QTcpSocket *tcpSocket;
     RemotePlayer *remotePlayer;
 
-    tcpSocket = new QTcpSocket();
+    tcpSocket = this->nextPendingConnection();
 
-    if (!tcpSocket->setSocketDescriptor(socketDescriptor))
+    if(!tcpSocket->isValid())
     {
-        //emit error(tcpSocket.error());
         qDebug() << "Socket error" << endl;
         return;
     }
 
-    remotePlayer = new RemotePlayer(tcpSocket);
+    remotePlayer = new RemotePlayer(NULL, tcpSocket);
 
     emit s_PlayerConnection(remotePlayer);
 }

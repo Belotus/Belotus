@@ -31,11 +31,13 @@ public:
     NetworkFrontend(QObject *parent = 0);
 
 signals:
-    //void unSignal(int *unParametre);
     void s_PlayerConnection(RemotePlayer *remotePlayer);
 
+private slots:
+    void NewConnection();
+
 protected:
-    void incomingConnection(int socketDescriptor);
+
     virtual QTextStream& PrintOn(QTextStream& stream) const;
 
 };

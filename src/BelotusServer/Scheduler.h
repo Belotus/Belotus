@@ -71,8 +71,7 @@ protected:
     virtual QTextStream& PrintOn(QTextStream& stream) const;
 
 private:
-    //QSet<QTcpSocket*> tcpClients;
-    //QMap<QTcpSocket*,Player*> players;
+    QVector<Player*> players;
     NetworkFrontend *networkFrontend;
 
     enum State {WFPlayersConnection,

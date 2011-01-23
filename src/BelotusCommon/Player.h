@@ -31,7 +31,7 @@ public:
     virtual Card* Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
     virtual void AddCard(Card* card)=0;
     virtual void Insult(QString insult)=0;
-    //virtual méthode_du_player(truc)=0;
+
 protected:
     virtual QTextStream& PrintOn(QTextStream&) const = 0;
 };

@@ -20,10 +20,26 @@
 #ifndef REMOTEPLAYERADAPTER_H
 #define REMOTEPLAYERADAPTER_H
 
-class RemotePlayerAdapter
+#include "../BelotusCommon/Base.h"
+#include "../BelotusCommon/Protocol.h"
+
+class RemotePlayerAdapter : public Base
 {
+    Q_OBJECT
+
 public:
-    RemotePlayerAdapter();
+    RemotePlayerAdapter(QObject *parent);
+    void AskConnection(QString adress, quint16 port);
+
+protected:
+    virtual QTextStream& PrintOn(QTextStream&) const;
+
+private slots:
+    void SocketConnected();
+
+private:
+    QTcpSocket *socket;
+    Protocol *protocol;
 };
 
 #endif // REMOTEPLAYERADAPTER_H
