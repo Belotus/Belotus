@@ -141,7 +141,7 @@ void Protocol::receive()
 
 void Protocol::receiveAddCard()
 {
-    
+
 }
 
 void Protocol::receiveInsult()
