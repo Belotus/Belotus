@@ -32,9 +32,9 @@ class Protocol : public Base
 public:
     Protocol(QObject *parent, QTcpSocket *socket);
 
-    void MessageProcessed();
-    Card* getCard();
-    QString* getQString();
+    void    MessageProcessed();
+    Card*   getCard();
+    QString getQString();
 
     void sendQueryPlay();
     void sendQueryAddCard(Card* card);
@@ -70,12 +70,12 @@ private:
     static const quint32 ANSWER_FAIL = 0x10002;
     static const quint32 ANSWER_PLAY = 0x10003;
 
-    void receive();
-    void receiveAddCard();
-    void receiveInsult();
-    void send();
-    void writeQuint32(quint32 value);
-    void writeQString(QString value);
+    void    receive();
+    void    receiveAddCard();
+    void    receiveInsult();
+    void    send();
+    void    writeQuint32(quint32 value);
+    void    writeQString(QString value);
     quint32 readQuint32();
     QString readQString();
 };
