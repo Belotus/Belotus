@@ -43,9 +43,9 @@ Card* Protocol::getCard()
     return this->card;
 }
 
-QString* Protocol::getQString()
+QString Protocol::getQString()
 {
-    return &(this->string);
+    return this->string;
 }
 
 void Protocol::sendQueryPlay()
@@ -151,8 +151,8 @@ void Protocol::receiveInsult()
 
 void Protocol::send()
 {
-    //this->socket->writeData(this->data.data(), this->data.size());
-    this->socket->write(data);
+    this->writeQuint32(this->data.size());
+    this->socket->write(this->data);
     this->data.clear();
 }
 
