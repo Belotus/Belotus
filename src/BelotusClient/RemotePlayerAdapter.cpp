@@ -36,6 +36,7 @@ void RemotePlayerAdapter::SocketConnected()
     qDebug() << "Socket connecté !";
     this->protocol = new Protocol(this, this->socket);
     this->protocol->sendAnswerACK();
+    this->protocol->MessageProcessed();
     this->protocol->sendQueryInsult("INSULT !");
 }
 

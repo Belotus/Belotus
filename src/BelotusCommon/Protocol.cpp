@@ -19,12 +19,6 @@
  */
 
 #include "Protocol.h"
-#include <QtEndian>
-
-/***********************************************************************
-*  !!!! TODO : rewrite read* and write* functions with the        !!!! *
-*  !!!!        QDataStream class                                  !!!! *
-***********************************************************************/
 
 
  /**********************************************************************
@@ -32,24 +26,35 @@
  **********************************************************************/
 
 Protocol::Protocol(QObject *parent, QTcpSocket *socket)
-    : Base(parent), isReady(true), socket(socket)
+    : Base(parent), isReady(true), messageLength(0),
+    lengthReceived(false), socket(socket)
 {
+    this->out = new QDataStream(&this->data, QIODevice::WriteOnly);
+    this->in = new QDataStream(this->socket);
     connect(this->socket, SIGNAL(readyRead()), this, SLOT(ReadyRead()));
+}
+
+Protocol::~Protocol()
+{
+    delete(this->in);
+    delete(this->out);
+    delete(this->socket);
 }
 
 void Protocol::MessageProcessed()
 {
     this->isReady = true;
     this->messageLength = 0;
+    this->lengthReceived = false;
     this->receive();
 }
 
-Card* Protocol::getCard()
+Card* Protocol::getCard() const
 {
     return this->card;
 }
 
-QString Protocol::getQString()
+QString Protocol::getQString() const
 {
     return this->string;
 }
@@ -60,12 +65,12 @@ void Protocol::sendQueryPlay()
     this->send();
 }
 
-void Protocol::sendQueryAddCard(Card* card)
+void Protocol::sendQueryAddCard(const Card* card)
 {
 
 }
 
-void Protocol::sendQueryInsult(QString insult)
+void Protocol::sendQueryInsult(const QString insult)
 {
     this->writeQString(insult);
     this->send();
@@ -113,9 +118,10 @@ void Protocol::receive()
 {
     if(this->isReady)
     {
-        if(this->messageLength != 0)
+        if(!this->lengthReceived)
         {
             this->messageLength = readQuint32();
+            this->lengthReceived = true;
         }
 
         if(this->socket->bytesAvailable() >= this->messageLength)
@@ -178,28 +184,26 @@ void Protocol::send()
     this->data.clear();
 }
 
-void Protocol::writeQuint32(quint32 value)
+void Protocol::writeQuint32(const quint32 value)
 {
-    this->data.append(qToBigEndian(value));
+    *(this->out) << value;
 }
 
-void Protocol::writeQString(QString value)
+void Protocol::writeQString(const QString value)
 {
-    this->data.append(value.size());
-    this->data.append(value.toUtf8());
+    *(this->out) << value;
 }
 
 quint32 Protocol::readQuint32()
 {
-    // TODO
+    quint32 value;
+    *(this->in) >> value;
+    return value;
 }
 
 QString Protocol::readQString()
 {
-    char *data = new char[this->messageLength];
-    int n = 0;
-
-    n = this->socket->read(data, (quint64) this->messageLength);
-
-    return QString(data);
+    QString value;
+    *(this->in) >> value;
+    return value;
 }
