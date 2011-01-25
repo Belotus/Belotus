@@ -31,14 +31,15 @@ class Protocol : public Base
 
 public:
     Protocol(QObject *parent, QTcpSocket *socket);
+    virtual ~Protocol();
 
     void    MessageProcessed();
-    Card*   getCard();
-    QString getQString();
+    Card*   getCard() const;
+    QString getQString() const;
 
     void sendQueryPlay();
-    void sendQueryAddCard(Card* card);
-    void sendQueryInsult(QString insult);
+    void sendQueryAddCard(const Card* card);
+    void sendQueryInsult(const QString insult);
 
     void sendAnswerACK();
     void sendAnswerFAIL();
@@ -54,13 +55,16 @@ private slots:
     void ReadyRead();
 
 private:
-    bool        isReady;
-    quint32     messageLength;
-    quint32     type;
-    QTcpSocket *socket;
-    QByteArray  data;
-    Card       *card;
-    QString     string;
+    bool          isReady;
+    quint32       messageLength;
+    bool          lengthReceived;
+    quint32       type;
+    QTcpSocket   *socket;
+    QByteArray    data;
+    QDataStream  *in;
+    QDataStream  *out;
+    Card         *card;
+    QString       string;
 
     static const quint32 QUERY_PLAY = 0x00001;
     static const quint32 QUERY_ADD_CARD = 0x00002;
@@ -74,8 +78,8 @@ private:
     void    receiveAddCard();
     void    receiveInsult();
     void    send();
-    void    writeQuint32(quint32 value);
-    void    writeQString(QString value);
+    void    writeQuint32(const quint32 value);
+    void    writeQString(const QString value);
     quint32 readQuint32();
     QString readQString();
 };
