@@ -21,6 +21,12 @@
 #include "Protocol.h"
 #include <QtEndian>
 
+/***********************************************************************
+*  !!!! TODO : rewrite read* and write* functions with the        !!!! *
+*  !!!!        QDataStream class                                  !!!! *
+***********************************************************************/
+
+
  /**********************************************************************
  * Public methods                                                      *
  **********************************************************************/
@@ -127,8 +133,24 @@ void Protocol::receive()
                 receiveInsult();
                 break;
 
+            case QUERY_PLAY:
+                qDebug() << "MessageReady : QUERY_PLAY" << endl;
+                break;
+
+            case ANSWER_ACK:
+                qDebug() << "MessageReady : ANSWER_ACK" << endl;
+                break;
+
+            case ANSWER_FAIL:
+                qDebug() << "MessageReady : ANSWER_FAIL" << endl;
+                break;
+
+            case ANSWER_PLAY:
+                qDebug() << "MessageReady : ANSWER_PLAY" << endl;
+                break;
+
             default:
-                qDebug() << "MessageReady" << endl;
+                qDebug() << "MessageReady : UNKNOWN (" << this->type << ")" << endl;
                 break;
             }
 
@@ -169,17 +191,15 @@ void Protocol::writeQString(QString value)
 
 quint32 Protocol::readQuint32()
 {
-    //return qFromBigEndian((quint32) this->socket->read(sizeof(quint32)));
+    // TODO
 }
 
 QString Protocol::readQString()
 {
-    QString *qs;
     char *data = new char[this->messageLength];
     int n = 0;
 
     n = this->socket->read(data, (quint64) this->messageLength);
-    qs = new QString(data);
 
-    return *qs;
+    return QString(data);
 }
