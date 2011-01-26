@@ -72,6 +72,7 @@ void Protocol::sendQueryAddCard(const Card* card)
 
 void Protocol::sendQueryInsult(const QString insult)
 {
+    this->writeQuint32(this->QUERY_INSULT);
     this->writeQString(insult);
     this->send();
 }
