@@ -43,7 +43,7 @@ Scheduler::Scheduler(QObject *parent)
 void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
 {
     // TODO
-    qDebug() << "PlayerConnection ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : PlayerConnection ( " << time(0) << " )" << endl ;
     qDebug() << remotePlayer << endl;
 
     players.append(remotePlayer);
@@ -54,55 +54,55 @@ void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
 void Scheduler::GameBeginning()
 {
     // TODO
-    qDebug() << "GameBeginning ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : GameBeginning ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::PlayBeginning()
 {
     // TODO
-    qDebug() << "PlayBeginning ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : PlayBeginning ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Pass()
 {
     // TODO
-    qDebug() << "Pass ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : Pass ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Take()
 {
     // TODO
-    qDebug() << "Take ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : Take ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Card()
 {
     // TODO
-    qDebug() << "Card ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : Card ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::QuitGame()
 {
     // TODO
-    qDebug() << "QuitGame ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : QuitGame ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::NewGame()
 {
     // TODO
-    qDebug() << "NewGame ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : NewGame ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::PlayerDeconnection()
 {
     // TODO
-    qDebug() << "PlayerDeconnection ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : PlayerDeconnection ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::incomingConnection(int socketfd)
 {
     // TODO
-    qDebug() << "incomingConnection ( " << time(0) << " )" << endl ;
+    qDebug() << "Scheduler : incomingConnection ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Test()
@@ -122,5 +122,5 @@ void Scheduler::Test()
 
 QTextStream& Scheduler::PrintOn(QTextStream& stream) const
 {
-    return stream << "Scheduler";
+    return stream << "Scheduler : PrintOn";
 }

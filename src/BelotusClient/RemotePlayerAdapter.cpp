@@ -23,24 +23,26 @@
 RemotePlayerAdapter::RemotePlayerAdapter(QObject *parent)
     :Base(parent), socket(new QTcpSocket())
 {
+    qDebug() << "RemotePlayerAdapter : Constructeur" ;
 }
 
 void RemotePlayerAdapter::AskConnection(QString adress, quint16 port)
 {
+    qDebug() << "RemotePlayerAdapter : AskConnection" ;
     this->socket->connectToHost(adress, port, QIODevice::ReadWrite);
     connect(this->socket, SIGNAL(connected()), this, SLOT(SocketConnected()));
+    qDebug() << "RemotePlayerAdapter : Fin AskConnection" ;
 }
 
 void RemotePlayerAdapter::SocketConnected()
 {
-    qDebug() << "Socket connecté !";
+    qDebug() << "RemotePlayerAdapter : SocketConnected" ;
     this->protocol = new Protocol(this, this->socket);
     this->protocol->sendAnswerACK();
-    this->protocol->MessageProcessed();
-    this->protocol->sendQueryInsult("INSULT !");
+    qDebug() << "RemotePlayerAdapter : Fin SockedConnected" ;
 }
 
 QTextStream& RemotePlayerAdapter::PrintOn(QTextStream& stream) const
 {
-    return stream << "RemotePlayerAdapter";
+    return stream << "RemotePlayerAdapter : PrintOn";
 }
