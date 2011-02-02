@@ -1,3 +1,9 @@
 *.pro.user
 *-build-desktop/
 *~
+moc_*
+ui_*
+*.o
+Makefile
+src/BelotusClient/BelotusClient
+src/BelotusServer/BelotusServer
