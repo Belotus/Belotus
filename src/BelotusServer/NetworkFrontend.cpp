@@ -23,12 +23,14 @@
 NetworkFrontend::NetworkFrontend(QObject *parent)
      : QTcpServer(parent)
 {
+    qDebug() << "NetworkFrontend : Constructeur" ;
     connect(this, SIGNAL(newConnection()), this, SLOT(NewConnection()));
     this->listen(QHostAddress::Any, 4242);
 }
 
 void NetworkFrontend::NewConnection()
 {
+    qDebug() << "NetworkFrontend : NewConnection" ;
     qDebug() << "Connection arrivée !";
     QTcpSocket *tcpSocket;
     RemotePlayer *remotePlayer;
@@ -44,9 +46,10 @@ void NetworkFrontend::NewConnection()
     remotePlayer = new RemotePlayer(NULL, tcpSocket);
 
     emit s_PlayerConnection(remotePlayer);
+    qDebug() << "NetworkFrontend : Fin NewConnection" ;
 }
 
 QTextStream& NetworkFrontend::PrintOn(QTextStream& stream) const
 {
-    return stream << "NetworkFrontend";
+    return stream << "NetworkFrontend : PrintOn";
 }

@@ -29,9 +29,11 @@ Protocol::Protocol(QObject *parent, QTcpSocket *socket)
     : Base(parent), isReady(true), messageLength(0),
     lengthReceived(false), socket(socket)
 {
+    qDebug() << "Protocol : Constructeur" ;
     this->out = new QDataStream(&this->data, QIODevice::WriteOnly);
     this->in = new QDataStream(this->socket);
     connect(this->socket, SIGNAL(readyRead()), this, SLOT(ReadyRead()));
+    qDebug() << "Protocol : Fin constructeur" ;
 }
 
 Protocol::~Protocol()
@@ -43,54 +45,71 @@ Protocol::~Protocol()
 
 void Protocol::MessageProcessed()
 {
+    qDebug() << "Protocol : MessageProcessed" ;
     this->isReady = true;
     this->messageLength = 0;
     this->lengthReceived = false;
     this->receive();
+    qDebug() << "Protocol : Fin MessageProcessed" ;
 }
 
 Card* Protocol::getCard() const
 {
+    qDebug() << "Protocol : getCard" ;
     return this->card;
+    qDebug() << "Protocol : Fin getCard" ;
 }
 
 QString Protocol::getQString() const
 {
+    qDebug() << "Protocol : getQString" ;
     return this->string;
+    qDebug() << "Protocol : Fin getQString" ;
 }
 
 void Protocol::sendQueryPlay()
 {
+    qDebug() << "Protocol : sendQueryPlay" ;
     this->writeQuint32(this->QUERY_PLAY);
     this->send();
+    qDebug() << "Protocol : Fin sendQueryPlay" ;
 }
 
 void Protocol::sendQueryAddCard(const Card* card)
 {
-
+    qDebug() << "Protocol : sendQueryAddCard" ;
+    qDebug() << "Protocol : Fin sendQueryAddCard" ;
 }
 
 void Protocol::sendQueryInsult(const QString insult)
 {
+    qDebug() << "Protocol : sendQueryInsult" ;
     this->writeQuint32(this->QUERY_INSULT);
     this->writeQString(insult);
     this->send();
+    qDebug() << "Protocol : Fin sendQueryInsult" ;
 }
 
 void Protocol::sendAnswerACK()
 {
+    qDebug() << "Protocol : sendAnswerACK" ;
     this->writeQuint32(this->ANSWER_ACK);
     this->send();
+    qDebug() << "Protocol : Fin sendAnswerACK" ;
 }
 
 void Protocol::sendAnswerFAIL()
 {
+    qDebug() << "Protocol : sendAnswerFail" ;
     this->writeQuint32(this->ANSWER_FAIL);
+    qDebug() << "Protocol : Fin sendAnswerFail" ;
 }
 
 void Protocol::sendAnswerPlay()
 {
+    qDebug() << "Protocol : sendAnswerPlay" ;
     this->writeQuint32(this->ANSWER_PLAY);
+    qDebug() << "Protocol : Fin sendAnswerPlay" ;
 }
 
 /**********************************************************************
@@ -99,7 +118,7 @@ void Protocol::sendAnswerPlay()
 
 QTextStream& Protocol::PrintOn(QTextStream& stream) const
 {
-    return stream << "Protocol";
+    return stream << "Protocol : PrintOn";
 }
 
 /**********************************************************************
@@ -108,7 +127,9 @@ QTextStream& Protocol::PrintOn(QTextStream& stream) const
 
 void Protocol::ReadyRead()
 {
+    qDebug() << "Protocol : ReadyRead" ;
     this->receive();
+    qDebug() << "Protocol : Fin ReadyRead" ;
 }
 
 /**********************************************************************
@@ -117,12 +138,14 @@ void Protocol::ReadyRead()
 
 void Protocol::receive()
 {
+    qDebug() << "Protocol : receive" ;
     if(this->isReady)
     {
         if(!this->lengthReceived)
         {
             this->messageLength = readQuint32();
             this->lengthReceived = true;
+            qDebug() << "Protocol : receive : messagelength : " << this->messageLength ;
         }
 
         if(this->socket->bytesAvailable() >= this->messageLength)
@@ -131,33 +154,33 @@ void Protocol::receive()
             switch(this->type)
             {
             case QUERY_ADD_CARD:
-                qDebug() << "MessageReady : QUERY_ADD_CARD" << endl;
+                qDebug() << "Protocol : MessageReady : QUERY_ADD_CARD" << endl;
                 receiveAddCard();
                 break;
 
             case QUERY_INSULT:
-                qDebug() << "MessageReady : QUERY_INSULT" << endl;
+                qDebug() << "Protocol : MessageReady : QUERY_INSULT" << endl;
                 receiveInsult();
                 break;
 
             case QUERY_PLAY:
-                qDebug() << "MessageReady : QUERY_PLAY" << endl;
+                qDebug() << "Protocol : MessageReady : QUERY_PLAY" << endl;
                 break;
 
             case ANSWER_ACK:
-                qDebug() << "MessageReady : ANSWER_ACK" << endl;
+                qDebug() << "Protocol : MessageReady : ANSWER_ACK" << endl;
                 break;
 
             case ANSWER_FAIL:
-                qDebug() << "MessageReady : ANSWER_FAIL" << endl;
+                qDebug() << "Protocol : MessageReady : ANSWER_FAIL" << endl;
                 break;
 
             case ANSWER_PLAY:
-                qDebug() << "MessageReady : ANSWER_PLAY" << endl;
+                qDebug() << "Protocol : MessageReady : ANSWER_PLAY" << endl;
                 break;
 
             default:
-                qDebug() << "MessageReady : UNKNOWN (" << this->type << ")" << endl;
+                qDebug() << "Protocol : MessageReady : UNKNOWN (" << this->type << ")" << endl;
                 break;
             }
 
@@ -166,45 +189,67 @@ void Protocol::receive()
             emit this->s_MessageReady(&this->type);
         }
     }
+    qDebug() << "Protocol : Fin receive" ;
 }
 
 void Protocol::receiveAddCard()
 {
-
+    qDebug() << "Protocol : receiveAddCard" ;
+    qDebug() << "Protocol : Fin receiveAddCard" ;
 }
 
 void Protocol::receiveInsult()
 {
+    qDebug() << "Protocol : receiveInsult" ;
     this->string = this->readQString();
+    qDebug() << "Protocol : Fin receiveInsult" ;
 }
 
 void Protocol::send()
 {
-    this->writeQuint32(this->data.size());
+    QByteArray qsize;
+    QDataStream *qstream;
+
+    qDebug() << "Protocol : send" ;
+    //this->writeQuint32(this->data.size());
+    qstream = new QDataStream(&qsize, QIODevice::WriteOnly);
+
+    *qstream << this->data.size();
+    this->socket->write(qsize);
+
     this->socket->write(this->data);
     this->data.clear();
+    qDebug() << "Protocol : Fin send" ;
 }
 
 void Protocol::writeQuint32(const quint32 value)
 {
+    qDebug() << "Protocol : writeQuint32 : " << value ;
     *(this->out) << value;
+    qDebug() << "Protocol : Fin writeQuint32" ;
 }
 
 void Protocol::writeQString(const QString value)
 {
+    qDebug() << "Protocol : writeQString" ;
     *(this->out) << value;
+    qDebug() << "Protocol : Fin writeQString" ;
 }
 
 quint32 Protocol::readQuint32()
 {
+    qDebug() << "Protocol : readQuint32" ;
     quint32 value;
     *(this->in) >> value;
+    qDebug() << "Protocol : Fin readQuint32" ;
     return value;
 }
 
 QString Protocol::readQString()
 {
+    qDebug() << "Protocol : readQString" ;
     QString value;
     *(this->in) >> value;
+    qDebug() << "Protocol : Fin readQString" ;
     return value;
 }
