@@ -25,17 +25,25 @@
  * Public methods                                                      *
  **********************************************************************/
 
+/**
+ * Constructor
+ * @param parent The QObject parent, or NULL
+ * @param socket A pointer to the socket to use
+ */
 Protocol::Protocol(QObject *parent, QTcpSocket *socket)
     : Base(parent), isReady(true), messageLength(0),
     lengthReceived(false), socket(socket)
 {
     qDebug() << "Protocol : Constructeur" ;
-    this->out = new QDataStream(&this->data, QIODevice::WriteOnly);
+    this->out = new QDataStream(&this->buffer, QIODevice::WriteOnly);
     this->in = new QDataStream(this->socket);
     connect(this->socket, SIGNAL(readyRead()), this, SLOT(ReadyRead()));
     qDebug() << "Protocol : Fin constructeur" ;
 }
 
+/**
+ * Destructor
+ */
 Protocol::~Protocol()
 {
     delete(this->in);
@@ -43,6 +51,9 @@ Protocol::~Protocol()
     delete(this->socket);
 }
 
+/**
+ * Indicate to the Protocol that the message has been processed, so a new message can be received and processed.
+ */
 void Protocol::MessageProcessed()
 {
     qDebug() << "Protocol : MessageProcessed" ;
@@ -53,6 +64,10 @@ void Protocol::MessageProcessed()
     qDebug() << "Protocol : Fin MessageProcessed" ;
 }
 
+/**
+ * Access method to the last Card object received.
+ * @return: A pointer to the last received Card object, or null if any.
+ */
 Card* Protocol::getCard() const
 {
     qDebug() << "Protocol : getCard" ;
@@ -60,6 +75,10 @@ Card* Protocol::getCard() const
     qDebug() << "Protocol : Fin getCard" ;
 }
 
+/**
+ * Access method to the last QString object received.
+ * @return: The last received QString object, or null if any.
+ */
 QString Protocol::getQString() const
 {
     qDebug() << "Protocol : getQString" ;
@@ -67,6 +86,9 @@ QString Protocol::getQString() const
     qDebug() << "Protocol : Fin getQString" ;
 }
 
+/**
+ * Build and send the QueryPlay message.
+ */
 void Protocol::sendQueryPlay()
 {
     qDebug() << "Protocol : sendQueryPlay" ;
@@ -75,12 +97,18 @@ void Protocol::sendQueryPlay()
     qDebug() << "Protocol : Fin sendQueryPlay" ;
 }
 
+/**
+ * Build and send the QueryAddCard message.
+ */
 void Protocol::sendQueryAddCard(const Card* card)
 {
     qDebug() << "Protocol : sendQueryAddCard" ;
     qDebug() << "Protocol : Fin sendQueryAddCard" ;
 }
 
+/**
+ * Build and send the QueryInsult message.
+ */
 void Protocol::sendQueryInsult(const QString insult)
 {
     qDebug() << "Protocol : sendQueryInsult" ;
@@ -90,6 +118,9 @@ void Protocol::sendQueryInsult(const QString insult)
     qDebug() << "Protocol : Fin sendQueryInsult" ;
 }
 
+/**
+ * Build and send the AnswerACK message.
+ */
 void Protocol::sendAnswerACK()
 {
     qDebug() << "Protocol : sendAnswerACK" ;
@@ -98,6 +129,9 @@ void Protocol::sendAnswerACK()
     qDebug() << "Protocol : Fin sendAnswerACK" ;
 }
 
+/**
+ * Build and send the AnswerFAIL message.
+ */
 void Protocol::sendAnswerFAIL()
 {
     qDebug() << "Protocol : sendAnswerFail" ;
@@ -105,6 +139,9 @@ void Protocol::sendAnswerFAIL()
     qDebug() << "Protocol : Fin sendAnswerFail" ;
 }
 
+/**
+ * Build and send the AnswerPlay message.
+ */
 void Protocol::sendAnswerPlay()
 {
     qDebug() << "Protocol : sendAnswerPlay" ;
@@ -116,6 +153,9 @@ void Protocol::sendAnswerPlay()
 * Protected methods                                                   *
 **********************************************************************/
 
+/**
+ * The printing mechanisme, inherited from Base.
+ */
 QTextStream& Protocol::PrintOn(QTextStream& stream) const
 {
     return stream << "Protocol : PrintOn";
@@ -125,6 +165,9 @@ QTextStream& Protocol::PrintOn(QTextStream& stream) const
 * Private slots                                                       *
 **********************************************************************/
 
+/**
+ * Slot for the ReadyRead signal of the socket.
+ */
 void Protocol::ReadyRead()
 {
     qDebug() << "Protocol : ReadyRead" ;
@@ -136,6 +179,9 @@ void Protocol::ReadyRead()
 * Private methods                                                     *
 **********************************************************************/
 
+/**
+ * Check if a message is completly received. If yes, the message is readed from the socket and decoded.
+ */
 void Protocol::receive()
 {
     qDebug() << "Protocol : receive" ;
@@ -192,12 +238,18 @@ void Protocol::receive()
     qDebug() << "Protocol : Fin receive" ;
 }
 
+/**
+ * Decoding method for the AddCard message.
+ */
 void Protocol::receiveAddCard()
 {
     qDebug() << "Protocol : receiveAddCard" ;
     qDebug() << "Protocol : Fin receiveAddCard" ;
 }
 
+/**
+ * Decoding method for the Insult message.
+ */
 void Protocol::receiveInsult()
 {
     qDebug() << "Protocol : receiveInsult" ;
@@ -205,23 +257,30 @@ void Protocol::receiveInsult()
     qDebug() << "Protocol : Fin receiveInsult" ;
 }
 
+/**
+ * Send the size and the actual message from the buffer to the socket.
+ */
 void Protocol::send()
 {
     QByteArray qsize;
     QDataStream *qstream;
 
     qDebug() << "Protocol : send" ;
-    //this->writeQuint32(this->data.size());
     qstream = new QDataStream(&qsize, QIODevice::WriteOnly);
 
-    *qstream << this->data.size();
+    *qstream << this->buffer.size();
     this->socket->write(qsize);
 
-    this->socket->write(this->data);
-    this->data.clear();
+    this->socket->write(this->buffer);
+    this->buffer.clear();
+
+    delete(qstream);
     qDebug() << "Protocol : Fin send" ;
 }
 
+/**
+ * Helper method to write a quint32 to the buffer.
+ */
 void Protocol::writeQuint32(const quint32 value)
 {
     qDebug() << "Protocol : writeQuint32 : " << value ;
@@ -229,6 +288,9 @@ void Protocol::writeQuint32(const quint32 value)
     qDebug() << "Protocol : Fin writeQuint32" ;
 }
 
+/**
+ * Helper method to write a QString to the buffer.
+ */
 void Protocol::writeQString(const QString value)
 {
     qDebug() << "Protocol : writeQString" ;
@@ -236,6 +298,9 @@ void Protocol::writeQString(const QString value)
     qDebug() << "Protocol : Fin writeQString" ;
 }
 
+/**
+ * Helper method to read a quint32 to the buffer.
+ */
 quint32 Protocol::readQuint32()
 {
     qDebug() << "Protocol : readQuint32" ;
@@ -245,6 +310,9 @@ quint32 Protocol::readQuint32()
     return value;
 }
 
+/**
+ * Helper method to read a QString to the buffer.
+ */
 QString Protocol::readQString()
 {
     qDebug() << "Protocol : readQString" ;

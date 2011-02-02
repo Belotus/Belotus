@@ -60,7 +60,7 @@ private:
     bool          lengthReceived;
     quint32       type;
     QTcpSocket   *socket;
-    QByteArray    data;
+    QByteArray    buffer;
     QDataStream  *in;
     QDataStream  *out;
     Card         *card;
