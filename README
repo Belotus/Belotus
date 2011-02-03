@@ -1,0 +1,10 @@
+== Belotus
+
+This project is an application to play a card game named "belote" (http://en.wikipedia.org/wiki/Belote).
+This application allow to play this game over internet or in a local network.
+
+-- Compilation
+
+For both src/BelotusClient and src/BelotusServer, run the following commands:
+- qmake-qt4
+- make
