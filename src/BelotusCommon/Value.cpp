@@ -20,8 +20,8 @@
 
 #include "Value.h"
 
-Value::Value(QObject *parent, CardValue value)
-    :Base(parent), value(value)
+Value::Value(CardValue value)
+    :Base(), value(value)
 {
 }
 
@@ -30,30 +30,24 @@ CardValue Value::GetValue() const
     return this->value;
 }
 
-QTextStream& Value::PrintOn(QTextStream& stream) const
+QString Value::ToString() const
 {
     switch(this->value) {
     case SEVEN:
     case EIGHT:
     case NINE:
     case TEN:
-        return stream << "Value: " << this->value;
-        break;
+        return "Value: " + QString::number(this->value);
     case JACK:
-        return stream << "Value: Jack";
-        break;
+        return "Value: Jack";
     case QUEEN:
-        return stream << "Value: Queen";
-        break;
+        return "Value: Queen";
     case KING:
-        return stream << "Value: King";
-        break;
+        return "Value: King";
     case ACE:
-        return stream << "Value: Ace";
-        break;
+        return "Value: Ace";
     default:
-        return stream << "Error: This Value doens't exist.";
-        break;
+        return "Error: This Value doens't exist.";
     }
 }
 

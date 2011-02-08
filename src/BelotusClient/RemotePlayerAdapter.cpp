@@ -21,7 +21,7 @@
 #include "RemotePlayerAdapter.h"
 
 RemotePlayerAdapter::RemotePlayerAdapter(QObject *parent)
-    :Base(parent), socket(new QTcpSocket())
+    : QObject(parent), Base(), socket(new QTcpSocket(this))
 {
     qDebug() << "RemotePlayerAdapter : Constructeur" ;
 }
@@ -42,7 +42,7 @@ void RemotePlayerAdapter::SocketConnected()
     qDebug() << "RemotePlayerAdapter : Fin SockedConnected" ;
 }
 
-QTextStream& RemotePlayerAdapter::PrintOn(QTextStream& stream) const
+QString RemotePlayerAdapter::ToString() const
 {
-    return stream << "RemotePlayerAdapter : PrintOn";
+    return "RemotePlayerAdapter : PrintOn";
 }

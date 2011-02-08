@@ -26,18 +26,14 @@
 
 class Card : public Base
 {
-    Q_OBJECT
-
 public:
-    Card(QObject *parent, Suit *suit, Value *value);
+    Card(Suit *suit, Value *value);
     Suit* GetSuit() const;
     Value* GetValue() const;
     int GetPoints() const;
     bool operator<(Card* card);
     bool operator>(Card* card);
-
-protected:
-    virtual QTextStream& PrintOn(QTextStream& stream) const;
+    virtual QString ToString() const;
 
 private:
     Suit *suit;

@@ -25,17 +25,13 @@
 
 class Deck : public CardHolder
 {
-    Q_OBJECT
-
 public:
-    Deck(QObject *parent);
+    Deck();
     void AddCard(Card* card);
     Card* GetFrontCard();
     Card* GetBackCard();
     int GetScore() const;
-
-protected:
-    virtual QTextStream& PrintOn(QTextStream& stream) const;
+    virtual QString ToString() const;
 };
 
 #endif // DECK_H

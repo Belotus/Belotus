@@ -23,16 +23,14 @@
 #include "Base.h"
 #include "Protocol.h"
 
-class RemotePlayerAdapter : public Base
+class RemotePlayerAdapter : public QObject, public Base
 {
     Q_OBJECT
 
 public:
     RemotePlayerAdapter(QObject *parent);
     void AskConnection(QString adress, quint16 port);
-
-protected:
-    virtual QTextStream& PrintOn(QTextStream&) const;
+    virtual QString ToString() const;
 
 private slots:
     void SocketConnected();

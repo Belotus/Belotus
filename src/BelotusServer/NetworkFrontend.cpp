@@ -21,7 +21,7 @@
 #include "NetworkFrontend.h"
 
 NetworkFrontend::NetworkFrontend(QObject *parent)
-     : QTcpServer(parent)
+     : QTcpServer(parent), Base()
 {
     qDebug() << "NetworkFrontend : Constructeur" ;
     connect(this, SIGNAL(newConnection()), this, SLOT(NewConnection()));
@@ -43,13 +43,13 @@ void NetworkFrontend::NewConnection()
         return;
     }
 
-    remotePlayer = new RemotePlayer(NULL, tcpSocket);
+    remotePlayer = new RemotePlayer(tcpSocket);
 
     emit s_PlayerConnection(remotePlayer);
     qDebug() << "NetworkFrontend : Fin NewConnection" ;
 }
 
-QTextStream& NetworkFrontend::PrintOn(QTextStream& stream) const
+QString NetworkFrontend::ToString() const
 {
-    return stream << "NetworkFrontend : PrintOn";
+    return "NetworkFrontend";
 }

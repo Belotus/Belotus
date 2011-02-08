@@ -24,16 +24,12 @@
 
 class Player : public CardHolder
 {
-    Q_OBJECT
-
 public:
-    Player(QObject *parent);
+    Player();
     virtual Card* Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
     virtual void AddCard(Card* card)=0;
     virtual void Insult(QString insult)=0;
-
-protected:
-    virtual QTextStream& PrintOn(QTextStream&) const = 0;
+    virtual QString ToString() const = 0;
 };
 
 #endif // PLAYER_H

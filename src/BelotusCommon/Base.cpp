@@ -22,8 +22,7 @@
 
 quint32 Base::ref = 0;
 
-Base::Base(QObject *parent)
-    : QObject(parent)
+Base::Base()
 {
     ref++;
 }
@@ -33,22 +32,7 @@ Base::~Base()
     ref--;
 }
 
-QString Base::ToString() const
-{
-    QString s;
-    QTextStream stream(&s);
-    PrintOn(stream);
-    return s;
-}
-
-QDebug operator<<(QDebug dbg, const Base *object)
-{
-    return dbg << object->ToString();
-}
-
-/*
 QDebug operator<<(QDebug dbg, const Base &object)
 {
     return dbg << object.ToString();
 }
-*/

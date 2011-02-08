@@ -25,11 +25,12 @@
 
 #include "Card.h"
 
-class Protocol : public Base
+class Protocol : public QObject, public Base
 {
     Q_OBJECT
 
 public:
+    Protocol(QTcpSocket *socket);
     Protocol(QObject *parent, QTcpSocket *socket);
     virtual ~Protocol();
 
@@ -45,8 +46,7 @@ public:
     void sendAnswerFAIL();
     void sendAnswerPlay();
 
-protected:
-    virtual QTextStream& PrintOn(QTextStream& stream) const;
+    virtual QString ToString() const;
 
 signals:
     void s_MessageReady(quint32 *type);

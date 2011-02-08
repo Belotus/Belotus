@@ -22,8 +22,8 @@
 
 using namespace std;
 
-Card::Card(QObject *parent, Suit *suit, Value *value)
-    :Base(parent), suit(suit), value(value)
+Card::Card(Suit *suit, Value *value)
+    :Base(), suit(suit), value(value)
 {
 }
 
@@ -75,11 +75,16 @@ int Card::GetPoints() const
     }
 }
 
-
-
-QTextStream& Card::PrintOn(QTextStream& stream) const
+QString Card::ToString() const
 {
-    return stream << "Card(" << this->suit << " , " << this->value << ", " << this->GetPoints() << " points)";
+    QString str = "Card(";
+    str += this->suit->ToString();
+    str += " , ";
+    str += this->value->ToString();
+    str += ", ";
+    str += QString::number(this->GetPoints());
+    str += " points)";
+    return str;
 }
 
 /**

@@ -29,21 +29,17 @@
 
 class RemotePlayer : public Player
 {
-    Q_OBJECT
-
 public:
-    RemotePlayer(QObject *parent, QTcpSocket *socket);
+    RemotePlayer(QTcpSocket *socket);
+    virtual ~RemotePlayer();
 
     Card* Play();
     void AddCard(Card* card);
     void Insult(QString insult);
-
-protected:
-    virtual QTextStream& PrintOn(QTextStream& stream) const;
+    virtual QString ToString() const;
 
 private:
     Protocol *protocol;
-
 };
 
 #endif // REMOTEPLAYER_H

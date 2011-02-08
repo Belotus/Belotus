@@ -23,8 +23,8 @@
 #include "RemotePlayer.h"
 
 
-RemotePlayer::RemotePlayer(QObject *parent, QTcpSocket *socket)
-    : Player(parent), protocol(new Protocol(this, socket))
+RemotePlayer::RemotePlayer(QTcpSocket *socket)
+    : Player(), protocol(new Protocol(socket))
 {
     qDebug() << "RemotePlayer : Constructeur" ;
     /*
@@ -32,6 +32,11 @@ RemotePlayer::RemotePlayer(QObject *parent, QTcpSocket *socket)
     qDebug() << "Sending ACK to remote player" << endl;
     this->protocol->sendAnswerACK();
     */
+}
+
+RemotePlayer::~RemotePlayer()
+{
+    delete this->protocol;
 }
 
 Card* RemotePlayer::Play()
@@ -53,7 +58,7 @@ void RemotePlayer::Insult(QString insult)
     qDebug() << "RemotePlayer : Fin Insult" ;
 }
 
-QTextStream& RemotePlayer::PrintOn(QTextStream& stream) const
+QString RemotePlayer::ToString() const
 {
-    return stream << "RemotePlayer : PrintOn";
+    return "RemotePlayer";
 }

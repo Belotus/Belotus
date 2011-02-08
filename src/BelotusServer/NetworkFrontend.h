@@ -23,23 +23,19 @@
 #include <QTcpServer>
 #include "RemotePlayer.h"
 
-class NetworkFrontend : public QTcpServer
+class NetworkFrontend : public QTcpServer, public Base
 {
     Q_OBJECT
 
 public:
-    NetworkFrontend(QObject *parent = 0);
+    NetworkFrontend(QObject *parent);
+    virtual QString ToString() const;
 
 signals:
     void s_PlayerConnection(RemotePlayer *remotePlayer);
 
 private slots:
     void NewConnection();
-
-protected:
-
-    virtual QTextStream& PrintOn(QTextStream& stream) const;
-
 };
 
 #endif // NetworkFrontend_H

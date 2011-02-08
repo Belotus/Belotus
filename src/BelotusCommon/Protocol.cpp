@@ -26,12 +26,21 @@
  **********************************************************************/
 
 /**
+ * Constructor with no parenting
+ * @param socket A pointer to the socket to use
+ */
+Protocol::Protocol(QTcpSocket *socket)
+{
+    Protocol(0, socket);
+}
+
+/**
  * Constructor
  * @param parent The QObject parent, or NULL
  * @param socket A pointer to the socket to use
  */
 Protocol::Protocol(QObject *parent, QTcpSocket *socket)
-    : Base(parent), isReady(true), messageLength(0),
+    : QObject(parent), Base(), isReady(true), messageLength(0),
     lengthReceived(false), socket(socket)
 {
     qDebug() << "Protocol : Constructeur" ;
@@ -149,16 +158,13 @@ void Protocol::sendAnswerPlay()
     qDebug() << "Protocol : Fin sendAnswerPlay" ;
 }
 
-/**********************************************************************
-* Protected methods                                                   *
-**********************************************************************/
 
 /**
  * The printing mechanisme, inherited from Base.
  */
-QTextStream& Protocol::PrintOn(QTextStream& stream) const
+QString Protocol::ToString() const
 {
-    return stream << "Protocol : PrintOn";
+    return "Protocol : PrintOn";
 }
 
 /**********************************************************************

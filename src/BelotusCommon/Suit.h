@@ -30,17 +30,13 @@ typedef enum {
 
 class Suit : public Base
 {
-    Q_OBJECT
-
 public:
-    Suit(QObject *parent, CardSuit type);
-    Suit(QObject *parent, CardSuit type, bool isTrump);
+    Suit(CardSuit type);
+    Suit(CardSuit type, bool isTrump);
     CardSuit GetType() const;
     void SetTrump(bool isTrump);
     bool IsTrump() const;
-
-protected:
-    virtual QTextStream& PrintOn(QTextStream& stream) const;
+    virtual QString ToString() const;
 
 private:
     CardSuit suit;

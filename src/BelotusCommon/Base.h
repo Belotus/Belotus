@@ -20,30 +20,22 @@
 #ifndef BASE_H_
 #define BASE_H_
 
-#include <QObject>
 #include <QString>
 #include <QDebug>
 #include <QTextStream>
 
-class Base : public QObject {
-    Q_OBJECT
-
+class Base{
 public:
-    Base(QObject *parent = 0);
+    Base();
     virtual ~Base();
 
     static quint32 GetRef();
 
-    virtual QString ToString() const;
-
-protected:
-    virtual QTextStream& PrintOn(QTextStream&) const = 0;
-
+    virtual QString ToString() const = 0;
 private:
     static quint32 ref;
 };
 
-QDebug operator<<(QDebug dbg, const Base *object);
-//QDebug operator<<(QDebug dbg, const Base &object);
+QDebug operator<<(QDebug dbg, const Base &object);
 
 #endif /* BASE_H_ */

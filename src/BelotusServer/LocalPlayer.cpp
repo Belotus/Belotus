@@ -20,8 +20,8 @@
 
 #include "LocalPlayer.h"
 
-LocalPlayer::LocalPlayer(QObject *parent)
-    :Player(parent)
+LocalPlayer::LocalPlayer()
+    :Player()
 {
 }
 
@@ -40,7 +40,7 @@ Card* LocalPlayer::Play()
     return cards.takeFirst();
 }
 
-QTextStream& LocalPlayer::PrintOn(QTextStream& stream) const
+QString LocalPlayer::ToString() const
 {
-    return stream << "LocalPlayer";
+    return "LocalPlayer";
 }

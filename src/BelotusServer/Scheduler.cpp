@@ -22,9 +22,9 @@
 #include "time.h"
 
 Scheduler::Scheduler(QObject *parent)
-    : Base(parent)
+    : QObject(parent), Base()
 {
-    this->networkFrontend = new NetworkFrontend();
+    this->networkFrontend = new NetworkFrontend(this);
 
     //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
     connect(this, SIGNAL(s_Card()), this, SLOT(Card()));
@@ -47,8 +47,6 @@ void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
     qDebug() << remotePlayer << endl;
 
     players.append(remotePlayer);
-
-
 }
 
 void Scheduler::GameBeginning()
@@ -120,7 +118,7 @@ void Scheduler::Test()
     */
 }
 
-QTextStream& Scheduler::PrintOn(QTextStream& stream) const
+QString Scheduler::ToString() const
 {
-    return stream << "Scheduler : PrintOn";
+    return "Scheduler";
 }

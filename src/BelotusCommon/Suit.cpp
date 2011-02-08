@@ -20,13 +20,13 @@
 
 #include "Suit.h"
 
-Suit::Suit(QObject *parent, CardSuit suit)
-    : Base(parent), suit(suit)
+Suit::Suit(CardSuit suit)
+    : Base(), suit(suit)
 {
 }
 
-Suit::Suit(QObject *parent, CardSuit suit, bool isTrump)
-    :Base(parent), suit(suit), trump(isTrump)
+Suit::Suit(CardSuit suit, bool isTrump)
+    :Base(), suit(suit), trump(isTrump)
 {
 }
 
@@ -45,28 +45,29 @@ bool Suit::IsTrump() const
     return this->trump;
 }
 
-QTextStream& Suit::PrintOn(QTextStream& stream) const
+QString Suit::ToString() const
 {
+    QString str;
     switch(this->suit) {
     case HEART:
-        stream << "Suit: Heart";
+        str = "Suit: Heart";
         break;
     case DIAMOND:
-        stream << "Suit: Diamond";
+        str = "Suit: Diamond";
         break;
     case CLUB:
-        stream << "Suit: Club";
+        str = "Suit: Club";
         break;
     case SPADE:
-        stream << "Suit: Spade";
+        str = "Suit: Spade";
         break;
     default:
-        return stream << "Error: This Suit doens't exist.";
+        return "Error: This Suit doens't exist.";
         break;
     }
     if(this->IsTrump())
     {
-        stream << " (trump)";
+        str += " (trump)";
     }
-    return stream;
+    return str;
 }

@@ -34,16 +34,12 @@ typedef enum {
 
 class Value : public Base
 {
-    Q_OBJECT
-
 public:
-    Value(QObject *parent, CardValue value);
+    Value(CardValue value);
     CardValue GetValue() const;
     bool operator<(Value& value);
     bool operator>(Value& value);
-
-protected:
-    QTextStream& PrintOn(QTextStream& stream) const;
+    virtual QString ToString() const;
 
 private:
     CardValue value;

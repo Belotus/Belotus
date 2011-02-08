@@ -32,38 +32,32 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     /* Test Card, Suit, Value */
-    /*Suit *suit = new Suit(&a, HEART);
-    Value *value = new Value(&a, SEVEN);
-    Card *card = new Card(&a, suit, value);
+    Suit suit(HEART);
+    Value value(SEVEN);
+    Card card(&suit, &value);
 
+    qDebug() << suit << endl << value << endl;
     qDebug() << card << endl;
 
-    delete suit;
-    delete value;
-    delete card;*/
-
-
     /* Test Dealer, Deck */
-    /*Dealer *dealer = new Dealer(&a);
-    Deck *deck1 = new Deck(&a);
-    Deck *deck2 = new Deck(&a);
+    Dealer dealer;
+    Deck deck1;
+    Deck deck2;
 
     qDebug() << dealer;
 
-    while(!dealer->DealEnded())
+    while(!dealer.DealEnded())
     {
-        deck1->AddCard(dealer->GetCard());
-        deck2->AddCard(dealer->GetCard());
+        deck1.AddCard(dealer.GetCard());
+        deck2.AddCard(dealer.GetCard());
     }
 
-    dealer->Reset(deck1, deck2);
+    dealer.Reset(&deck1, &deck2);
     qDebug() << dealer;
 
-    Scheduler scheduler;
+    Scheduler scheduler(&a);
 
-    scheduler.Test();*/
-    //return a.exec();
+    scheduler.Test();
 
-    Scheduler *scheduler = new Scheduler(&a);
     return a.exec();
 }

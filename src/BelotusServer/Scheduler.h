@@ -30,12 +30,13 @@
 #include "NetworkFrontend.h"
 #include "Player.h"
 
-class Scheduler : public Base
+class Scheduler : public QObject, public Base
 {
     Q_OBJECT
 
 public:
-    Scheduler(QObject *parent = 0);
+    Scheduler(QObject *parent);
+    virtual QString ToString() const;
     void Test();
 
 signals:
@@ -66,9 +67,6 @@ public slots:
 
 protected:
     void incomingConnection(int socketfd);
-
-protected:
-    virtual QTextStream& PrintOn(QTextStream& stream) const;
 
 private:
     QVector<Player*> players;
