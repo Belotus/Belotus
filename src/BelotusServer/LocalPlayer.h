@@ -20,7 +20,7 @@
 #ifndef LOCALPLAYER_H
 #define LOCALPLAYER_H
 
-#include "../BelotusCommon/Player.h"
+#include "Player.h"
 
 class LocalPlayer : public Player
 {

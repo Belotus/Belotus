@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QTcpSocket>
 
-#include "../BelotusCommon/Card.h"
+#include "Card.h"
 
 class Protocol : public Base
 {

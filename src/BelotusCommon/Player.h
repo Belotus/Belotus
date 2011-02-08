@@ -20,7 +20,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../BelotusCommon/CardHolder.h"
+#include "CardHolder.h"
 
 class Player : public CardHolder
 {

@@ -20,9 +20,9 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include "../BelotusCommon/Base.h"
-#include "../BelotusCommon/Suit.h"
-#include "../BelotusCommon/Value.h"
+#include "Base.h"
+#include "Suit.h"
+#include "Value.h"
 
 class Card : public Base
 {

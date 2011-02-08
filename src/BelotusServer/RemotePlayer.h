@@ -22,9 +22,9 @@
 #define REMOTEPLAYER_H
 
 #include <QTcpSocket>
-#include "../BelotusCommon/Protocol.h"
+#include "Protocol.h"
 
-#include "../BelotusCommon/Player.h"
+#include "Player.h"
 
 
 class RemotePlayer : public Player

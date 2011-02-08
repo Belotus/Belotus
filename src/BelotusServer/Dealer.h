@@ -20,7 +20,7 @@
 #ifndef DEALER_H
 #define DEALER_H
 
-#include "../BelotusCommon/CardHolder.h"
+#include "CardHolder.h"
 #include "Deck.h"
 
 class Dealer : public CardHolder

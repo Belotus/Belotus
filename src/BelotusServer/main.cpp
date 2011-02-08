@@ -19,9 +19,9 @@
  */
 
 #include <QtCore/QCoreApplication>
-#include "../BelotusCommon/Suit.h"
-#include "../BelotusCommon/Value.h"
-#include "../BelotusCommon/Card.h"
+#include "Suit.h"
+#include "Value.h"
+#include "Card.h"
 #include "Dealer.h"
 #include "Scheduler.h"
 

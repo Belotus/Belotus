@@ -3,36 +3,28 @@
 # -------------------------------------------------
 QT += network
 QT -= gui
+
+DESTDIR = ../bin
+
 TARGET = BelotusServer
 CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
-SOURCES += main.cpp \
-    ../BelotusCommon/Player.cpp \
-    ../BelotusCommon/Base.cpp \
-    ../BelotusCommon/Protocol.cpp \
-    ../BelotusCommon/CardHolder.cpp \
-    ../BelotusCommon/Card.cpp \
-    ../BelotusCommon/Suit.cpp \
-    ../BelotusCommon/Value.cpp \
-    Scheduler.cpp \
-    RemotePlayer.cpp \
-    Dealer.cpp \
-    Deck.cpp \
-    CheckRules.cpp \
-    LocalPlayer.cpp \
-    NetworkFrontend.cpp
-HEADERS += ../BelotusCommon/Base.h \
-    ../BelotusCommon/Protocol.h \
-    ../BelotusCommon/CardHolder.h \
-    ../BelotusCommon/Card.h \
-    ../BelotusCommon/Suit.h \
-    ../BelotusCommon/Value.h \
-    ../BelotusCommon/Player.h \
-    Scheduler.h \
-    RemotePlayer.h \
-    Dealer.h \
-    Deck.h \
-    CheckRules.h \
-    LocalPlayer.h \
-    NetworkFrontend.h
+INCLUDEPATH += ../BelotusCommon
+LIBS += -L ../bin -lBelotusCommon
+SOURCES +=  main.cpp \
+            Scheduler.cpp \
+            RemotePlayer.cpp \
+            Dealer.cpp \
+            Deck.cpp \
+            CheckRules.cpp \
+            LocalPlayer.cpp \
+            NetworkFrontend.cpp
+
+HEADERS +=  Scheduler.h \
+            RemotePlayer.h \
+            Dealer.h \
+            Deck.h \
+            CheckRules.h \
+            LocalPlayer.h \
+            NetworkFrontend.h

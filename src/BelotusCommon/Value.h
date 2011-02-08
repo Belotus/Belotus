@@ -20,7 +20,7 @@
 #ifndef VALUE_H
 #define VALUE_H
 
-#include "../BelotusCommon/Base.h"
+#include "Base.h"
 
 typedef enum {
     SEVEN = 7,

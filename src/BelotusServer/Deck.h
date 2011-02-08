@@ -21,7 +21,7 @@
 #ifndef DECK_H
 #define DECK_H
 
-#include "../BelotusCommon/CardHolder.h"
+#include "CardHolder.h"
 
 class Deck : public CardHolder
 {

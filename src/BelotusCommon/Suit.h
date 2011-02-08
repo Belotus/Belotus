@@ -20,7 +20,7 @@
 #ifndef SUIT_H
 #define SUIT_H
 
-#include "../BelotusCommon/Base.h"
+#include "Base.h"
 
 typedef enum {
     HEART = 0,

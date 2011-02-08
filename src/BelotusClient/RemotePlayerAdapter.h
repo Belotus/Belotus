@@ -20,8 +20,8 @@
 #ifndef REMOTEPLAYERADAPTER_H
 #define REMOTEPLAYERADAPTER_H
 
-#include "../BelotusCommon/Base.h"
-#include "../BelotusCommon/Protocol.h"
+#include "Base.h"
+#include "Protocol.h"
 
 class RemotePlayerAdapter : public Base
 {

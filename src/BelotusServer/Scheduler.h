@@ -28,7 +28,7 @@
 
 #include "RemotePlayer.h"
 #include "NetworkFrontend.h"
-#include "../BelotusCommon/Player.h"
+#include "Player.h"
 
 class Scheduler : public Base
 {

@@ -20,8 +20,8 @@
 #ifndef CARDHOLDER_H
 #define CARDHOLDER_H
 
-#include "../BelotusCommon/Base.h"
-#include "../BelotusCommon/Card.h"
+#include "Base.h"
+#include "Card.h"
 #include <QList>
 
 class CardHolder : public Base
