@@ -36,3 +36,8 @@ QDebug operator<<(QDebug dbg, const Base &object)
 {
     return dbg << object.ToString();
 }
+
+QDebug operator<<(QDebug dbg, const Base *object)
+{
+    return dbg << *object;
+}

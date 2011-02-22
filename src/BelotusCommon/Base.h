@@ -37,5 +37,6 @@ private:
 };
 
 QDebug operator<<(QDebug dbg, const Base &object);
+QDebug operator<<(QDebug dbg, const Base *object);
 
 #endif /* BASE_H_ */
