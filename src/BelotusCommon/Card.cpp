@@ -22,30 +22,32 @@
 
 using namespace std;
 
-Card::Card(Suit *suit, Value *value)
-    :Base(), suit(suit), value(value)
+Card::Card(CardSuit suit, CardValue value)
+    :Base()
 {
+    this->suit = suit;
+    this->value = value;
 }
 
-Suit* Card::GetSuit() const
+CardSuit Card::GetSuit() const
 {
     return this->suit;
 }
 
-Value* Card::GetValue() const
+CardValue Card::GetValue() const
 {
     return this->value;
 }
 
 int Card::GetPoints() const
 {
-    switch(this->value->GetValue())
+    switch(this->value)
     {
     case SEVEN :
     case EIGHT :
         return 0;
     case NINE :
-        if(this->suit->IsTrump())
+        if(this->IsTrump())
         {
             return 14;
         }
@@ -56,7 +58,7 @@ int Card::GetPoints() const
     case TEN :
         return 10;
     case JACK :
-        if(this->suit->IsTrump())
+        if(this->IsTrump())
         {
             return 20;
         }
@@ -95,14 +97,14 @@ QString Card::ToString() const
  */
 bool Card::operator<(Card* card)
 {
-    if(this->suit->IsTrump())
+    if(this->IsTrump())
     {
-        if(card->suit->IsTrump())
+        if(card->IsTrump())
         {
-            if(this->value->GetValue() == JACK) return false;
-            if(card->value->GetValue() == JACK) return true;
-            if(this->value->GetValue() == NINE) return false;
-            if(card->value->GetValue() == NINE) return true;
+            if(this->GetValue() == JACK) return false;
+            if(card->GetValue() == JACK) return true;
+            if(this->GetValue() == NINE) return false;
+            if(card->GetValue() == NINE) return true;
             return (this->value < card->value);
         }
         else
