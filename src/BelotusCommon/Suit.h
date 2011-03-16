@@ -21,12 +21,15 @@
 #define SUIT_H
 
 #include "Base.h"
+#include "CardFactory.h"
 
+/*
 typedef enum {
     HEART = 0,
     DIAMOND,
     CLUB,
     SPADE} CardSuit;
+*/
 
 class Suit : public Base
 {

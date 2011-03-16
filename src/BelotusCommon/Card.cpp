@@ -22,6 +22,8 @@
 
 using namespace std;
 
+CardSuit Card::trump_suit = HEART;
+
 Card::Card(CardSuit suit, CardValue value)
     :Base()
 {
@@ -77,16 +79,21 @@ int Card::GetPoints() const
     }
 }
 
-QString Card::ToString() const
+bool Card::IsTrump() const
 {
-    QString str = "Card(";
-    str += this->suit->ToString();
-    str += " , ";
-    str += this->value->ToString();
-    str += ", ";
-    str += QString::number(this->GetPoints());
-    str += " points)";
-    return str;
+    if (this->suit == CardFactory::trump_suit)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Card::SetTrump(CardSuit suit)
+{    
+    Card::trump_suit = suit;
 }
 
 /**
@@ -114,7 +121,7 @@ bool Card::operator<(Card* card)
     }
     else
     {
-        if(card->suit->IsTrump())
+        if(card->IsTrump())
         {
             return false;
         }
@@ -134,4 +141,25 @@ bool Card::operator<(Card* card)
 bool Card::operator>(Card* card)
 {
     return !(this->operator <(card));
+}
+
+
+QString Card::ToString() const
+{
+    QString s;
+    QString v;
+
+    s = this->GetSuit();
+    v = this->GetValue();
+
+    QString str = "Card(Suit=";
+    str += this->GetSuit();
+    str += " , Value=";
+    str += this->GetValue();
+    str += ", ";
+    str += QString::number(this->GetPoints());
+    str += " points)";
+    return str;
+
+    //return "Card::ToString";
 }

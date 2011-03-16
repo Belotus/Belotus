@@ -19,8 +19,8 @@
  */
 
 #include <QtCore/QCoreApplication>
-#include "Suit.h"
-#include "Value.h"
+//#include "Suit.h"
+//#include "Value.h"
 #include "Card.h"
 #include "Dealer.h"
 #include "Scheduler.h"
@@ -31,12 +31,15 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    /* Test Card, Suit, Value */
-    Suit suit(HEART);
-    Value value(SEVEN);
-    Card card(&suit, &value);
+    qDebug() << "bonjour" << endl;
 
-    qDebug() << suit << endl << value << endl;
+    /* Test Card, Suit, Value */
+    //Suit suit(HEART);
+    //Value value(SEVEN);
+    //Card card(&suit, &value);
+    Card card(HEART, SEVEN);
+
+    //qDebug() << suit << endl << value << endl;
     qDebug() << card << endl;
 
     /* Test Dealer, Deck */
@@ -57,7 +60,7 @@ int main(int argc, char *argv[])
 
     Scheduler scheduler(&a);
 
-    scheduler.Test();
+    //scheduler.Test();
 
     return a.exec();
 }

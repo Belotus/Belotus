@@ -21,33 +21,20 @@
 #define CARD_H
 
 #include "Base.h"
+#include "Suit.h"
+#include "Value.h"
+//#include "CardFactory.h"
 
-
-typedef enum {
-    SEVEN = 7,
-    EIGHT,
-    NINE,
-    TEN,
-    JACK,
-    QUEEN,
-    KING,
-    ACE} CardValue;
-
-typedef enum {
-    HEART = 0,
-    DIAMOND,
-    CLUB,
-    SPADE} CardSuit;
 
 class Card : public Base
 {
 public:
-    Card(CardSuit suit, CardValue value);
+    Card(Suit suit, Value value);
     CardSuit GetSuit() const;
     CardValue GetValue() const;
     int GetPoints() const;
     bool IsTrump() const;
-    void SetTrump();
+    static void SetTrump();
     bool operator<(Card* card);
     bool operator>(Card* card);
     virtual QString ToString() const;
@@ -55,7 +42,6 @@ public:
 private:
     CardSuit suit;
     CardValue value;
-    static bool is_trump;
 };
 
 #endif // CARD_H

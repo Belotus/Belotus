@@ -36,7 +36,7 @@ bool CardHolder::HasSuit(CardSuit suit) const
 
     for(iCard = this->cards.constBegin(); iCard != this->cards.constEnd(); iCard++)
     {
-        if((*iCard)->GetSuit()->GetType() == suit)
+        if((*iCard)->GetSuit() == suit)
         {
             return true;
         }

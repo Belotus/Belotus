@@ -22,6 +22,8 @@
 
 #include "CardHolder.h"
 #include "Deck.h"
+#include "Card.h"
+#include "CardFactory.h"
 
 class Dealer : public CardHolder
 {
@@ -35,15 +37,14 @@ public:
     virtual QString ToString() const;
 
 private:
-    void GenerateSuits();
-    void GenerateValues();
-    void GenerateCard();
+    //void GenerateSuits();
+    //void GenerateValues();
+    //void GenerateCard();
     void Cut();
     void Shuffle();
 
 
-    QList<Value*> values;
-    QList<Suit*> suits;
+    QList<Card*> cards;
     int indexDeal;
 };
 

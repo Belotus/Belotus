@@ -29,9 +29,9 @@ Dealer::Dealer()
     QTime time = QTime::currentTime ();
     qsrand(time.hour() + time.minute() + time.msec());
 
-    this->GenerateSuits();
-    this->GenerateValues();
-    this->GenerateCard();
+    //this->GenerateSuits();
+    //this->GenerateValues();
+    //this->GenerateCard();
     //this->Shuffle();
     //this->Cut();
 }
@@ -77,14 +77,10 @@ Card* Dealer::GetCard()
 
 void Dealer::SetTrump(const CardSuit suit)
 {
-    QList<Suit*>::iterator SuitIndex;
-
-    for(SuitIndex = this->suits.begin(); SuitIndex != this->suits.end(); SuitIndex++)
-    {
-        (*SuitIndex)->SetTrump((*SuitIndex)->GetType() == suit);
-    }
+    CardFactory::SetTrump(suit);
 }
 
+/*
 void Dealer::GenerateSuits()
 {
     this->suits.append(new Suit(HEART));
@@ -103,9 +99,12 @@ void Dealer::GenerateValues() {
     this->values.append(new Value(KING));
     this->values.append(new Value(ACE));
 }
+*/
 
+/*
 void Dealer::GenerateCard()
 {
+    // V1
     QList<Value*>::iterator valueIndex;
     QList<Suit*>::iterator suitIndex;
 
@@ -116,7 +115,23 @@ void Dealer::GenerateCard()
             this->cards.append(new Card(*suitIndex, *valueIndex));
         }
     }
+    // V2
+    CardValue *p_cv;
+    CardSuit *p_cs;
+    quint32 *v;
+    quint32 *s;
+
+    for (*v = SEVEN; *v <= ACE; (*v)++)
+    {
+        for (*s = HEART; *s <= SPADE; (*s)++)
+        {
+            p_cv = (CardValue*)v;
+            p_cs = (CardSuit*)s;
+            this->cards.append(new Card(*p_cs, *p_cv));
+        }
+    }
 }
+*/
 
 void Dealer::Cut()
 {
