@@ -21,29 +21,22 @@
 #define SUIT_H
 
 #include "Base.h"
-#include "CardFactory.h"
-
-/*
-typedef enum {
-    HEART = 0,
-    DIAMOND,
-    CLUB,
-    SPADE} CardSuit;
-*/
+#include "Types.h"
 
 class Suit : public Base
 {
 public:
-    Suit(CardSuit type);
-    Suit(CardSuit type, bool isTrump);
-    CardSuit GetType() const;
-    void SetTrump(bool isTrump);
+    Suit(CardSuit suit);
+    Suit(CardSuit suit, bool isTrump);
+    CardSuit GetSuit() const;
+    static CardSuit GetTrump();
+    static void SetTrump(const CardSuit suit);
     bool IsTrump() const;
     virtual QString ToString() const;
 
 private:
     CardSuit suit;
-    bool trump;
+    static CardSuit trumpSuit;
 };
 
 #endif // SUIT_H

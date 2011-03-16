@@ -43,25 +43,28 @@ CardFactory::CardFactory()
     {
         for(valueIndex = this->values.begin(); valueIndex != this->values.end(); valueIndex++)
         {
-            this->cards.append(new Card(*suitIndex, *valueIndex));
+
+            this->cards.insert((*valueIndex)->GetValue() & (*suitIndex)->GetSuit(), new Card((*suitIndex)->GetSuit(),(*valueIndex)->GetValue()));
         }
     }
 }
 
-CardFactory::GetCard(CardValue value, CardSuit suit)
+//this->cards.append(new Card(*suitIndex, *valueIndex));
+
+Card* CardFactory::GetCard(CardValue value, CardSuit suit)
 {
     return this->cards.value((quint32) (value & suit));
 }
 
-SetTrump(const CardSuit suit)
+void SetTrump(const CardSuit suit)
 {
-    // TODO
+    Suit::SetTrump(suit);
 }
 
-CardFactory::ToString()
+QString CardFactory::ToString() const
 {
     QString str = "CardFactory: ";
-    QMapIterator<int, Card*> i(cards);
+    QMapIterator<quint32, Card*> i(cards);
     while (i.hasNext())
     {
          i.next();

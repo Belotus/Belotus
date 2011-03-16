@@ -21,19 +21,7 @@
 #define VALUE_H
 
 #include "Base.h"
-//#include "CardFactory.h"
-
-/*
-typedef enum {
-    SEVEN = 7,
-    EIGHT,
-    NINE,
-    TEN,
-    JACK,
-    QUEEN,
-    KING,
-    ACE} CardValue;
-*/
+#include "Types.h"
 
 class Value : public Base
 {

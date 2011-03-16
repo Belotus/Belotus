@@ -22,28 +22,26 @@
 
 using namespace std;
 
-CardSuit Card::trump_suit = HEART;
-
 Card::Card(CardSuit suit, CardValue value)
     :Base()
 {
-    this->suit = suit;
-    this->value = value;
+    this->suit = new Suit(suit);
+    this->value = new Value(value);
 }
 
 CardSuit Card::GetSuit() const
 {
-    return this->suit;
+    return this->suit->GetSuit();
 }
 
 CardValue Card::GetValue() const
 {
-    return this->value;
+    return this->value->GetValue();
 }
 
 int Card::GetPoints() const
 {
-    switch(this->value)
+    switch(this->value->GetValue())
     {
     case SEVEN :
     case EIGHT :
@@ -81,7 +79,7 @@ int Card::GetPoints() const
 
 bool Card::IsTrump() const
 {
-    if (this->suit == CardFactory::trump_suit)
+    if (this->suit->IsTrump())
     {
         return true;
     }
@@ -91,9 +89,9 @@ bool Card::IsTrump() const
     }
 }
 
-void Card::SetTrump(CardSuit suit)
+void Card::SetTrump()
 {    
-    Card::trump_suit = suit;
+    Suit::SetTrump(this->suit->GetSuit());
 }
 
 /**

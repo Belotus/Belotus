@@ -23,25 +23,25 @@
 #include "Base.h"
 #include "Suit.h"
 #include "Value.h"
-//#include "CardFactory.h"
+#include "Types.h"
 
 
 class Card : public Base
 {
 public:
-    Card(Suit suit, Value value);
+    Card(CardSuit suit, CardValue value);
     CardSuit GetSuit() const;
     CardValue GetValue() const;
     int GetPoints() const;
     bool IsTrump() const;
-    static void SetTrump();
+    void SetTrump();
     bool operator<(Card* card);
     bool operator>(Card* card);
     virtual QString ToString() const;
 
 private:
-    CardSuit suit;
-    CardValue value;
+    Suit *suit;
+    Value *value;
 };
 
 #endif // CARD_H

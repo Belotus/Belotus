@@ -19,6 +19,7 @@
  */
 
 #include "Dealer.h"
+#include "Types.h"
 #include <algorithm>
 #include <QTime>
 #include <QtGlobal>
@@ -77,7 +78,7 @@ Card* Dealer::GetCard()
 
 void Dealer::SetTrump(const CardSuit suit)
 {
-    CardFactory::SetTrump(suit);
+    Suit::SetTrump(suit);
 }
 
 /*

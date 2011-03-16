@@ -18,4 +18,5 @@ HEADERS = Base.h \
     CardHolder.h \
     Player.h \
     Protocol.h \
-    CardFactory.h
+    CardFactory.h \
+    Types.h

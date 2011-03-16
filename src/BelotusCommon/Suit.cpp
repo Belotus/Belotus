@@ -20,29 +20,47 @@
 
 #include "Suit.h"
 
+CardSuit Suit::trumpSuit;
+
 Suit::Suit(CardSuit suit)
     : Base(), suit(suit)
 {
 }
 
 Suit::Suit(CardSuit suit, bool isTrump)
-    :Base(), suit(suit), trump(isTrump)
+    :Base(), suit(suit)
 {
+    if (isTrump)
+    {
+        Suit::SetTrump(suit);
+    }
 }
 
-CardSuit Suit::GetType() const
+CardSuit Suit::GetSuit() const
 {
     return this->suit;
 }
 
-void Suit::SetTrump(bool isTrump)
+CardSuit Suit::GetTrump()
 {
-    this->trump = isTrump;
+    return Suit::trumpSuit;
+}
+
+void Suit::SetTrump(const CardSuit suit)
+{
+    Suit::trumpSuit = suit;
 }
 
 bool Suit::IsTrump() const
 {
-    return this->trump;
+    if (this->suit == Suit::GetTrump())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 QString Suit::ToString() const

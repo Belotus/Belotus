@@ -20,10 +20,7 @@
 #ifndef CARDFACTORY_H
 #define CARDFACTORY_H
 
-#include "Base.h"
 #include "Card.h"
-#include "Value.h"
-#include "Suit.h"
 #include <QList>
 #include <QMap>
 
@@ -40,7 +37,6 @@ private:
     QMap<quint32, Card*> cards;
     QList<Value*> values;
     QList<Suit*> suits;
-    static CardSuit trump_suit;
 };
 
 #endif // CARDFACTORY_H
