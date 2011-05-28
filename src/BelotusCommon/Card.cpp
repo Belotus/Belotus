@@ -1,7 +1,7 @@
 /* Belotus
  *
  * Card.cpp
- * Copyright (C) 2010 Schneider Julien
+ * Copyright (C) 2010 Schneider Julien <contact@julienschneider.fr>
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,27 +21,28 @@
 #include "Card.h"
 
 using namespace std;
+CardSuit Card::trump = HEART;
 
 Card::Card(CardSuit suit, CardValue value)
     :Base()
 {
-    this->suit = new Suit(suit);
-    this->value = new Value(value);
+    this->suit = suit;
+    this->value = value;
 }
 
 CardSuit Card::GetSuit() const
 {
-    return this->suit->GetSuit();
+    return this->suit;
 }
 
 CardValue Card::GetValue() const
 {
-    return this->value->GetValue();
+    return this->value;
 }
 
 int Card::GetPoints() const
 {
-    switch(this->value->GetValue())
+    switch(this->value)
     {
     case SEVEN :
     case EIGHT :
@@ -79,7 +80,7 @@ int Card::GetPoints() const
 
 bool Card::IsTrump() const
 {
-    if (this->suit->IsTrump())
+    if (this->suit == this->trump)
     {
         return true;
     }
@@ -89,9 +90,9 @@ bool Card::IsTrump() const
     }
 }
 
-void Card::SetTrump()
+void Card::SetTrump(CardSuit suit)
 {    
-    Suit::SetTrump(this->suit->GetSuit());
+    this->trump = suit;
 }
 
 /**
@@ -106,10 +107,10 @@ bool Card::operator<(Card* card)
     {
         if(card->IsTrump())
         {
-            if(this->GetValue() == JACK) return false;
-            if(card->GetValue() == JACK) return true;
-            if(this->GetValue() == NINE) return false;
-            if(card->GetValue() == NINE) return true;
+            if(this->value == JACK) return false;
+            if(card->value == JACK) return true;
+            if(this->value == NINE) return false;
+            if(card->value == NINE) return true;
             return (this->value < card->value);
         }
         else
@@ -147,17 +148,56 @@ QString Card::ToString() const
     QString s;
     QString v;
 
-    s = this->GetSuit();
-    v = this->GetValue();
+    switch(this->value)
+    {
+    case SEVEN:
+        v = "SEVEN";
+        break;
+    case EIGHT:
+        v = "EIGHT";
+        break;
+    case NINE:
+        v = "NINE";
+        break;
+    case TEN:
+        v = "TEN";
+        break;
+    case JACK:
+        v = "JACK";
+        break;
+    case QUEEN:
+        v = "QUEEN";
+        break;
+    case KING:
+        v = "KING";
+        break;
+    case ACE:
+        v = "ACE";
+        break;
+    }
+
+    switch(this->suit)
+    {
+    case HEART:
+        s = "HEART";
+        break;
+    case DIAMOND:
+        s = "DIAMOND";
+        break;
+    case CLUB:
+        s = "CLUB";
+        break;
+    case SPADE:
+        s = "SPADE";
+        break;
+    }
 
     QString str = "Card(Suit=";
-    str += this->GetSuit();
-    str += " , Value=";
-    str += this->GetValue();
+    str += s;
+    str += ", Value=";
+    str += v;
     str += ", ";
     str += QString::number(this->GetPoints());
     str += " points)";
     return str;
-
-    //return "Card::ToString";
 }

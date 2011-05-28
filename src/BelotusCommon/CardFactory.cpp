@@ -1,7 +1,7 @@
 /* Belotus
  *
  * CardFactory.cpp
- * Copyright (C) 2010 Schneider Julien
+ * Copyright (C) 2010 Schneider Julien <contact@julienschneider.fr>
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,44 +21,32 @@
 #include "CardFactory.h"
 
 CardFactory::CardFactory()
+    : Base()
 {
-    this->suits.append(new Suit(HEART));
-    this->suits.append(new Suit(DIAMOND));
-    this->suits.append(new Suit(CLUB));
-    this->suits.append(new Suit(SPADE));
+    CardValue v;
+    CardSuit s;
 
-    this->values.append(new Value(SEVEN));
-    this->values.append(new Value(EIGHT));
-    this->values.append(new Value(NINE));
-    this->values.append(new Value(TEN));
-    this->values.append(new Value(JACK));
-    this->values.append(new Value(QUEEN));
-    this->values.append(new Value(KING));
-    this->values.append(new Value(ACE));
-
-    QList<Value*>::iterator valueIndex;
-    QList<Suit*>::iterator suitIndex;
-
-    for(suitIndex = this->suits.begin(); suitIndex != this->suits.end(); suitIndex++)
+    for(v=SEVEN; v<=ACE; v++);
     {
-        for(valueIndex = this->values.begin(); valueIndex != this->values.end(); valueIndex++)
+        for(s=HEART; s<=SPADE; s+=0x1000)
         {
-
-            this->cards.insert((*valueIndex)->GetValue() & (*suitIndex)->GetSuit(), new Card((*suitIndex)->GetSuit(),(*valueIndex)->GetValue()));
+            this->cards.insert(v+s,new Card(s,v));
         }
     }
 }
 
-//this->cards.append(new Card(*suitIndex, *valueIndex));
+CardFactory::~CardFactory()
+{
+    QMap<quint32, Card*>::iterator i;
+    for(i=cards.begin(); i!=cards.end(); ++i)
+    {
+        delete i.value();
+    }
+}
 
 Card* CardFactory::GetCard(CardValue value, CardSuit suit)
 {
     return this->cards.value((quint32) (value & suit));
-}
-
-void SetTrump(const CardSuit suit)
-{
-    Suit::SetTrump(suit);
 }
 
 QString CardFactory::ToString() const

@@ -1,7 +1,7 @@
 /* Belotus
  *
  * Dealer.h
- * Copyright (C) 2010 Schneider Julien
+ * Copyright (C) 2010 Schneider Julien <contact@julienschneider.fr>
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,24 +28,15 @@
 class Dealer : public CardHolder
 {
 public:
-    Dealer();
-    ~Dealer();
+    Dealer(CardFactory *cardFactory);
     void Reset(Deck* deck1, Deck* deck2);
     bool DealEnded() const;
     Card* GetCard();
-    void SetTrump(const CardSuit suit);
     virtual QString ToString() const;
 
 private:
-    //void GenerateSuits();
-    //void GenerateValues();
-    //void GenerateCard();
     void Cut();
     void Shuffle();
-
-
-    QList<Card*> cards;
-    int indexDeal;
 };
 
 #endif // DEALER_H

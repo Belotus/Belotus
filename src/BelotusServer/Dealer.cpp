@@ -1,7 +1,7 @@
 /* Belotus
  *
  * Dealer.cpp
- * Copyright (C) 2010 Schneider Julien
+ * Copyright (C) 2010 Schneider Julien <contact@julienschneider.fr>
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,25 +24,18 @@
 #include <QTime>
 #include <QtGlobal>
 
-Dealer::Dealer()
-    : CardHolder(), indexDeal(0)
+Dealer::Dealer(CardFactory *cardFactory)
+    : CardHolder()
 {
-    QTime time = QTime::currentTime ();
-    qsrand(time.hour() + time.minute() + time.msec());
+    CardValue v;
+    CardSuit s;
 
-    //this->GenerateSuits();
-    //this->GenerateValues();
-    //this->GenerateCard();
-    //this->Shuffle();
-    //this->Cut();
-}
-
-Dealer::~Dealer()
-{
-    while(!this->cards.empty())
+    for(s=HEART; s<=SPADE; s+=0x1000)
     {
-        delete this->cards.first();
-        this->cards.pop_front();
+        for(v=SEVEN; v<=ACE; v++)
+        {
+            cards.append(cardFactory->GetCard(v, s));
+        }
     }
 }
 
@@ -61,78 +54,19 @@ void Dealer::Reset(Deck* deck1, Deck* deck2)
     }
 
     this->Cut();
-    indexDeal = 0;
 }
 
 bool Dealer::DealEnded() const
 {
-    return (this->indexDeal >= this->cards.count());
+    return !(this->cards.empty());
 }
 
 Card* Dealer::GetCard()
 {
-    Card* card = this->cards.at(this->indexDeal);
-    indexDeal++;
+    Card* card = this->cards.first();
+    cards.removeFirst();
     return card;
 }
-
-void Dealer::SetTrump(const CardSuit suit)
-{
-    Suit::SetTrump(suit);
-}
-
-/*
-void Dealer::GenerateSuits()
-{
-    this->suits.append(new Suit(HEART));
-    this->suits.append(new Suit(DIAMOND));
-    this->suits.append(new Suit(CLUB));
-    this->suits.append(new Suit(SPADE));
-}
-
-void Dealer::GenerateValues() {
-    this->values.append(new Value(SEVEN));
-    this->values.append(new Value(EIGHT));
-    this->values.append(new Value(NINE));
-    this->values.append(new Value(TEN));
-    this->values.append(new Value(JACK));
-    this->values.append(new Value(QUEEN));
-    this->values.append(new Value(KING));
-    this->values.append(new Value(ACE));
-}
-*/
-
-/*
-void Dealer::GenerateCard()
-{
-    // V1
-    QList<Value*>::iterator valueIndex;
-    QList<Suit*>::iterator suitIndex;
-
-    for(suitIndex = this->suits.begin(); suitIndex != this->suits.end(); suitIndex++)
-    {
-        for(valueIndex = this->values.begin(); valueIndex != this->values.end(); valueIndex++)
-        {
-            this->cards.append(new Card(*suitIndex, *valueIndex));
-        }
-    }
-    // V2
-    CardValue *p_cv;
-    CardSuit *p_cs;
-    quint32 *v;
-    quint32 *s;
-
-    for (*v = SEVEN; *v <= ACE; (*v)++)
-    {
-        for (*s = HEART; *s <= SPADE; (*s)++)
-        {
-            p_cv = (CardValue*)v;
-            p_cs = (CardSuit*)s;
-            this->cards.append(new Card(*p_cs, *p_cv));
-        }
-    }
-}
-*/
 
 void Dealer::Cut()
 {
@@ -140,7 +74,8 @@ void Dealer::Cut()
     int iteration = (qrand() % (count - 1)) + 1;
     while(iteration > 0)
     {
-        Card* tmp = this->cards.takeLast();
+        Card* tmp = this->cards.last();
+        this->cards.removeLast();
         this->cards.push_front(tmp);
         iteration--;
     }

@@ -1,7 +1,7 @@
 /* Belotus
  *
  * main.cpp
- * Copyright (C) 2010 Schneider Julien
+ * Copyright (C) 2010 Schneider Julien <contact@julienschneider.fr>
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,11 +19,10 @@
  */
 
 #include <QtCore/QCoreApplication>
-//#include "Suit.h"
-//#include "Value.h"
 #include "Card.h"
 #include "Dealer.h"
 #include "Scheduler.h"
+#include "CardFactory.h"
 
 using namespace std;
 
@@ -31,22 +30,12 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    qDebug() << "bonjour" << endl;
-
-    /* Test Card, Suit, Value */
-    //Suit suit(HEART);
-    //Value value(SEVEN);
-    //Card card(&suit, &value);
-    Card card(HEART, SEVEN);
-
-    //qDebug() << suit << endl << value << endl;
-    qDebug() << card << endl;
-
-    /* Test Dealer, Deck */
-    Dealer dealer;
+    CardFactory cardFactory;
+    Dealer dealer(&cardFactory);
     Deck deck1;
     Deck deck2;
 
+    qDebug() << cardFactory;
     qDebug() << dealer;
 
     while(!dealer.DealEnded())

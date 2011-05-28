@@ -1,7 +1,7 @@
 /* Belotus
  *
  * CardFactory.h
- * Copyright (C) 2010 Schneider Julien
+ * Copyright (C) 2010 Schneider Julien <contact@julienschneider.fr>
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,23 +20,22 @@
 #ifndef CARDFACTORY_H
 #define CARDFACTORY_H
 
+#include "Base.h"
 #include "Card.h"
 #include <QList>
 #include <QMap>
 
 
-class CardFactory
+class CardFactory : public Base
 {
 public:
     CardFactory();
+    virtual ~CardFactory();
     Card* GetCard(CardValue value, CardSuit suit);
-    static void SetTrump(const CardSuit suit);
     virtual QString ToString() const;
 
 private:
     QMap<quint32, Card*> cards;
-    QList<Value*> values;
-    QList<Suit*> suits;
 };
 
 #endif // CARDFACTORY_H

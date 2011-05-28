@@ -1,7 +1,7 @@
 /* Belotus
  *
  * Card.h
- * Copyright (C) 2010 Schneider Julien
+ * Copyright (C) 2010 Schneider Julien <contact@julienschneider.fr>
  * Copyright (C) 2010 Michael Muré <batolettre@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,8 +21,6 @@
 #define CARD_H
 
 #include "Base.h"
-#include "Suit.h"
-#include "Value.h"
 #include "Types.h"
 
 
@@ -34,14 +32,15 @@ public:
     CardValue GetValue() const;
     int GetPoints() const;
     bool IsTrump() const;
-    void SetTrump();
+    void SetTrump(CardSuit suit);
     bool operator<(Card* card);
     bool operator>(Card* card);
     virtual QString ToString() const;
 
 private:
-    Suit *suit;
-    Value *value;
+    CardSuit suit;
+    CardValue value;
+    static CardSuit trump;
 };
 
 #endif // CARD_H
