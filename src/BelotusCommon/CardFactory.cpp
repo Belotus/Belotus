@@ -26,7 +26,7 @@ CardFactory::CardFactory()
     CardValue v;
     CardSuit s;
 
-    for(v=SEVEN; v<=ACE; v++);
+    for(v=SEVEN; v<=ACE; v++)
     {
         for(s=HEART; s<=SPADE; s+=0x1000)
         {
@@ -46,12 +46,17 @@ CardFactory::~CardFactory()
 
 Card* CardFactory::GetCard(CardValue value, CardSuit suit)
 {
-    return this->cards.value((quint32) (value & suit));
+    Q_ASSERT(!cards.isEmpty());
+    Q_ASSERT(SEVEN <= value);
+    Q_ASSERT(value <= ACE);
+    Q_ASSERT(HEART <= suit);
+    Q_ASSERT(suit <= SPADE);
+    return this->cards.value(value + suit);
 }
 
 QString CardFactory::ToString() const
 {
-    QString str = "CardFactory: ";
+    QString str = "CardFactory: \n";
     QMapIterator<quint32, Card*> i(cards);
     while (i.hasNext())
     {

@@ -35,6 +35,20 @@ int main(int argc, char *argv[])
     Deck deck1;
     Deck deck2;
 
+    Scheduler scheduler(&a);
+
+    //scheduler.Test();
+
+    return a.exec();
+}
+
+void test()
+{
+    CardFactory cardFactory;
+    Dealer dealer(&cardFactory);
+    Deck deck1;
+    Deck deck2;
+
     qDebug() << cardFactory;
     qDebug() << dealer;
 
@@ -44,12 +58,9 @@ int main(int argc, char *argv[])
         deck2.AddCard(dealer.GetCard());
     }
 
+    qDebug() << deck1;
+    qDebug() << deck2;
+
     dealer.Reset(&deck1, &deck2);
     qDebug() << dealer;
-
-    Scheduler scheduler(&a);
-
-    //scheduler.Test();
-
-    return a.exec();
 }

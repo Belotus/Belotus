@@ -29,14 +29,17 @@ Dealer::Dealer(CardFactory *cardFactory)
 {
     CardValue v;
     CardSuit s;
+    Card* c;
 
     for(s=HEART; s<=SPADE; s+=0x1000)
     {
         for(v=SEVEN; v<=ACE; v++)
         {
-            cards.append(cardFactory->GetCard(v, s));
+            c = cardFactory->GetCard(v, s);
+            cards.append(c);
         }
     }
+    this->Shuffle();
 }
 
 void Dealer::Reset(Deck* deck1, Deck* deck2)
@@ -58,7 +61,7 @@ void Dealer::Reset(Deck* deck1, Deck* deck2)
 
 bool Dealer::DealEnded() const
 {
-    return !(this->cards.empty());
+    return this->cards.empty();
 }
 
 Card* Dealer::GetCard()
@@ -92,6 +95,11 @@ QString Dealer::ToString() const
     QString str = "Dealer: ";
     str += QString::number(this->cards.count());
     str += " cards\n";
+
+    if(cards.isEmpty())
+    {
+        return str;
+    }
 
     for(cardIndex = this->cards.constBegin(); cardIndex != this->cards.constEnd(); cardIndex++)
     {
