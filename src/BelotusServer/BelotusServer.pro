@@ -19,7 +19,8 @@ SOURCES +=  main.cpp \
             Deck.cpp \
             CheckRules.cpp \
             LocalPlayer.cpp \
-            NetworkFrontend.cpp
+            NetworkFrontend.cpp \
+            ConfigServer.cpp
 
 HEADERS +=  Scheduler.h \
             RemotePlayer.h \
@@ -27,4 +28,5 @@ HEADERS +=  Scheduler.h \
             Deck.h \
             CheckRules.h \
             LocalPlayer.h \
-            NetworkFrontend.h
+            NetworkFrontend.h \
+            ConfigServer.h

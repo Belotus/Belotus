@@ -23,12 +23,20 @@
 #include "Dealer.h"
 #include "Scheduler.h"
 #include "CardFactory.h"
+#include "ConfigServer.h"
 
 using namespace std;
+
+void readArgs(int argc, char *argv[]);
+void msgHandler( QtMsgType t, const char * message );
+void test();
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+    qInstallMsgHandler(msgHandler);
+    readArgs(argc, argv);
+
 
     CardFactory cardFactory;
     Dealer dealer(&cardFactory);
@@ -37,9 +45,54 @@ int main(int argc, char *argv[])
 
     Scheduler scheduler(&a);
 
+    //test();
     //scheduler.Test();
 
     return a.exec();
+}
+
+void readArgs(int argc, char *argv[])
+{
+    int c;
+    while((c = getopt(argc, argv, "vp:")) != -1)
+    {
+        switch(c)
+        {
+        case 'v':
+            ConfigServer::debug_level = 4;
+            break;
+        case 'p':
+            ConfigServer::network_port = (quint32) atoi(optarg);
+            break;
+        }
+    }
+}
+
+void msgHandler( QtMsgType t, const char * message )
+{
+    bool print = FALSE;
+    switch(t)
+    {
+    case QtDebugMsg:
+        if(ConfigServer::debug_level >= 4)
+            print = TRUE;
+        break;
+    case QtWarningMsg:
+        if(ConfigServer::debug_level >= 3)
+            print = TRUE;
+        break;
+    case QtCriticalMsg:
+        if(ConfigServer::debug_level >= 2)
+            print = TRUE;
+        break;
+    case QtFatalMsg:
+        if(ConfigServer::debug_level >= 1)
+            print = TRUE;
+        break;
+    }
+
+    if ( print && message && *message )
+        fprintf( stderr, "%s\n", message );
 }
 
 void test()
