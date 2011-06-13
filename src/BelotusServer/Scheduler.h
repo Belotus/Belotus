@@ -36,6 +36,7 @@ class Scheduler : public QObject, public Base
 
 public:
     Scheduler(QObject *parent);
+    virtual ~Scheduler();
     virtual QString ToString() const;
     void Test();
 
@@ -71,6 +72,7 @@ protected:
 private:
     QVector<Player*> players;
     NetworkFrontend *networkFrontend;
+    CardFactory *cardFactory;
 
     enum State {WFPlayersConnection,
                 WFGameBeginning,

@@ -29,7 +29,8 @@ int main(int argc, char *argv[])
     //MainWindow w;
     //w.show();
 
-    RemotePlayerAdapter *remote = new RemotePlayerAdapter(NULL);
+    CardFactory *cardFactory = new CardFactory();
+    RemotePlayerAdapter *remote = new RemotePlayerAdapter(NULL, cardFactory);
     remote->AskConnection("127.0.0.1", 4242);
     return a.exec();
 }

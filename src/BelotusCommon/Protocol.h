@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include "CardFactory.h"
 
 #include "Card.h"
 
@@ -30,8 +31,8 @@ class Protocol : public QObject, public Base
     Q_OBJECT
 
 public:
-    Protocol(QTcpSocket *socket);
-    Protocol(QObject *parent, QTcpSocket *socket);
+    Protocol(QTcpSocket *socket, CardFactory *cardFactory);
+    Protocol(QObject *parent, QTcpSocket *socket, CardFactory *cardFactory);
     virtual ~Protocol();
 
     void    MessageProcessed();
@@ -60,11 +61,12 @@ private:
     bool          lengthReceived;
     quint32       type;
     QTcpSocket   *socket;
-    QByteArray    buffer;
+    QByteArray   *buffer;
     QDataStream  *in;
     QDataStream  *out;
     Card         *card;
     QString       string;
+    CardFactory  *cardFactory;
 
     static const quint32 QUERY_PLAY = 0x00001;
     static const quint32 QUERY_ADD_CARD = 0x00002;

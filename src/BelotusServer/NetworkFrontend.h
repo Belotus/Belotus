@@ -22,14 +22,18 @@
 
 #include <QTcpServer>
 #include "RemotePlayer.h"
+#include "CardFactory.h"
 
 class NetworkFrontend : public QTcpServer, public Base
 {
     Q_OBJECT
 
 public:
-    NetworkFrontend(QObject *parent);
+    NetworkFrontend(QObject *parent, CardFactory *cardFactory);
     virtual QString ToString() const;
+
+private:
+    CardFactory *cardFactory;
 
 signals:
     void s_PlayerConnection(RemotePlayer *remotePlayer);

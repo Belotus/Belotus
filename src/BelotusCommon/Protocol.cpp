@@ -29,9 +29,9 @@
  * Constructor with no parenting
  * @param socket A pointer to the socket to use
  */
-Protocol::Protocol(QTcpSocket *socket)
+Protocol::Protocol(QTcpSocket *socket, CardFactory *cardFactory)
 {
-    Protocol(0, socket);
+    Protocol(NULL, socket, cardFactory);
 }
 
 /**
@@ -39,12 +39,13 @@ Protocol::Protocol(QTcpSocket *socket)
  * @param parent The QObject parent, or NULL
  * @param socket A pointer to the socket to use
  */
-Protocol::Protocol(QObject *parent, QTcpSocket *socket)
+Protocol::Protocol(QObject *parent, QTcpSocket *socket, CardFactory *cardFactory)
     : QObject(parent), Base(), isReady(true), messageLength(0),
-    lengthReceived(false), socket(socket)
+    lengthReceived(false), socket(socket), cardFactory(cardFactory)
 {
     qDebug() << "Protocol : Constructeur" ;
-    this->out = new QDataStream(&this->buffer, QIODevice::WriteOnly);
+    this->buffer = new QByteArray();
+    this->out = new QDataStream(this->buffer, QIODevice::WriteOnly);
     this->in = new QDataStream(this->socket);
     connect(this->socket, SIGNAL(readyRead()), this, SLOT(ReadyRead()));
     qDebug() << "Protocol : Fin constructeur" ;
@@ -57,6 +58,7 @@ Protocol::~Protocol()
 {
     delete(this->in);
     delete(this->out);
+    delete(this->buffer);
     delete(this->socket);
 }
 
@@ -112,6 +114,10 @@ void Protocol::sendQueryPlay()
 void Protocol::sendQueryAddCard(const Card* card)
 {
     qDebug() << "Protocol : sendQueryAddCard" ;
+    this->writeQuint32(this->QUERY_ADD_CARD);
+    this->writeQuint32(card->GetSuit());
+    this->writeQuint32(card->GetValue());
+    this->send();
     qDebug() << "Protocol : Fin sendQueryAddCard" ;
 }
 
@@ -250,6 +256,10 @@ void Protocol::receive()
 void Protocol::receiveAddCard()
 {
     qDebug() << "Protocol : receiveAddCard" ;
+    quint32 value = this->readQuint32();
+    quint32 suit = this->readQuint32();
+    this->card = this->cardFactory->GetCard(value, suit);
+    qDebug() << "Card: " << this->card << "\n";
     qDebug() << "Protocol : Fin receiveAddCard" ;
 }
 
@@ -260,6 +270,7 @@ void Protocol::receiveInsult()
 {
     qDebug() << "Protocol : receiveInsult" ;
     this->string = this->readQString();
+    qDebug() << "Insult: " << this->string << "\n";
     qDebug() << "Protocol : Fin receiveInsult" ;
 }
 
@@ -274,11 +285,11 @@ void Protocol::send()
     qDebug() << "Protocol : send" ;
     qstream = new QDataStream(&qsize, QIODevice::WriteOnly);
 
-    *qstream << this->buffer.size();
+    *qstream << this->buffer->size();
     this->socket->write(qsize);
 
-    this->socket->write(this->buffer);
-    this->buffer.clear();
+    this->socket->write(*this->buffer);
+    this->buffer->clear();
 
     delete(qstream);
     qDebug() << "Protocol : Fin send" ;

@@ -22,13 +22,14 @@
 
 #include "Base.h"
 #include "Protocol.h"
+#include "CardFactory.h"
 
 class RemotePlayerAdapter : public QObject, public Base
 {
     Q_OBJECT
 
 public:
-    RemotePlayerAdapter(QObject *parent);
+    RemotePlayerAdapter(QObject *parent, CardFactory *cardFactory);
     void AskConnection(QString adress, quint16 port);
     virtual QString ToString() const;
 
@@ -38,6 +39,7 @@ private slots:
 private:
     QTcpSocket *socket;
     Protocol *protocol;
+    CardFactory *cardFactory;
 };
 
 #endif // REMOTEPLAYERADAPTER_H

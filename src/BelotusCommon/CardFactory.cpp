@@ -47,7 +47,6 @@ CardFactory::~CardFactory()
 Card* CardFactory::GetCard(CardValue value, CardSuit suit)
 {
     Q_ASSERT(!cards.isEmpty());
-    Q_ASSERT(SEVEN <= value);
     Q_ASSERT(value <= ACE);
     Q_ASSERT(HEART <= suit);
     Q_ASSERT(suit <= SPADE);

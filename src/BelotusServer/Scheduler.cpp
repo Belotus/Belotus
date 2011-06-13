@@ -24,7 +24,8 @@
 Scheduler::Scheduler(QObject *parent)
     : QObject(parent), Base()
 {
-    this->networkFrontend = new NetworkFrontend(this);
+    this->cardFactory = new CardFactory();
+    this->networkFrontend = new NetworkFrontend(this, this->cardFactory);
 
     //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
     connect(this, SIGNAL(s_Card()), this, SLOT(Card()));
@@ -38,6 +39,11 @@ Scheduler::Scheduler(QObject *parent)
     connect(this, SIGNAL(s_Take()), this, SLOT(Take()));
 
     // TODO : Replace the sender (this) by the appropriate sender
+}
+
+Scheduler::~Scheduler()
+{
+    delete this->cardFactory;
 }
 
 void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)

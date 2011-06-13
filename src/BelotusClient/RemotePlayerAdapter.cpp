@@ -20,8 +20,8 @@
 
 #include "RemotePlayerAdapter.h"
 
-RemotePlayerAdapter::RemotePlayerAdapter(QObject *parent)
-    : QObject(parent), Base(), socket(new QTcpSocket(this))
+RemotePlayerAdapter::RemotePlayerAdapter(QObject *parent, CardFactory *cardFactory)
+    : QObject(parent), Base(), socket(new QTcpSocket(this)), cardFactory(cardFactory)
 {
     qDebug() << "RemotePlayerAdapter : Constructeur" ;
 }
@@ -37,7 +37,7 @@ void RemotePlayerAdapter::AskConnection(QString adress, quint16 port)
 void RemotePlayerAdapter::SocketConnected()
 {
     qDebug() << "RemotePlayerAdapter : SocketConnected" ;
-    this->protocol = new Protocol(this, this->socket);
+    this->protocol = new Protocol(this, this->socket, this->cardFactory);
     this->protocol->sendAnswerACK();
     qDebug() << "RemotePlayerAdapter : Fin SockedConnected" ;
 }

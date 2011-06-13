@@ -23,8 +23,8 @@
 #include "RemotePlayer.h"
 
 
-RemotePlayer::RemotePlayer(QTcpSocket *socket)
-    : Player(), protocol(new Protocol(socket))
+RemotePlayer::RemotePlayer(QTcpSocket *socket, CardFactory *cardFactory)
+    : Player(), protocol(new Protocol(socket, cardFactory))
 {
     qDebug() << "RemotePlayer : Constructeur" ;
     /*

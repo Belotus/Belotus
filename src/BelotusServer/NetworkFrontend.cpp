@@ -20,8 +20,8 @@
 
 #include "NetworkFrontend.h"
 
-NetworkFrontend::NetworkFrontend(QObject *parent)
-     : QTcpServer(parent), Base()
+NetworkFrontend::NetworkFrontend(QObject *parent, CardFactory *cardFactory)
+     : QTcpServer(parent), Base(), cardFactory(cardFactory)
 {
     qDebug() << "NetworkFrontend : Constructeur" ;
     connect(this, SIGNAL(newConnection()), this, SLOT(NewConnection()));
@@ -43,7 +43,7 @@ void NetworkFrontend::NewConnection()
         return;
     }
 
-    remotePlayer = new RemotePlayer(tcpSocket);
+    remotePlayer = new RemotePlayer(tcpSocket, this->cardFactory);
 
     emit s_PlayerConnection(remotePlayer);
     qDebug() << "NetworkFrontend : Fin NewConnection" ;

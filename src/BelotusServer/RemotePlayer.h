@@ -23,6 +23,7 @@
 
 #include <QTcpSocket>
 #include "Protocol.h"
+#include "CardFactory.h"
 
 #include "Player.h"
 
@@ -30,7 +31,7 @@
 class RemotePlayer : public Player
 {
 public:
-    RemotePlayer(QTcpSocket *socket);
+    RemotePlayer(QTcpSocket *socket, CardFactory *cardFactory);
     virtual ~RemotePlayer();
 
     Card* Play();
