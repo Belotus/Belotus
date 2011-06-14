@@ -48,11 +48,35 @@ Scheduler::~Scheduler()
 
 void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
 {
-    // TODO
     qDebug() << "Scheduler : PlayerConnection ( " << time(0) << " )" << endl ;
     qDebug() << remotePlayer << endl;
 
-    players.append(remotePlayer);
+    if(this->schedulerState == WFPlayersConnection)
+    {
+        players.append(remotePlayer);
+
+        qDebug() << "Scheduler : Player accepted : " << remotePlayer << " ( " << time(0) << " )" << endl ;
+
+        if(players.size() == 4)
+        {
+            emit s_AllPlayersConnected();
+        }
+    }
+    else
+    {
+        qDebug() << "Scheduler : Player refused : " << remotePlayer << " ( " << time(0) << " )" << endl ;
+
+        // TODO : deconnect the player in a nicer way
+        delete remotePlayer;
+    }
+}
+
+void Scheduler::AllPlayersConnected()
+{
+    this->schedulerState = WFGameBeginning;
+
+    // TODO : how to begin the game?  Ask a player? Nothing special to do and juste begin?
+    // I dont know for the moment...
 }
 
 void Scheduler::GameBeginning()

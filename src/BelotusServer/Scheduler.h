@@ -43,6 +43,7 @@ public:
 signals:
     //void unSignal(int *unParametre);
     //void s_PlayerConnection(); in NetworkFrontend.h
+    void s_AllPlayersConnected();
     void s_GameBeginning();
     void s_PlayBeginning();
     void s_Pass();
@@ -56,6 +57,7 @@ signals:
 public slots:
     //void unSlot(int *unParametre);
     void PlayerConnection(RemotePlayer *remotePlayer);
+    void AllPlayersConnected();
     void GameBeginning();
     void PlayBeginning();
     void Pass();
@@ -82,6 +84,8 @@ private:
                 WFPlayer1Decision,
                 End
                 };
+
+    State schedulerState;
 
 };
 
