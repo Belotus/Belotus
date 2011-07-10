@@ -29,6 +29,7 @@
 #include "RemotePlayer.h"
 #include "NetworkFrontend.h"
 #include "Player.h"
+#include "Dealer.h"
 
 class Scheduler : public QObject, public Base
 {
@@ -43,12 +44,11 @@ public:
 signals:
     //void unSignal(int *unParametre);
     //void s_PlayerConnection(); in NetworkFrontend.h
-    void s_AllPlayersConnected();
     void s_GameBeginning();
     void s_PlayBeginning();
     void s_Pass();
     void s_Take();
-    void s_Card();
+    //void s_Card(); in Player.h and derivatives
     void s_QuitGame();
     void s_NewGame();
     void s_PlayerDeconnection();
@@ -57,7 +57,6 @@ signals:
 public slots:
     //void unSlot(int *unParametre);
     void PlayerConnection(RemotePlayer *remotePlayer);
-    void AllPlayersConnected();
     void GameBeginning();
     void PlayBeginning();
     void Pass();
@@ -68,12 +67,10 @@ public slots:
     void PlayerDeconnection();
 
 
-protected:
-    void incomingConnection(int socketfd);
-
 private:
     QVector<Player*> players;
     NetworkFrontend *networkFrontend;
+    Dealer *dealer;
     CardFactory *cardFactory;
 
     enum State {WFPlayersConnection,

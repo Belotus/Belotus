@@ -30,14 +30,20 @@
 
 class RemotePlayer : public Player
 {
+    Q_OBJECT
+
 public:
     RemotePlayer(QTcpSocket *socket, CardFactory *cardFactory);
     virtual ~RemotePlayer();
 
-    Card* Play();
+    void Play();
     void AddCard(Card* card);
     void Insult(QString insult);
+    void AFGameBeginning();
     virtual QString ToString() const;
+
+private slots:
+    void MessageReady();
 
 private:
     Protocol *protocol;

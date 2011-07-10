@@ -27,11 +27,7 @@ RemotePlayer::RemotePlayer(QTcpSocket *socket, CardFactory *cardFactory)
     : Player(), protocol(new Protocol(socket, cardFactory))
 {
     qDebug() << "RemotePlayer : Constructeur" ;
-    /*
-    qDebug() << "Constructeur remote player" << endl;
-    qDebug() << "Sending ACK to remote player" << endl;
-    this->protocol->sendAnswerACK();
-    */
+    connect(this->protocol, SIGNAL(s_MessageReady(quint32*)), this, SLOT(MessageReady()));
 }
 
 RemotePlayer::~RemotePlayer()
@@ -39,24 +35,39 @@ RemotePlayer::~RemotePlayer()
     delete this->protocol;
 }
 
-Card* RemotePlayer::Play()
+void RemotePlayer::Play()
 {
     qDebug() << "RemotePlayer : Play" ;
+    this->protocol->sendAnswerPlay();
     qDebug() << "RemotePlayer : Fin Play" ;
-    return 0;
 }
 
 void RemotePlayer::AddCard(Card* card)
 {
     qDebug() << "RemotePlayer : AddCard" ;
+    this->protocol->sendQueryAddCard(card);
     qDebug() << "RemotePlayer : Fin AddCard" ;
 }
 
 void RemotePlayer::Insult(QString insult)
 {
     qDebug() << "RemotePlayer : Insult" ;
+    this->protocol->sendQueryInsult(insult);
     qDebug() << "RemotePlayer : Fin Insult" ;
 }
+
+void RemotePlayer::AFGameBeginning()
+{
+    qDebug() << "RemotePlayer : Asking Player 1 for game beginning" ;
+    this->protocol->sendQueryStartGame();
+    qDebug() << "RemotePlayer : Fin AFGameBeginning";
+}
+
+void RemotePlayer::MessageReady()
+{
+    qDebug() << "RemotePlayer : ReadyRead";
+}
+
 
 QString RemotePlayer::ToString() const
 {

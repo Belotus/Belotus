@@ -26,7 +26,7 @@ class LocalPlayer : public Player
 {
 public:
     LocalPlayer();
-    Card* Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
+    void Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
     void AddCard(Card* card);
     void Insult(QString insult);
     virtual QString ToString() const;

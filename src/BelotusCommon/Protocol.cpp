@@ -134,6 +134,17 @@ void Protocol::sendQueryInsult(const QString insult)
 }
 
 /**
+ * Build and send the QueryStartGame message.
+ */
+void Protocol::sendQueryStartGame()
+{
+    qDebug() << "Protocol : sendQueryStartGame" ;
+    this->writeQuint32(this->QUERY_START_GAME);
+    this->send();
+    qDebug() << "Protocol : Fin sendQueryStartGame" ;
+}
+
+/**
  * Build and send the AnswerACK message.
  */
 void Protocol::sendAnswerACK()
@@ -164,6 +175,15 @@ void Protocol::sendAnswerPlay()
     qDebug() << "Protocol : Fin sendAnswerPlay" ;
 }
 
+/**
+ * Build and send the AnswerStartGame message.
+ */
+void Protocol::sendAnswerStartGame()
+{
+    qDebug() << "Protocol : sendAnswerStartGame" ;
+    this->writeQuint32(this->ANSWER_START_GAME);
+    qDebug() << "Protocol : Fin sendAnswerStartGame" ;
+}
 
 /**
  * The printing mechanisme, inherited from Base.

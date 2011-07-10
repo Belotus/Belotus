@@ -20,16 +20,23 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <QObject>
 #include "CardHolder.h"
 
-class Player : public CardHolder
+class Player : public QObject, public CardHolder
 {
+    Q_OBJECT
+
 public:
     Player();
-    virtual Card* Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
+    virtual void Play()=0;  // =0 pour dire qu'on implémente pas ça dans Player.cpp (standard pour les méthodes virtuelles)
     virtual void AddCard(Card* card)=0;
     virtual void Insult(QString insult)=0;
+    virtual void AFGameBeginning()=0;
     virtual QString ToString() const = 0;
+
+signals:
+    void s_Card();
 };
 
 #endif // PLAYER_H

@@ -28,7 +28,6 @@ Scheduler::Scheduler(QObject *parent)
     this->networkFrontend = new NetworkFrontend(this, this->cardFactory);
 
     //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
-    connect(this, SIGNAL(s_Card()), this, SLOT(Card()));
     connect(this, SIGNAL(s_GameBeginning()), this, SLOT(GameBeginning()));
     connect(this, SIGNAL(s_NewGame()), this, SLOT(NewGame()));
     connect(this, SIGNAL(s_Pass()), this, SLOT(Pass()));
@@ -49,34 +48,28 @@ Scheduler::~Scheduler()
 void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
 {
     qDebug() << "Scheduler : PlayerConnection ( " << time(0) << " )" << endl ;
-    qDebug() << remotePlayer << endl;
+    qDebug() << *remotePlayer << endl;
 
     if(this->schedulerState == WFPlayersConnection)
     {
         players.append(remotePlayer);
+        connect(remotePlayer, SIGNAL(s_Card()), this, SLOT(Card()));
 
-        qDebug() << "Scheduler : Player accepted : " << remotePlayer << " ( " << time(0) << " )" << endl ;
+        qDebug() << "Scheduler : Player accepted : " << *remotePlayer << " ( " << time(0) << " )" << endl ;
 
         if(players.size() == 4)
         {
-            emit s_AllPlayersConnected();
+            this->schedulerState = WFGameBeginning;
+            players.first()->AFGameBeginning();
         }
     }
     else
     {
-        qDebug() << "Scheduler : Player refused : " << remotePlayer << " ( " << time(0) << " )" << endl ;
+        qDebug() << "Scheduler : Player refused : " << *remotePlayer << " ( " << time(0) << " )" << endl ;
 
         // TODO : deconnect the player in a nicer way
         delete remotePlayer;
     }
-}
-
-void Scheduler::AllPlayersConnected()
-{
-    this->schedulerState = WFGameBeginning;
-
-    // TODO : how to begin the game?  Ask a player? Nothing special to do and juste begin?
-    // I dont know for the moment...
 }
 
 void Scheduler::GameBeginning()
@@ -125,12 +118,6 @@ void Scheduler::PlayerDeconnection()
 {
     // TODO
     qDebug() << "Scheduler : PlayerDeconnection ( " << time(0) << " )" << endl ;
-}
-
-void Scheduler::incomingConnection(int socketfd)
-{
-    // TODO
-    qDebug() << "Scheduler : incomingConnection ( " << time(0) << " )" << endl ;
 }
 
 void Scheduler::Test()

@@ -35,9 +35,9 @@ void LocalPlayer::Insult(QString insult)
     // TODO
 }
 
-Card* LocalPlayer::Play()
+void LocalPlayer::Play()
 {
-    return cards.takeFirst();
+    // TODO : emit s_Card with the correct card (implement IA :D )
 }
 
 QString LocalPlayer::ToString() const

@@ -42,10 +42,12 @@ public:
     void sendQueryPlay();
     void sendQueryAddCard(const Card* card);
     void sendQueryInsult(const QString insult);
+    void sendQueryStartGame();
 
     void sendAnswerACK();
     void sendAnswerFAIL();
     void sendAnswerPlay();
+    void sendAnswerStartGame();
 
     virtual QString ToString() const;
 
@@ -71,10 +73,12 @@ private:
     static const quint32 QUERY_PLAY = 0x00001;
     static const quint32 QUERY_ADD_CARD = 0x00002;
     static const quint32 QUERY_INSULT = 0x00003;
+    static const quint32 QUERY_START_GAME = 0x00004;
 
     static const quint32 ANSWER_ACK = 0x10001;
     static const quint32 ANSWER_FAIL = 0x10002;
     static const quint32 ANSWER_PLAY = 0x10003;
+    static const quint32 ANSWER_START_GAME = 0x10004;
 
     void    receive();
     void    receiveAddCard();
