@@ -35,15 +35,15 @@ class RemotePlayer : public Player
 public:
     RemotePlayer(QTcpSocket *socket, CardFactory *cardFactory);
     virtual ~RemotePlayer();
+    virtual QString ToString() const;
 
+private slots:
     void Play();
     void AddCard(Card* card);
     void Insult(QString insult);
     void AFGameBeginning();
-    virtual QString ToString() const;
 
-private slots:
-    void MessageReady();
+    void MessageReady(quint32 type);
 
 private:
     Protocol *protocol;

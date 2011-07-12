@@ -35,40 +35,15 @@ public:
     Protocol(QObject *parent, QTcpSocket *socket, CardFactory *cardFactory);
     virtual ~Protocol();
 
+    void    writeQuint32(const quint32 value);
+    void    writeQString(const QString value);
+    void    writeCard(const Card* card);
+    quint32 readQuint32();
+    QString readQString();
+    Card*   readCard();
+    void    send();
     void    MessageProcessed();
-    Card*   getCard() const;
-    QString getQString() const;
-
-    void sendQueryPlay();
-    void sendQueryAddCard(const Card* card);
-    void sendQueryInsult(const QString insult);
-    void sendQueryStartGame();
-
-    void sendAnswerACK();
-    void sendAnswerFAIL();
-    void sendAnswerPlay();
-    void sendAnswerStartGame();
-
     virtual QString ToString() const;
-
-signals:
-    void s_MessageReady(quint32 *type);
-
-private slots:
-    void ReadyRead();
-
-private:
-    bool          isReady;
-    quint32       messageLength;
-    bool          lengthReceived;
-    quint32       type;
-    QTcpSocket   *socket;
-    QByteArray   *buffer;
-    QDataStream  *in;
-    QDataStream  *out;
-    Card         *card;
-    QString       string;
-    CardFactory  *cardFactory;
 
     static const quint32 QUERY_PLAY = 0x00001;
     static const quint32 QUERY_ADD_CARD = 0x00002;
@@ -80,14 +55,23 @@ private:
     static const quint32 ANSWER_PLAY = 0x10003;
     static const quint32 ANSWER_START_GAME = 0x10004;
 
+signals:
+    void s_MessageReady(quint32 type);
+
+private slots:
+    void ReadyRead();
+
+private:
+    bool          isReady;
+    quint32       messageLength;
+    bool          lengthReceived;
+    QTcpSocket   *socket;
+    QByteArray   *buffer;
+    QDataStream  *in;
+    QDataStream  *out;
+    CardFactory  *cardFactory;
+
     void    receive();
-    void    receiveAddCard();
-    void    receiveInsult();
-    void    send();
-    void    writeQuint32(const quint32 value);
-    void    writeQString(const QString value);
-    quint32 readQuint32();
-    QString readQString();
 };
 
 #endif // PROTOCOL_H

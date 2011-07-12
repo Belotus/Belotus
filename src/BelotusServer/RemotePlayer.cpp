@@ -27,7 +27,7 @@ RemotePlayer::RemotePlayer(QTcpSocket *socket, CardFactory *cardFactory)
     : Player(), protocol(new Protocol(socket, cardFactory))
 {
     qDebug() << "RemotePlayer : Constructeur" ;
-    connect(this->protocol, SIGNAL(s_MessageReady(quint32*)), this, SLOT(MessageReady()));
+    connect(this->protocol, SIGNAL(s_MessageReady(quint32)), this, SLOT(MessageReady()));
 }
 
 RemotePlayer::~RemotePlayer()
@@ -38,33 +38,54 @@ RemotePlayer::~RemotePlayer()
 void RemotePlayer::Play()
 {
     qDebug() << "RemotePlayer : Play" ;
-    this->protocol->sendAnswerPlay();
+    this->protocol->writeQuint32(Protocol::QUERY_PLAY);
+    this->protocol->send();
     qDebug() << "RemotePlayer : Fin Play" ;
 }
 
 void RemotePlayer::AddCard(Card* card)
 {
     qDebug() << "RemotePlayer : AddCard" ;
-    this->protocol->sendQueryAddCard(card);
+    this->protocol->writeQuint32(Protocol::QUERY_ADD_CARD);
+    this->protocol->writeCard(card);
+    this->protocol->send();
     qDebug() << "RemotePlayer : Fin AddCard" ;
 }
 
 void RemotePlayer::Insult(QString insult)
 {
     qDebug() << "RemotePlayer : Insult" ;
-    this->protocol->sendQueryInsult(insult);
+    this->protocol->writeQuint32(Protocol::QUERY_INSULT);
+    this->protocol->writeQString(insult);
+    this->protocol->send();
     qDebug() << "RemotePlayer : Fin Insult" ;
 }
 
 void RemotePlayer::AFGameBeginning()
 {
     qDebug() << "RemotePlayer : Asking Player 1 for game beginning" ;
-    this->protocol->sendQueryStartGame();
+    this->protocol->writeQuint32(Protocol::QUERY_START_GAME);
+    this->protocol->send();
     qDebug() << "RemotePlayer : Fin AFGameBeginning";
 }
 
-void RemotePlayer::MessageReady()
+void RemotePlayer::MessageReady(quint32 type)
 {
+    switch(type)
+    {
+    /* Only handled messages */
+    case Protocol::QUERY_INSULT:
+        qDebug() << "Insult received : " << this->protocol->readQString();
+        break;
+    case Protocol::ANSWER_START_GAME:
+        /* TODO: implementer une machine à etat simple
+                 pour gerer les messages pouvant être recus. */
+        break;
+
+    default:
+        break;
+    }
+
     qDebug() << "RemotePlayer : ReadyRead";
 }
 
