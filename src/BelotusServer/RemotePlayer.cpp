@@ -78,9 +78,22 @@ void RemotePlayer::MessageReady(quint32 type)
         qDebug() << "Insult received : " << this->protocol->readQString();
         break;
     case Protocol::ANSWER_START_GAME:
-        /* TODO: implementer une machine à etat simple
-                 pour gerer les messages pouvant être recus. */
+        qDebug() << "ANSWER_START_GAME received";
+        s_GameBeginning();  // TODO : connect this signal in the scheduler
         break;
+    case Protocol::ANSWER_CARD_PLAYED:
+        qDebug() << "ANSWER_CARD_PLAYED received";
+        s_Card(this->protocol->readCard());  // TODO : connect this signal in the scheduler
+        break;
+    case Protocol::ANSWER_CHOICE:
+        qDebug() << "ANSWER_CHOICE received";
+        // TODO
+        break;
+    case Protocol::ANSWER_REMOVE_CARD:
+        qDebug() << "ANSWER_REMOVE_CARD received";
+        // TODO
+        break;
+
 
     default:
         break;

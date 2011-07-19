@@ -35,8 +35,6 @@ public:
     virtual void AFGameBeginning()=0;
     virtual QString ToString() const = 0;
 
-signals:
-    void s_Card();
 };
 
 #endif // PLAYER_H

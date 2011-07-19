@@ -45,6 +45,10 @@ private slots:
 
     void MessageReady(quint32 type);
 
+signals:
+    void s_GameBeginning();
+    void s_Card(Card* card);
+
 private:
     Protocol *protocol;
 };

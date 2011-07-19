@@ -44,11 +44,11 @@ public:
 signals:
     //void unSignal(int *unParametre);
     //void s_PlayerConnection(); in NetworkFrontend.h
-    void s_GameBeginning();
+    //void s_GameBeginning();
     void s_PlayBeginning();
     void s_Pass();
     void s_Take();
-    //void s_Card(); in Player.h and derivatives
+    //void s_Card(Card* card);
     void s_QuitGame();
     void s_NewGame();
     void s_PlayerDeconnection();
