@@ -28,7 +28,7 @@ Scheduler::Scheduler(QObject *parent)
     this->networkFrontend = new NetworkFrontend(this, this->cardFactory);
 
     //connect(const QObject *sender, SIGNAL(unSignal(int*)), this, SLOT(unSlot(int*)));
-    connect(this, SIGNAL(s_GameBeginning()), this, SLOT(GameBeginning()));
+    //connect(this, SIGNAL(s_GameBeginning()), this, SLOT(GameBeginning()));
     connect(this, SIGNAL(s_NewGame()), this, SLOT(NewGame()));
     connect(this, SIGNAL(s_Pass()), this, SLOT(Pass()));
     connect(this, SIGNAL(s_PlayBeginning()), this, SLOT(PlayBeginning()));
@@ -36,8 +36,9 @@ Scheduler::Scheduler(QObject *parent)
     connect(this, SIGNAL(s_PlayerDeconnection()), this, SLOT(PlayerDeconnection()));
     connect(this, SIGNAL(s_QuitGame()), this, SLOT(PlayerDeconnection()));
     connect(this, SIGNAL(s_Take()), this, SLOT(Take()));
-
     // TODO : Replace the sender (this) by the appropriate sender
+
+    this->schedulerState = WFPlayersConnection;
 }
 
 Scheduler::~Scheduler()
@@ -53,7 +54,8 @@ void Scheduler::PlayerConnection(RemotePlayer *remotePlayer)
     if(this->schedulerState == WFPlayersConnection)
     {
         players.append(remotePlayer);
-        connect(remotePlayer, SIGNAL(s_Card()), this, SLOT(Card()));
+        connect(remotePlayer, SIGNAL(s_Card(Card*)), this, SLOT(Card()));
+        connect(remotePlayer, SIGNAL(s_GameBeginning()), this, SLOT(GameBeginning()));
 
         qDebug() << "Scheduler : Player accepted : " << *remotePlayer << " ( " << time(0) << " )" << endl ;
 

@@ -27,7 +27,8 @@ RemotePlayer::RemotePlayer(QTcpSocket *socket, CardFactory *cardFactory)
     : Player(), protocol(new Protocol(socket, cardFactory))
 {
     qDebug() << "RemotePlayer : Constructeur" ;
-    connect(this->protocol, SIGNAL(s_MessageReady(quint32)), this, SLOT(MessageReady()));
+    connect(this->protocol, SIGNAL(s_MessageReady(quint32)), this, SLOT(MessageReady(quint32)));
+    qDebug() << "RemotePlayer : Fin constructeur" ;
 }
 
 RemotePlayer::~RemotePlayer()

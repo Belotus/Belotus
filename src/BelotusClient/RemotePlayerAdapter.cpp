@@ -38,7 +38,7 @@ void RemotePlayerAdapter::SocketConnected()
 {
     qDebug() << "RemotePlayerAdapter : SocketConnected" ;
     this->protocol = new Protocol(this, this->socket, this->cardFactory);
-    this->protocol->sendAnswerACK();
+    //this->protocol->sendAnswerACK();
     qDebug() << "RemotePlayerAdapter : Fin SockedConnected" ;
 }
 

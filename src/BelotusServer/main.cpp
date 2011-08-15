@@ -35,6 +35,10 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     qInstallMsgHandler(msgHandler);
+
+    ConfigServer::debug_level = 4;
+    ConfigServer::network_port = 4242;
+
     readArgs(argc, argv);
 
 

@@ -82,7 +82,7 @@ void Protocol::MessageProcessed()
 void Protocol::writeQuint32(const quint32 value)
 {
     qDebug() << "Protocol : writeQuint32 : " << value ;
-    *(this->out) << value;
+    *(this->out) << (quint32) value;
     qDebug() << "Protocol : Fin writeQuint32" ;
 }
 

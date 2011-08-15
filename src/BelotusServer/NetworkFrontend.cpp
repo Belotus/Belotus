@@ -26,6 +26,7 @@ NetworkFrontend::NetworkFrontend(QObject *parent, CardFactory *cardFactory)
     qDebug() << "NetworkFrontend : Constructeur" ;
     connect(this, SIGNAL(newConnection()), this, SLOT(NewConnection()));
     this->listen(QHostAddress::Any, 4242);
+    qDebug() << "NetworkFrontend : Fin constructeur" ;
 }
 
 void NetworkFrontend::NewConnection()
