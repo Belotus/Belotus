@@ -74,7 +74,8 @@ private:
     QDataStream  *out;
     CardFactory  *cardFactory;
 
-    void    receive();
+    void    Receive();
+    void    Init(QTcpSocket *socket, CardFactory *cardFactory);
 };
 
 #endif // PROTOCOL_H

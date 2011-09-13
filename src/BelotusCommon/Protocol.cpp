@@ -31,7 +31,7 @@
  */
 Protocol::Protocol(QTcpSocket *socket, CardFactory *cardFactory)
 {
-    Protocol(NULL, socket, cardFactory);
+    Init(socket, cardFactory);
 }
 
 /**
@@ -43,12 +43,7 @@ Protocol::Protocol(QObject *parent, QTcpSocket *socket, CardFactory *cardFactory
     : QObject(parent), Base(), isReady(true), messageLength(0),
     lengthReceived(false), socket(socket), cardFactory(cardFactory)
 {
-    qDebug() << "Protocol : Constructeur" ;
-    this->buffer = new QByteArray();
-    this->out = new QDataStream(this->buffer, QIODevice::WriteOnly);
-    this->in = new QDataStream(this->socket);
-    connect(this->socket, SIGNAL(readyRead()), this, SLOT(ReadyRead()));
-    qDebug() << "Protocol : Fin constructeur" ;
+    Init(socket, cardFactory);
 }
 
 /**
@@ -71,7 +66,7 @@ void Protocol::MessageProcessed()
     this->isReady = true;
     this->messageLength = 0;
     this->lengthReceived = false;
-    this->receive();
+    this->Receive();
     qDebug() << "Protocol : Fin MessageProcessed" ;
 }
 
@@ -184,7 +179,7 @@ QString Protocol::ToString() const
 void Protocol::ReadyRead()
 {
     qDebug() << "Protocol : ReadyRead" ;
-    this->receive();
+    this->Receive();
     qDebug() << "Protocol : Fin ReadyRead" ;
 }
 
@@ -195,7 +190,7 @@ void Protocol::ReadyRead()
 /**
  * Check if a message is completly received. If yes, the message is readed from the socket and decoded.
  */
-void Protocol::receive()
+void Protocol::Receive()
 {
     qDebug() << "Protocol : receive" ;
     if(this->isReady)
@@ -216,4 +211,19 @@ void Protocol::receive()
         }
     }
     qDebug() << "Protocol : Fin receive" ;
+}
+
+void Protocol::Init(QTcpSocket *socket, CardFactory *cardFactory)
+{
+    qDebug() << "Protocol : Init" ;
+    this->isReady = true;
+    this->messageLength = 0;
+    this->lengthReceived = false;
+    this->socket = socket;
+    this->cardFactory = cardFactory;
+    this->buffer = new QByteArray();
+    this->out = new QDataStream(this->buffer, QIODevice::WriteOnly);
+    this->in = new QDataStream(socket);
+    connect(socket, SIGNAL(readyRead()), this, SLOT(ReadyRead()));
+    qDebug() << "Protocol : Fin Init" ;
 }
